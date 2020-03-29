@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "classmap": [
+            "src",
+            "src/acf",
+            "src/classes",
+            "src/classes/filters",
+            "src/classes/shortcodes",
+            "src/classes/svg",
+            "src/classes/utils"
+        ]
+    }
+}
