@@ -20,4 +20,5 @@ return array(
     'genimage\\svg\\build_svg' => $baseDir . '/src/classes/svg/build_svg.php',
     'genimage\\utils\\replace' => $baseDir . '/src/classes/utils/replace.php',
     'genimage\\utils\\utils' => $baseDir . '/src/classes/utils/utils.php',
+    'genimage\\wp\\get_image' => $baseDir . '/src/classes/wp/get_image.php',
 );

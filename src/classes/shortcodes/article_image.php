@@ -5,6 +5,7 @@ namespace genimage\shortcodes;
 
 use genimage\svg\build_svg as svg;
 use genimage\options as options;
+use genimage\wp\get_image as wp;
 
 
 class article_image {
@@ -56,7 +57,8 @@ class article_image {
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
     public function get_image_url(){
-        $this->image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->options['article']->ID ), 'full' );
+        $wp = new wp;
+        $this->image = $wp->get_image_url($this->options['article']);
         $this->set_image_filter();
         return $this;
     }
