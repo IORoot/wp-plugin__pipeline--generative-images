@@ -6,6 +6,7 @@ namespace genimage\shortcodes;
 use genimage\svg\build_svg as svg;
 use genimage\options as options;
 use genimage\wp\get_image as wp;
+use genimage\utils\replace as replace;
 
 
 class article_image {
@@ -16,10 +17,14 @@ class article_image {
     // The image URL for the article.
     public $image;
 
-    // Generated SVG to output
+    // SVG object
     public $s;
 
+    // Multi SVG object;
+    public $multi_s;
 
+    // need to store all source images for conversion
+    public $image_url_collection;
 
     public function __construct(){
         return $this;
@@ -31,10 +36,24 @@ class article_image {
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
     public function render(){
+
         $this->get_options();
-        $this->get_image_url();
-        $this->render_svg();
-        return;
+
+        // if a single result
+        if (!is_array($this->options['article'])){
+            $this->get_image_url();
+            return $this->render_svg();
+        } 
+
+        // else an array of results
+        $this->options['collection'] = $this->options['article'];
+        foreach($this->options['collection'] as $article){
+            $this->options['article'] = $article;
+            $this->get_image_url();
+            $this->multi_s[] .= $this->render_svg();
+        }
+        
+        return $this->multi_s;
     }
 
 
@@ -50,6 +69,17 @@ class article_image {
     }
 
 
+    public function get_source_file(){
+        $filepath = $this->image[0];
+        $filepath = str_replace('../../../../', '', $filepath);
+        return $filepath;
+    }
+
+    public function get_source_files(){
+        return $this->image_url_collection;
+    }
+
+
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
     // │                    Get the selected posts' image URL.                   │
@@ -59,6 +89,7 @@ class article_image {
     public function get_image_url(){
         $wp = new wp;
         $this->image = $wp->get_image_url($this->options['article']);
+        $this->image_url_collection[] = str_replace('../../../../', '', $this->image[0]); 
         $this->set_image_filter();
         return $this;
     }
@@ -75,7 +106,7 @@ class article_image {
         if (empty($this->options['filter'])){ return $this; }
         foreach ($this->options['filter'] as $key => $filter){
             if ($filter['filter_name'] == 'image'){
-                $this->options[filter][$key]['filter_parameters'] = $this->image;
+                $this->options['filter'][$key]['filter_parameters'] = $this->image;
             }
         }
         return $this;   
@@ -96,10 +127,9 @@ class article_image {
                 $this->s->close_defs();
                 $this->run_filters();
             $this->s->close_svg();
-            echo $this->s->render();
         }
 
-        return $this;
+        return $this->s->render();
     }
 
 
@@ -129,7 +159,6 @@ class article_image {
         // check first
         if (empty($this->options['filter'])){ return; }
 
-        // 
         foreach ($this->options['filter'] as $filter){
             $filter_object = $this->instantiate_filter($filter);
             $this->s->add_element($filter_object->defs());
@@ -143,7 +172,7 @@ class article_image {
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
     public function instantiate_filter($filter){
-
+                
         // Get namespaced name of the filter
         $filter_name = "genimage\\filters\\" . $filter['filter_name'];
 
@@ -156,5 +185,6 @@ class article_image {
         // return object
         return $filter_object;
     }
+
 
 }

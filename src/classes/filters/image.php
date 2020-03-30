@@ -14,16 +14,16 @@ class image {
     public function output(){
 
         if (!empty($this->params)){ 
-            $params = ' href='.$this->params[0];
-            $params .= ' width='.$this->params[1];
-            $params .= ' height='.$this->params[2];
+            $params = ' xlink:href="'.$this->params[0].'"';
+            $params .= ' width="'.$this->params[1].'"';
+            $params .= ' height="'.$this->params[2].'"';
         }
 
         return '<image '.$params.'></image>';
     }
 
     public function defs(){
-        return $def;
+        return;
     }
 
 }

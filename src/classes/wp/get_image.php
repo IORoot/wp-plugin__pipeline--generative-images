@@ -13,7 +13,6 @@ class get_image {
 
         $this->item = $item;
 
-         // What was returned?
         $type = get_class($item);
         $this->$type();
 
@@ -21,14 +20,27 @@ class get_image {
     }
 
     public function WP_Post(){
-        $this->image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->item->ID ), 'full' );
+        $thumnail_id = get_post_thumbnail_id( $this->item->ID );
+        $image_array = wp_get_attachment_image_src($thumnail_id , 'full' );
+        $domain = get_site_url();
+        // Rewrite the absolute to relative path.
+        $image_array[0] = str_replace( $domain, '', '../../../..'.$image_array[0] );
+
+        $this->image = $image_array;
+
+        return;
     }
 
     public function WP_Term(){
         $image = get_field("article_category_image", 'term_'.$this->item->term_id);
+        $domain = get_site_url();
+        $image['url'] = str_replace( $domain, '', $image['url'] );
+
         $this->image[0] = $image['url'];
         $this->image[1] = $image['width'];
         $this->image[2] = $image['height'];
+
+        return;
     }
 
 }

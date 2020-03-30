@@ -2,9 +2,9 @@
 
 namespace genimage\filters;
 
-class darken {
+class whiten {
 
-    public $params;
+    public $params = '0.5';
 
     public function __construct($params){
         $this->params = unserialize($params);
@@ -12,7 +12,7 @@ class darken {
     }
 
     public function output(){
-        return '<rect height="100%" width="100%" x="0" y="0" fill-opacity="'.$this->params.'" fill="#000000"></rect>';
+        return '<rect height="100%" width="100%" x="0" y="0" fill-opacity="'.$this->params.'" fill="#ffffff"></rect>';
     }
 
     public function defs(){

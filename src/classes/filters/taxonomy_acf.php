@@ -4,7 +4,7 @@ namespace genimage\filters;
 
 use genimage\utils\replace as replace;
 
-class text {
+class taxonomy_acf {
 
     public $params;
 
@@ -20,8 +20,10 @@ class text {
     public function output(){
         if (empty($this->params) || empty($this->post)){ return; }
 
+        $taxonomy = get_the_terms($this->post, 'articlecategory');
+
         $output = replace::switch($this->params, $this->post);
-        $output = replace::switch_acf($output, $this->post);
+        $output = replace::switch_acf($output, $taxonomy[0]);
 
         return $output;
     }

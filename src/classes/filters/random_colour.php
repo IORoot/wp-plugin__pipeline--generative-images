@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class darken {
+use genimage\utils\random as rand;
+
+class random_colour {
 
     public $params;
 
@@ -12,11 +14,14 @@ class darken {
     }
 
     public function output(){
-        return '<rect height="100%" width="100%" x="0" y="0" fill-opacity="'.$this->params.'" fill="#000000"></rect>';
     }
 
     public function defs(){
-        return ;
+
+        $r = new rand();
+        $def = '<linearGradient id="'.$this->params.'"><stop stop-color="'.$r::colour_hex().'"/></linearGradient>';
+
+        return $def;
     }
 
 }

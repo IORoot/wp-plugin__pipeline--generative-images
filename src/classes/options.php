@@ -25,9 +25,10 @@ class options {
         // which source is selected ?
         $this->source = $source = get_field('genimage_source' , 'option'); 
 
-        // get_article or get_category
+        // get_article, get_category, get_query, etc...
         $this->$source(); 
         
+        // get all the associated filters to run
         $this->get_filters();
 
         return $this->result;
@@ -37,7 +38,6 @@ class options {
 
 
     public function get_article(){
-        // set the new filtersource name.
         $this->source = 'get_article';
         $this->filtersource = 'genimage_filters';
         $this->result['article'] = get_field('genimage_article' , 'option'); 
@@ -45,10 +45,18 @@ class options {
     }
 
     public function get_category(){
-        // set the new filtersource name.
         $this->source = 'get_category';
         $this->filtersource = 'genimage_category_filters';
-        $this->result['article'] = get_field('genimage_category' , 'option'); 
+        $this->result['article'] = get_field('genimage_category' , 'option');
+        return $this;
+    }
+
+    public function get_query(){
+        $this->source = 'get_query';
+        $this->filtersource = 'genimage_query_filters';
+        $args = utils::lb(get_field('query_statement' , 'option'));
+        $args = eval("return $args;");
+        $this->result['article'] = get_posts($args);
         return $this;
     }
 
@@ -96,6 +104,5 @@ class options {
 
         return $this;
     }
-
 
 }
