@@ -36,7 +36,7 @@ class get_image {
         $domain = get_site_url();
         $image['url'] = str_replace( $domain, '', $image['url'] );
 
-        $this->image[0] = $image['url'];
+        $this->image[0] = '../../../..'. $image['url'];
         $this->image[1] = $image['width'];
         $this->image[2] = $image['height'];
 

@@ -4,7 +4,8 @@ namespace genimage\utils;
 
 use Imagick;
 
-class convert_to_png {
+class convert_to_png
+{
 
     // The SVG data
     public $svg_data;
@@ -13,7 +14,7 @@ class convert_to_png {
     public $source_image;
 
     // path to upload dir.
-    public $upload_dir = 'wp-content/uploads/';
+    public $upload_dir = 'wp-content/uploads';
 
     // Latest WP upload directory.
     public $subdir;
@@ -36,16 +37,18 @@ class convert_to_png {
     // Upload dir + output jpg file
     public $jpg_dir;
 
-    // JPG Quality 
+    // JPG Quality
     public $jpg_quality = 100;
     
     
 
 
 
-    public function __construct($svg_data, $source_image){
-
-        if ($svg_data == null || $source_image == null){ return; }
+    public function __construct($svg_data, $source_image)
+    {
+        if ($svg_data == null || $source_image == null) {
+            return;
+        }
         $this->svg_data = $svg_data;
         $this->source_image = $source_image;
 
@@ -63,8 +66,6 @@ class convert_to_png {
 
         $this->jpg_dir = $this->source_image;
 
-
-        
         $this->create_SVG_file();
 
         $this->convert_to_png();
@@ -76,8 +77,8 @@ class convert_to_png {
 
 
 
-    public function create_SVG_file(){
-
+    public function create_SVG_file()
+    {
         file_put_contents($this->svg_file, $this->svg_data);
 
         return;
@@ -86,29 +87,28 @@ class convert_to_png {
 
 
 
-    public function convert_to_png(){
-
+    public function convert_to_png()
+    {
         exec('inkscape -z '. $this->svg_file.' -e '.$this->png_dir, $output, $return);
 
-        if($result > 0)
-        {
+        if ($result > 0) {
             die('Inkscape did not execute correctly. $result = '.$result. ' | $output = '. $output);
-        }   
+        }
 
         return;
     }
 
 
 
-    public function png_to_jpg(){
-
+    public function png_to_jpg()
+    {
         try {
             $im = new Imagick($this->png_dir);
         } catch (ImagickException $e) {
             $im = null;
         }
 
-        if ($im){
+        if ($im) {
             $im->setImageCompressionQuality($this->jpg_quality);
             $im->setImageFormat("jpg");
             $im->writeImage($this->jpg_dir);
@@ -118,5 +118,4 @@ class convert_to_png {
         
         return;
     }
-
 }

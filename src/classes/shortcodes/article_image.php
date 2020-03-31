@@ -2,14 +2,13 @@
 
 namespace genimage\shortcodes;
 
-
 use genimage\svg\build_svg as svg;
 use genimage\options as options;
 use genimage\wp\get_image as wp;
 use genimage\utils\replace as replace;
 
-
-class article_image {
+class article_image
+{
     
     //The ACF options
     public $options;
@@ -20,13 +19,14 @@ class article_image {
     // SVG object
     public $s;
 
-    // Multi SVG object;
+    // Multi SVG arrays;
     public $multi_s;
 
     // need to store all source images for conversion
     public $image_url_collection;
 
-    public function __construct(){
+    public function __construct()
+    {
         return $this;
     }
 
@@ -35,19 +35,20 @@ class article_image {
     // │                        Start the high-level tasks                       │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function render(){
-
+    public function render()
+    {
         $this->get_options();
 
         // if a single result
-        if (!is_array($this->options['article'])){
+        if (!is_array($this->options['article'])) {
             $this->get_image_url();
-            return $this->render_svg();
-        } 
+            $this->multi_s[] .= $this->render_svg();
+            return $this->multi_s;
+        }
 
         // else an array of results
         $this->options['collection'] = $this->options['article'];
-        foreach($this->options['collection'] as $article){
+        foreach ($this->options['collection'] as $article) {
             $this->options['article'] = $article;
             $this->get_image_url();
             $this->multi_s[] .= $this->render_svg();
@@ -62,20 +63,23 @@ class article_image {
     // │                         Get the options from ACF                        │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function get_options(){
+    public function get_options()
+    {
         $options = new options();
         $this->options = $options->get_article_options();
         return $this;
     }
 
 
-    public function get_source_file(){
-        $filepath = $this->image[0];
-        $filepath = str_replace('../../../../', '', $filepath);
-        return $filepath;
-    }
+    // public function get_source_file()
+    // {
+    //     $filepath = $this->image[0];
+    //     $filepath = str_replace('../../../../', '', $filepath);
+    //     return $filepath;
+    // }
 
-    public function get_source_files(){
+    public function get_source_files()
+    {
         return $this->image_url_collection;
     }
 
@@ -86,10 +90,11 @@ class article_image {
     // │           This will return an array with URL, width & height.           │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function get_image_url(){
+    public function get_image_url()
+    {
         $wp = new wp;
         $this->image = $wp->get_image_url($this->options['article']);
-        $this->image_url_collection[] = str_replace('../../../../', '', $this->image[0]); 
+        $this->image_url_collection[] = str_replace('../../../../', '', $this->image[0]);
         $this->set_image_filter();
         return $this;
     }
@@ -102,14 +107,17 @@ class article_image {
     // │                      be the selected posts' image.                      │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function set_image_filter(){
-        if (empty($this->options['filter'])){ return $this; }
-        foreach ($this->options['filter'] as $key => $filter){
-            if ($filter['filter_name'] == 'image'){
+    public function set_image_filter()
+    {
+        if (empty($this->options['filter'])) {
+            return $this;
+        }
+        foreach ($this->options['filter'] as $key => $filter) {
+            if ($filter['filter_name'] == 'image') {
                 $this->options['filter'][$key]['filter_parameters'] = $this->image;
             }
         }
-        return $this;   
+        return $this;
     }
 
 
@@ -118,14 +126,15 @@ class article_image {
     // │      Builds the SVG up based on the filters added and their order.      │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function render_svg(){
-        if (!empty($this->image)){
+    public function render_svg()
+    {
+        if (!empty($this->image)) {
             $this->s = new svg;
             $this->s->open_svg('0 0 '.$this->image[1].' '.$this->image[2].'');
-                $this->s->open_defs();
-                    $this->run_defs();
-                $this->s->close_defs();
-                $this->run_filters();
+            $this->s->open_defs();
+            $this->run_defs();
+            $this->s->close_defs();
+            $this->run_filters();
             $this->s->close_svg();
         }
 
@@ -138,11 +147,14 @@ class article_image {
     // │         Iterate over all of the filters and return their results        │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function run_filters(){
+    public function run_filters()
+    {
         // check first
-        if (empty($this->options['filter'])){ return; }
+        if (empty($this->options['filter'])) {
+            return;
+        }
 
-        foreach ($this->options['filter'] as $filter){
+        foreach ($this->options['filter'] as $filter) {
             $filter_object = $this->instantiate_filter($filter);
             $this->s->add_element($filter_object->output());
         }
@@ -155,11 +167,14 @@ class article_image {
     // │                               <defs> tags.                              │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function run_defs(){
+    public function run_defs()
+    {
         // check first
-        if (empty($this->options['filter'])){ return; }
+        if (empty($this->options['filter'])) {
+            return;
+        }
 
-        foreach ($this->options['filter'] as $filter){
+        foreach ($this->options['filter'] as $filter) {
             $filter_object = $this->instantiate_filter($filter);
             $this->s->add_element($filter_object->defs());
         }
@@ -171,20 +186,19 @@ class article_image {
     // │     Instantiate the class with the same name as the selected filter.    │
     // │                                                                         │
     // └─────────────────────────────────────────────────────────────────────────┘
-    public function instantiate_filter($filter){
+    public function instantiate_filter($filter)
+    {
                 
         // Get namespaced name of the filter
         $filter_name = "genimage\\filters\\" . $filter['filter_name'];
 
         // Instantiate new object with the filter parameters and the post
         $filter_object = new $filter_name(
-            $filter['filter_parameters'], 
+            $filter['filter_parameters'],
             $this->options['article']
         );
 
         // return object
         return $filter_object;
     }
-
-
 }

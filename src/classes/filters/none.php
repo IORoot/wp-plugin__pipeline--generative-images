@@ -2,18 +2,20 @@
 
 namespace genimage\filters;
 
-class none {
-
-    public function __construct(){
+class none
+{
+    public function __construct()
+    {
         return $this;
     }
 
-    public function output(){
+    public function output()
+    {
         return;
     }
 
-    public function defs(){
+    public function defs()
+    {
         return;
     }
-
 }
