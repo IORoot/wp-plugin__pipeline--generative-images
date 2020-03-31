@@ -71,13 +71,6 @@ class article_image
     }
 
 
-    // public function get_source_file()
-    // {
-    //     $filepath = $this->image[0];
-    //     $filepath = str_replace('../../../../', '', $filepath);
-    //     return $filepath;
-    // }
-
     public function get_source_files()
     {
         return $this->image_url_collection;
