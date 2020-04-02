@@ -107,6 +107,8 @@ class article_image
         }
         foreach ($this->options['filter'] as $key => $filter) {
             if ($filter['filter_name'] == 'image') {
+                // Whatever is in the 'filter_parameters textbox, add it on as part of the image array.
+                $this->image[] = $this->options['filter'][$key]['filter_parameters'];
                 $this->options['filter'][$key]['filter_parameters'] = $this->image;
             }
         }

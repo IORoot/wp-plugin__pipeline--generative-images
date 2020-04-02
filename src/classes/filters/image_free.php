@@ -2,7 +2,7 @@
 
 namespace genimage\filters;
 
-class image {
+class image_free {
 
     public $params;
 
@@ -14,9 +14,7 @@ class image {
     public function output(){
 
         if (!empty($this->params)){ 
-            $params = ' xlink:href="'.$this->params[0].'"';
-            $params .= ' width="'.$this->params[1].'"';
-            $params .= ' height="'.$this->params[2].'" ';
+            $params = ' xlink:href="'.$this->params[0].'" ';
             $params .= unserialize($this->params[4]);
         }
 
