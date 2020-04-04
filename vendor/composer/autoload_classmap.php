@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'genimage\\exporter\\convert_to_file' => $baseDir . '/src/classes/exporters/convert_to_file.php',
     'genimage\\filters\\darken' => $baseDir . '/src/classes/filters/darken.php',
     'genimage\\filters\\element' => $baseDir . '/src/classes/filters/element.php',
     'genimage\\filters\\generate_shape' => $baseDir . '/src/classes/filters/generate_shape.php',
@@ -24,7 +25,6 @@ return array(
     'genimage\\shortcodes\\add_shortcodes' => $baseDir . '/src/classes/shortcodes/add_shortcodes.php',
     'genimage\\shortcodes\\article_image' => $baseDir . '/src/classes/shortcodes/article_image.php',
     'genimage\\svg\\build_svg' => $baseDir . '/src/classes/svg/build_svg.php',
-    'genimage\\utils\\convert_to_png' => $baseDir . '/src/classes/utils/convert_to_png.php',
     'genimage\\utils\\random' => $baseDir . '/src/classes/utils/random.php',
     'genimage\\utils\\replace' => $baseDir . '/src/classes/utils/replace.php',
     'genimage\\utils\\utils' => $baseDir . '/src/classes/utils/utils.php',

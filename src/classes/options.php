@@ -10,9 +10,7 @@ class options {
 
     // defaults
     public $source = 'get_article';
-    public $filtersource = 'genimage_filters';
-
-    
+    public $filtersource = 'genimage_filters';    
 
     public function __construct(){
         return ;
@@ -30,6 +28,12 @@ class options {
         
         // get all the associated filters to run
         $this->get_filters();
+
+        // get the update/save options
+        $this->result['save']['post']   = get_field('gi_save_post' , 'option'); 
+        $this->result['save']['svg']    = get_field('gi_save_svg' , 'option'); 
+        $this->result['save']['jpg']    = get_field('gi_save_jpg' , 'option'); 
+        $this->result['save']['png']    = get_field('gi_save_png' , 'option'); 
 
         return $this->result;
 

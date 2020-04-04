@@ -77,6 +77,11 @@ class article_image
     }
 
 
+    public function get_save_values(){
+        return $this->options['save'];
+    }
+
+
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
     // │                    Get the selected posts' image URL.                   │
@@ -86,8 +91,9 @@ class article_image
     public function get_image_url()
     {
         $wp = new wp;
+        $domain = get_site_url();
         $this->image = $wp->get_image_url($this->options['article']);
-        $this->image_url_collection[] = str_replace('../../../../', '', $this->image[0]);
+        $this->image_url_collection[] = str_replace('../../../..', $domain, $this->image[0]);
         $this->set_image_filter();
         return $this;
     }
@@ -106,9 +112,9 @@ class article_image
             return $this;
         }
         foreach ($this->options['filter'] as $key => $filter) {
-            if ($filter['filter_name'] == 'image') {
-                // Whatever is in the 'filter_parameters textbox, add it on as part of the image array.
-                $this->image[] = $this->options['filter'][$key]['filter_parameters'];
+            if ($filter['filter_name'] == 'image' || $filter['filter_name'] == 'image_free') {
+                // Whatever is in the 'filter_parameters textbox, add it on as part of the image array item [4].
+                $this->image[4] = $this->options['filter'][$key]['filter_parameters'];
                 $this->options['filter'][$key]['filter_parameters'] = $this->image;
             }
         }

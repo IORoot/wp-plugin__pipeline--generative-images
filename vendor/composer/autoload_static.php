@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInita2fee0734c84cd5f140d105459003871
 {
     public static $classMap = array (
+        'genimage\\exporter\\convert_to_file' => __DIR__ . '/../..' . '/src/classes/exporters/convert_to_file.php',
         'genimage\\filters\\darken' => __DIR__ . '/../..' . '/src/classes/filters/darken.php',
         'genimage\\filters\\element' => __DIR__ . '/../..' . '/src/classes/filters/element.php',
         'genimage\\filters\\generate_shape' => __DIR__ . '/../..' . '/src/classes/filters/generate_shape.php',
@@ -25,7 +26,6 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\shortcodes\\add_shortcodes' => __DIR__ . '/../..' . '/src/classes/shortcodes/add_shortcodes.php',
         'genimage\\shortcodes\\article_image' => __DIR__ . '/../..' . '/src/classes/shortcodes/article_image.php',
         'genimage\\svg\\build_svg' => __DIR__ . '/../..' . '/src/classes/svg/build_svg.php',
-        'genimage\\utils\\convert_to_png' => __DIR__ . '/../..' . '/src/classes/utils/convert_to_png.php',
         'genimage\\utils\\random' => __DIR__ . '/../..' . '/src/classes/utils/random.php',
         'genimage\\utils\\replace' => __DIR__ . '/../..' . '/src/classes/utils/replace.php',
         'genimage\\utils\\utils' => __DIR__ . '/../..' . '/src/classes/utils/utils.php',

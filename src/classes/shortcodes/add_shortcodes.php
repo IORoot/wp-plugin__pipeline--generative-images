@@ -2,7 +2,7 @@
 
 namespace genimage\shortcodes;
 
-use genimage\utils\convert_to_png as convert;
+use genimage\exporter\convert_to_file as convert;
 
 class add_shortcodes
 {
@@ -10,7 +10,11 @@ class add_shortcodes
     public $png;
     public $jpg;
 
+    public $suffix = '_gi';
+
     public $source_files ;
+
+    public $save_options;
 
     public function __construct()
     {
@@ -39,6 +43,12 @@ class add_shortcodes
         // $this->source_file = $genimage->get_source_file();
         $this->source_files = $genimage->get_source_files();
 
+        // Get which save options have been
+        $this->save_options = $genimage->get_save_values();
+
+        // Do the conversions
+        $this->convert_files();
+
         $this->render_table();
 
         return;
@@ -49,30 +59,44 @@ class add_shortcodes
 
     public function render_table()
     {
+        ob_start();
+
+        $svg_data = $this->combine_svgs();
+
         $output = '<table>';
-        $output .= '<thead><tr><td>SVG</td><td>JPG</td></tr></thead>';
+        $output .= '<thead style="background-color:#fafafa;"><tr><td>SVG Data</td><td>SVG file</td><td>JPG file</td><td>PNG file</td></tr></thead>';
         $output .= '<tr>';
-        $output .= '<td style="width:50%;">';
+        $output .= '<td style="width:25%;">';
+        $output .= $svg_data;
+        $output .= '</td>';
+
+        $output .= '<td style="width:25%;">';
         $output .= $this->render_svg();
         $output .= '</td>';
 
-        $output .= '<td style="width:50%;">';
+        $output .= '<td style="width:25%;">';
         $output .= $this->render_jpg();
         $output .= '</td>';
+
+        $output .= '<td style="width:25%;">';
+        $output .= $this->render_png();
+        $output .= '</td>';
+
+
         $output .= '</tr>';
         $output .= '</table>';
 
         echo $output;
-        return;
+        return ob_end_flush();
     }
 
 
 
 
-    public function render_svg()
+    public function combine_svgs()
     {
         foreach ($this->svg as $svg) {
-            $combined_svg .= $svg;
+            $combined_svg .= '<p>Data</p>' . $svg;
         }
         return $combined_svg;
 
@@ -93,12 +117,14 @@ class add_shortcodes
 
 
 
-    public function render_png()
+    public function convert_files()
     {
         $i = 0;
         foreach ($this->svg as $svgfile) {
-            /* $svg = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'.$this->svgfile;*/
-            $this->png = new convert($svgfile, $this->source_files[$i]);
+
+            // make absolute path to relative.
+            $filename = str_replace(get_site_url().'/', '', $this->source_files[$i]);
+            $this->convert = new convert($svgfile, $filename, $this->save_options);
             $i++;
         }
         return;
@@ -106,23 +132,68 @@ class add_shortcodes
 
 
 
+
+
     public function render_jpg()
     {
-        // create a PNG first to convert.
-        $this->render_png();
-
         $output = '';
 
         foreach ($this->source_files as $file) {
-            // substitute;
-            $this->jpg = str_replace('.png', '_gi.png', $file);
-            $this->jpg = str_replace('.jpg', '_gi.jpg', $file);
 
-            $output .= '<img src="/';
+            // substitute source filename.png for a jpeg filename_suffix.jpg
+            $this->jpg = str_replace('.png', $this->suffix.'.jpg', $file);
+            $this->jpg = str_replace('.jpg', $this->suffix.'.jpg', $file);
+
+            $output .= '<a href="'.$this->jpg.'" target="_blank">Open File</a>';
+            $output .= '<img src="';
             $output .= $this->jpg;
             $output .= '" />';
+            
         }
 
         return $output;
     }
+
+
+    public function render_png()
+    {
+        $output = '';
+
+        foreach ($this->source_files as $file) {
+
+            // substitute source filename.png for a jpeg filename_suffix.jpg
+            $this->png = str_replace('.png', $this->suffix.'.png', $file);
+            $this->png = str_replace('.jpg', $this->suffix.'.png', $file);
+
+            $output .= '<a href="'.$this->png.'" target="_blank">Open File</a>';
+            $output .= '<img src="';
+            $output .= $this->png;
+            $output .= '" />';
+            
+        }
+
+        return $output;
+    }
+
+
+    public function render_svg()
+    {
+        $output = '';
+
+        foreach ($this->source_files as $file) {
+
+            // substitute source filename.png for a jpeg filename_suffix.jpg
+            $this->svg = str_replace('.png', $this->suffix.'.svg', $file);
+            $this->svg = str_replace('.jpg', $this->suffix.'.svg', $file);
+
+            $output .= '<a href="'.$this->svg.'" target="_blank">Open File</a>';
+            $output .= '<embed src="';
+            $output .= $this->svg;
+            $output .= '" />';
+            
+        }
+
+        return $output;
+    }
+
 }
