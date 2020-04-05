@@ -79,36 +79,46 @@ class add_shortcodes
     {
         ob_start();
 
+        $width_on = 100 / (count(array_filter($this->save_options)));
+
         $svg_data = $this->combine_svgs();
 
         $output = '<table>';
-        $output .= '<thead style="background-color:#fafafa;"><tr><td>SVG Data</td><td>SVG file</td><td>JPG file</td><td>PNG file</td></tr></thead>';
+        $output .= '<thead style="background-color:#fafafa;"><tr><td>SVG Data</td>';
+            if ($this->save_options['svg']) {
+                $output .= '<td>SVG file</td>';
+            }
+            if ($this->save_options['jpg']) {
+                $output .= '<td>JPG file</td>';
+            }
+            if ($this->save_options['png']) {
+                $output .= '<td>PNG file</td>';
+            }
+        $output .= '</thead>';
         $output .= '<tr>';
-        $output .= '<td style="width:25%;">';
+        $output .= '<td style="width:'.$width_on.'%;">';
         $output .= $svg_data;
         $output .= '</td>';
 
         
-        $output .= '<td style="width:25%;">';
         if ($this->save_options['svg']) {
-            $output .= $this->render_svg();
+            $output .= '<td style="width:'.$width_on.'%;">';
+                $output .= $this->render_svg();
+            $output .= '</td>';
         }
-        $output .= '</td>';
         
-        
-        $output .= '<td style="width:25%;">';
         if ($this->save_options['jpg']) {
-            $output .= $this->render_jpg();
+            $output .= '<td style="width:'.$width_on.'%;">';
+                $output .= $this->render_jpg();
+            $output .= '</td>';
         }
-        $output .= '</td>';
         
-
-        
-        $output .= '<td style="width:25%;">';
         if ($this->save_options['png']) {
-            $output .= $this->render_png();
+            $output .= '<td style="width:'.$width_on.'%;">';
+                $output .= $this->render_png();
+            $output .= '</td>';
         }
-        $output .= '</td>';
+        
         
 
 
