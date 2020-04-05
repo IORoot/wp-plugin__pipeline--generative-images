@@ -30,6 +30,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\utils\\replace' => __DIR__ . '/../..' . '/src/classes/utils/replace.php',
         'genimage\\utils\\utils' => __DIR__ . '/../..' . '/src/classes/utils/utils.php',
         'genimage\\wp\\get_image' => __DIR__ . '/../..' . '/src/classes/wp/get_image.php',
+        'genimage\\wp\\set_image' => __DIR__ . '/../..' . '/src/classes/wp/set_image.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

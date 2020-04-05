@@ -29,4 +29,5 @@ return array(
     'genimage\\utils\\replace' => $baseDir . '/src/classes/utils/replace.php',
     'genimage\\utils\\utils' => $baseDir . '/src/classes/utils/utils.php',
     'genimage\\wp\\get_image' => $baseDir . '/src/classes/wp/get_image.php',
+    'genimage\\wp\\set_image' => $baseDir . '/src/classes/wp/set_image.php',
 );

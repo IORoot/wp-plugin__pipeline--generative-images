@@ -42,7 +42,10 @@ class article_image
         // if a single result
         if (!is_array($this->options['article'])) {
             $this->get_image_url();
-            $this->multi_s[] .= $this->render_svg();
+            // Make sure that a source image is returned!
+            if ($this->image[0] != "../../../.."){
+                $this->multi_s[] .= $this->render_svg();
+            }
             return $this->multi_s;
         }
 
@@ -51,7 +54,11 @@ class article_image
         foreach ($this->options['collection'] as $article) {
             $this->options['article'] = $article;
             $this->get_image_url();
-            $this->multi_s[] .= $this->render_svg();
+            // Make sure that a source image is returned!
+            if ($this->image[0] != "../../../.."){
+                $this->multi_s[] .= $this->render_svg();
+            }
+            
         }
         
         return $this->multi_s;
@@ -76,8 +83,27 @@ class article_image
         return $this->image_url_collection;
     }
 
+    public function get_source_posts()
+    {
+        // query
+        $return_posts = $this->options['collection'];
 
-    public function get_save_values(){
+        // term
+        if (get_class($this->options['article']) == 'WP_Term') {
+            $return_posts[] = $this->options['article'];
+        }
+
+        // post
+        if (get_class($this->options['article']) == 'WP_Post') {
+            $return_posts[] = $this->options['article'];
+        }
+
+        return $return_posts;
+    }
+
+
+    public function get_save_values()
+    {
         return $this->options['save'];
     }
 
@@ -129,6 +155,10 @@ class article_image
     // └─────────────────────────────────────────────────────────────────────────┘
     public function render_svg()
     {
+        if ($this->image[1] == null) {
+            return false;
+        }
+
         if (!empty($this->image)) {
             $this->s = new svg;
             $this->s->open_svg('0 0 '.$this->image[1].' '.$this->image[2].'');

@@ -3,6 +3,7 @@
 namespace genimage\shortcodes;
 
 use genimage\exporter\convert_to_file as convert;
+use genimage\wp\set_image;
 
 class add_shortcodes
 {
@@ -12,14 +13,22 @@ class add_shortcodes
 
     public $suffix = '_gi';
 
-    public $source_files ;
+    public $source_files;
+    public $source_posts;
 
     public $save_options;
 
     public function __construct()
     {
-        add_shortcode('andyp_gen_image', array($this, 'generative_image'));
+        // ┌─────────────────────────────────────────────────────────────────────────┐
+        // │   Shortcode runs on page load, and the page is loaded TWICE. This will  │
+        // │                    stop the code from running twice.                    │
+        // └─────────────────────────────────────────────────────────────────────────┘
+        if ($_SERVER['HTTP_ACCEPT'] == "*/*") {
+            return;
+        }
 
+        add_shortcode('andyp_gen_image', array($this, 'generative_image'));
         return;
     }
 
@@ -34,27 +43,36 @@ class add_shortcodes
             $atts
         );
 
-        // Create new object.
         $genimage = new article_image;
 
-        // set returned results.
         $this->svg = $genimage->render();
 
-        // $this->source_file = $genimage->get_source_file();
+        if ($this->svg == null) {
+            return "No Source File.";
+        }
+
         $this->source_files = $genimage->get_source_files();
 
-        // Get which save options have been
+        $this->source_posts = $genimage->get_source_posts();
+
         $this->save_options = $genimage->get_save_values();
 
-        // Do the conversions
         $this->convert_files();
 
         $this->render_table();
 
+        $this->save_featured_image();
+
+        $this->switch_off_file_write();
+        
         return;
     }
 
 
+    public function switch_off_file_write()
+    {
+        update_field('gi_save_post', 'none', 'option');
+    }
 
 
     public function render_table()
@@ -70,17 +88,28 @@ class add_shortcodes
         $output .= $svg_data;
         $output .= '</td>';
 
+        
         $output .= '<td style="width:25%;">';
-        $output .= $this->render_svg();
+        if ($this->save_options['svg']) {
+            $output .= $this->render_svg();
+        }
         $output .= '</td>';
+        
+        
+        $output .= '<td style="width:25%;">';
+        if ($this->save_options['jpg']) {
+            $output .= $this->render_jpg();
+        }
+        $output .= '</td>';
+        
 
+        
         $output .= '<td style="width:25%;">';
-        $output .= $this->render_jpg();
+        if ($this->save_options['png']) {
+            $output .= $this->render_png();
+        }
         $output .= '</td>';
-
-        $output .= '<td style="width:25%;">';
-        $output .= $this->render_png();
-        $output .= '</td>';
+        
 
 
         $output .= '</tr>';
@@ -99,7 +128,6 @@ class add_shortcodes
             $combined_svg .= '<p>Data</p>' . $svg;
         }
         return $combined_svg;
-
     }
 
 
@@ -139,16 +167,13 @@ class add_shortcodes
         $output = '';
 
         foreach ($this->source_files as $file) {
+            $this->jpg = $this->rename_file($file, 'jpg');
 
-            // substitute source filename.png for a jpeg filename_suffix.jpg
-            $this->jpg = str_replace('.png', $this->suffix.'.jpg', $file);
-            $this->jpg = str_replace('.jpg', $this->suffix.'.jpg', $file);
-
-            $output .= '<a href="'.$this->jpg.'" target="_blank">Open File</a>';
-            $output .= '<img src="';
+            $output .= '<a href="'.$this->jpg.'" target="_blank">Open File';
+            $output .= '<img class="pushin" src="';
             $output .= $this->jpg;
             $output .= '" />';
-            
+            $output .= '</a>';
         }
 
         return $output;
@@ -160,16 +185,13 @@ class add_shortcodes
         $output = '';
 
         foreach ($this->source_files as $file) {
+            $this->png = $this->rename_file($file, 'png');
 
-            // substitute source filename.png for a jpeg filename_suffix.jpg
-            $this->png = str_replace('.png', $this->suffix.'.png', $file);
-            $this->png = str_replace('.jpg', $this->suffix.'.png', $file);
-
-            $output .= '<a href="'.$this->png.'" target="_blank">Open File</a>';
-            $output .= '<img src="';
+            $output .= '<a href="'.$this->png.'" target="_blank">Open File';
+            $output .= '<img class="pushin" src="';
             $output .= $this->png;
             $output .= '" />';
-            
+            $output .= '</a>';
         }
 
         return $output;
@@ -183,17 +205,66 @@ class add_shortcodes
         foreach ($this->source_files as $file) {
 
             // substitute source filename.png for a jpeg filename_suffix.jpg
-            $this->svg = str_replace('.png', $this->suffix.'.svg', $file);
-            $this->svg = str_replace('.jpg', $this->suffix.'.svg', $file);
+            $this->svg = $this->rename_file($file, 'svg');
 
-            $output .= '<a href="'.$this->svg.'" target="_blank">Open File</a>';
-            $output .= '<embed src="';
+            $output .= '<a href="'.$this->svg.'" target="_blank">Open File';
+            $output .= '<embed class="pushin" src="';
             $output .= $this->svg;
             $output .= '" />';
-            
+            $output .= '</a>';
         }
 
         return $output;
     }
 
+
+
+
+    public function save_featured_image()
+    {
+        $save_type = $this->save_options['post'];
+        if ($save_type == 'none') {
+            return;
+        }
+
+        $i = 0;
+        foreach ($this->source_files as $file) {
+            $file = $this->rename_file($file, $save_type);
+
+            $wp = new set_image;
+            $wp->set_filename($file);
+
+            $source_type = get_class($this->source_posts[$i]);
+
+            // Term
+            if ($source_type == 'WP_Term') {
+                $wp->set_id($this->source_posts[$i]->term_id);
+                $wp->update_term_thumbnail();
+
+            // Post / Query
+            } else {
+                $wp->set_id($this->source_posts[$i]->ID);
+                $wp->update_post_thumbnail();
+            }
+
+            $i++;
+        }
+        
+        return;
+    }
+
+
+    public function rename_file($file, $format)
+    {
+
+        // remove the suffix
+        $file = str_replace($this->suffix.'.png', '.png', $file);
+        $file = str_replace($this->suffix.'.jpg', '.jpg', $file);
+
+        // Reset the format
+        $file = str_replace('.png', $this->suffix.'.'.$format, $file);
+        $file = str_replace('.jpg', $this->suffix.'.'.$format, $file);
+
+        return $file;
+    }
 }
