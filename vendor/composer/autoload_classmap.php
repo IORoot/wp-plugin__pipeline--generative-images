@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'genimage\\exporter\\convert_to_file' => $baseDir . '/src/classes/exporters/convert_to_file.php',
+    'genimage\\filters\\acf_term_field' => $baseDir . '/src/classes/filters/acf_term_field.php',
+    'genimage\\filters\\acf_term_field_definition' => $baseDir . '/src/classes/filters/acf_term_field_definition.php',
     'genimage\\filters\\darken' => $baseDir . '/src/classes/filters/darken.php',
     'genimage\\filters\\element' => $baseDir . '/src/classes/filters/element.php',
     'genimage\\filters\\generate_shape' => $baseDir . '/src/classes/filters/generate_shape.php',
@@ -15,7 +17,6 @@ return array(
     'genimage\\filters\\noise' => $baseDir . '/src/classes/filters/noise.php',
     'genimage\\filters\\none' => $baseDir . '/src/classes/filters/none.php',
     'genimage\\filters\\random_colour' => $baseDir . '/src/classes/filters/random_colour.php',
-    'genimage\\filters\\rectangle' => $baseDir . '/src/classes/filters/rectangle.php',
     'genimage\\filters\\svg_definition' => $baseDir . '/src/classes/filters/svg_definition.php',
     'genimage\\filters\\taxonomy_acf' => $baseDir . '/src/classes/filters/taxonomy_acf.php',
     'genimage\\filters\\text' => $baseDir . '/src/classes/filters/text.php',
