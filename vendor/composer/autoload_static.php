@@ -26,6 +26,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\options' => __DIR__ . '/../..' . '/src/classes/options.php',
         'genimage\\shortcodes\\add_shortcodes' => __DIR__ . '/../..' . '/src/classes/shortcodes/add_shortcodes.php',
         'genimage\\shortcodes\\article_image' => __DIR__ . '/../..' . '/src/classes/shortcodes/article_image.php',
+        'genimage\\svg\\build_shape' => __DIR__ . '/../..' . '/src/classes/svg/build_shape.php',
         'genimage\\svg\\build_svg' => __DIR__ . '/../..' . '/src/classes/svg/build_svg.php',
         'genimage\\utils\\random' => __DIR__ . '/../..' . '/src/classes/utils/random.php',
         'genimage\\utils\\replace' => __DIR__ . '/../..' . '/src/classes/utils/replace.php',

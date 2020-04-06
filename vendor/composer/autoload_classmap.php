@@ -25,6 +25,7 @@ return array(
     'genimage\\options' => $baseDir . '/src/classes/options.php',
     'genimage\\shortcodes\\add_shortcodes' => $baseDir . '/src/classes/shortcodes/add_shortcodes.php',
     'genimage\\shortcodes\\article_image' => $baseDir . '/src/classes/shortcodes/article_image.php',
+    'genimage\\svg\\build_shape' => $baseDir . '/src/classes/svg/build_shape.php',
     'genimage\\svg\\build_svg' => $baseDir . '/src/classes/svg/build_svg.php',
     'genimage\\utils\\random' => $baseDir . '/src/classes/utils/random.php',
     'genimage\\utils\\replace' => $baseDir . '/src/classes/utils/replace.php',
