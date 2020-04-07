@@ -137,10 +137,17 @@ class article_image
         if (empty($this->options['filter'])) {
             return $this;
         }
+
         foreach ($this->options['filter'] as $key => $filter) {
             if ($filter['filter_name'] == 'image' || $filter['filter_name'] == 'image_free') {
-                // Whatever is in the 'filter_parameters textbox, add it on as part of the image array item [4].
-                $this->image[4] = $this->options['filter'][$key]['filter_parameters'];
+                
+                if (!is_array($this->options['filter'][$key]['filter_parameters'])){
+                    // Whatever is in the 'filter_parameters textbox, add it on as part of the image array item [4].
+                    $this->image[4] = $this->options['filter'][$key]['filter_parameters'];
+                } else {
+                    $this->image[4] = $this->options['filter'][$key]['filter_parameters'][4];
+                }
+                
                 $this->options['filter'][$key]['filter_parameters'] = $this->image;
             }
         }

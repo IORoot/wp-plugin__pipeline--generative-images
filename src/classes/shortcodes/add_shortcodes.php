@@ -134,6 +134,7 @@ class add_shortcodes
 
     public function combine_svgs()
     {
+        $combined_svg = '';
         foreach ($this->svg as $svg) {
             $combined_svg .= '<p>Data</p>' . $svg;
         }

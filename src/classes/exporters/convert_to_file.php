@@ -187,9 +187,11 @@ class convert_to_file
     // └─────────────────────────────────────────────────────────────────────────┘
     public function convert_to_png()
     {
+        
+        
         exec('inkscape -z '. $this->svg_file.' -e '.$this->png_dir, $output, $return);
 
-        if ($result > 0) {
+        if ($return > 0) {
             die('Inkscape did not execute correctly. $result = '.$result. ' | $output = '. $output);
         }
 
@@ -229,15 +231,15 @@ class convert_to_file
     // └─────────────────────────────────────────────────────────────────────────┘
     public function cleanup(){
 
-        if ($this->save_options['svg'] == false){
+        if ($this->save_options['svg'] == false && file_exists($this->save_options['svg'])){
             $svg_del = unlink($this->svg_dir);
         }
 
-        if ($this->save_options['png'] == false){
+        if ($this->save_options['png'] == false && file_exists($this->save_options['png'])){
             $png_del = unlink($this->png_dir);
         }
 
-        if ($this->save_options['jpg'] == false){
+        if ($this->save_options['jpg'] == false && file_exists($this->save_options['jpg'])){
             $jpg_del = unlink($this->jpg_dir);
         }
 
