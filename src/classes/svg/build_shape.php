@@ -10,7 +10,7 @@ class build_shape
 
     public $shape_type;
 
-
+    public $cell_size = 80;
 
     public function __construct($args, $shape_type)
     {

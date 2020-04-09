@@ -39,7 +39,7 @@ class generate_shape
     public function output()
     {
         $corners = $this->get_array_param('corners', 'tl,tr,br,bl');
-        $output = $this->random_patchwork_corner(in_array('tl',$corners), in_array('tr',$corners), in_array('br',$corners), in_array('bl',$corners), 80);
+        $output = $this->random_patchwork_corner(in_array('tl',$corners), in_array('tr',$corners), in_array('br',$corners), in_array('bl',$corners), $this->get_param('cell_size', 80));
         return $output;
     }
 
@@ -49,9 +49,11 @@ class generate_shape
     {
         $corner_size = $this->get_param('corner_size', 4);
 
-        $width = 1280;
-        $height = 720;
+        $cell_size = $this->get_param('cell_size', 80);
+        $cell_divide = 80 / $cell_size; 
 
+        $width = 1280 / $cell_divide;
+        $height = 720 / $cell_divide;
 
         $colour_count = $this->get_param('additional_colours', 0);
         $colour_palette = $this->get_array_param('additional_palette', '');
@@ -120,6 +122,9 @@ class generate_shape
 
     public function random_shape($x, $y, $w, $h, $c)
     {
+        $cell_size = $this->get_param('cell_size', 80);
+        $cell_divide = 80 / $cell_size; 
+
         $scale = random_int(1, 2);
         $rotate = (random_int(1,3)*90);
         $filter = '';
