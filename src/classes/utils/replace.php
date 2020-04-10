@@ -110,23 +110,6 @@ class replace
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * substitute any %post_title% type matches with their WP_Post
      * real values.

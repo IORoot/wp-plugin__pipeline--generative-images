@@ -31,6 +31,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\svg\\build_svg' => __DIR__ . '/../..' . '/src/classes/svg/build_svg.php',
         'genimage\\utils\\random' => __DIR__ . '/../..' . '/src/classes/utils/random.php',
         'genimage\\utils\\replace' => __DIR__ . '/../..' . '/src/classes/utils/replace.php',
+        'genimage\\utils\\replace_terms' => __DIR__ . '/../..' . '/src/classes/utils/replace_terms.php',
         'genimage\\utils\\utils' => __DIR__ . '/../..' . '/src/classes/utils/utils.php',
         'genimage\\wp\\get_image' => __DIR__ . '/../..' . '/src/classes/wp/get_image.php',
         'genimage\\wp\\set_image' => __DIR__ . '/../..' . '/src/classes/wp/set_image.php',

@@ -1,7 +1,7 @@
 # Generative Images for Wordpress posts
 
 ## TL;DR
-This is highly cowboy-coded plugin I created to enable me to manipulate all of my post images. The premise was to be able to automatically alter ALL posts/CPT/Taxonomy featured images in some way to give them a more consistent tone and feel. This plugin does that through SVGs and conversion.
+This is highly cowboy-coded plugin I created to enable me to manipulate all of my post images. The premise was to be able to automatically alter ALL posts/CPT/Taxonomy featured images in some way to give them a more consistent tone and feel. This plugin does that through SVGs and conversion. Note that I have 'articles' CPT with 'articlecategory' and 'articletags' as taxonomy and terms. The code may have references to these. Like I said, this was a personal project... Will need refactoring.
 
 At a broad sense it does the following:
 

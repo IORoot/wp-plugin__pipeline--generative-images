@@ -2,7 +2,7 @@
 
 namespace genimage\filters;
 
-use genimage\utils\replace as replace;
+use genimage\utils\replace_terms as replace;
 
 /**
  * Used only on the single post & WP_Query sources.
@@ -16,6 +16,8 @@ class acf_post_term_field {
 
     public $post;
 
+    public $terms;
+
     public function __construct($params, $post){
         $this->params = unserialize($params);
         $this->post = $post;
@@ -24,18 +26,35 @@ class acf_post_term_field {
     
 
     public function output(){
-        if (empty($this->params) || empty($this->post)){ return; }
+        if (empty($this->post)){ return; }
 
-        $term = get_the_terms($this->post, 'articletags');
+        $this->terms = get_the_terms($this->post, 'articletags');
+        $this->view_term_last();
 
-        $output = replace::switch($this->params, $this->post);
-        $output = replace::switch_acf($output, $term[0]);
+        $sub = new replace($this->terms, $this->params);
+        
+        $output = $sub->terms_to_term();
 
         return $output;
     }
 
+
+
     public function defs(){
         return;
+    }
+
+
+    public function view_term_last(){
+
+        $slug = $this->terms[0]->slug;
+
+        if (strpos($slug, 'view') !== false) {
+            $this->terms = array_reverse($this->terms);
+        }
+
+        return;
+
     }
 
 }
