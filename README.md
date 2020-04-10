@@ -69,6 +69,15 @@ Therefore, the base image has its height/width automatically set based on the so
     Parameter [STRING]
     The parameter is anything extra you want to add into the image string. Good for adding filters. i.e. filter="url(#myfilter)"
 
+## image_free
+
+This will create an `<image>` tag with the image of the source post. The difference here is that no width or height is set. Which is good for overlays and resizing/repositioning.
+
+`<image xlink:href="../../../../wp-content/uploads/2020/03/my_image.jpg" {{params}}></image>`
+
+    Parameter [STRING]
+    The parameter is anything extra you want to add into the image string. Good for adding widths / heights / x /y / filters / etc..
+
 
 ## svg_element
 
@@ -78,6 +87,7 @@ This create a layer of anything you want into the SVG at that level. This is use
 
     Parameter [STRING]
     Any manual text you want to inject in. 
+
 
 ## svg_definition
 
@@ -89,6 +99,14 @@ This creates a layer within the SVG `<defs></defs>` tags at the top. Allows you 
     Any manual text you want to inject into the def tags. 
 
   
+## noise
+
+Creates a transparent 'noise' layer. This is a tileable img supplied with the plugin. This creates a pattern definition and rectangle element to layer over everything underneath.
+
+    Parameters [INT] 0 to 1.
+    You can control the opacity with the parameter field. 
+
+
 ## darken
 
 Creates a black rectangle of 100% height and width.
@@ -98,6 +116,7 @@ Creates a black rectangle of 100% height and width.
     Parameters [INT] 0 to 1.
     You can control the opacity with the parameter field. 
 
+
 ## whiten
 
 Creates a white rectangle of 100% height and width.
@@ -106,3 +125,24 @@ Creates a white rectangle of 100% height and width.
 
     Parameters [INT] 0 to 1.
     You can control the opacity with the parameter field.
+
+
+## random_colour
+
+Creates a linear-gradient definition with a random hex colour. 
+
+`<linearGradient id="{{your id}}"><stop stop-color="#98BC2A"/></linearGradient>`
+
+    Parameters [STRING] 
+    This allows you to set the ID of the linear-gradient definition. Therefore referencing it in any element with a
+    fill=url(#randomID)
+
+## text
+
+## generate_shape
+
+## acf_post_tax_field
+
+## acf_term_field
+
+## acf_term_field_defintion
