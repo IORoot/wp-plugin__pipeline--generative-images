@@ -160,12 +160,122 @@ The text substitution also has a few extra 'functions' that you can prefix the f
     <text>{{w2:uc:post_title}}</text>
     This will split by hypens, output the second one in UPPERCASE.
 
+
 ## acf_post_tax_field
 
+This will allow the post get ACF fields on the category its attached to. Use the moustache brackets to define the category ACF field you wish to use. Has all functionality of the `text` type layer.
+
+    Parameters [STRING] 
+    Add an element with substitutions with the post object.
+
+I created this because my categories have ACF colour fields on them. Any post attached to the category can now get the category colour.
 
 
 ## acf_term_field
 
+Only available on the 'Category' source. 
+
+Allows you to specify an ACF field attached to the taxonomy and output the value. Moushache brackets, same as the `text` layer type.
+
+    Parameters [STRING] 
+    Add an element with substitutions with the term object.
+
+
 ## acf_term_field_defintion
 
+Same as the `acf_term_field` but puts the parameter into the `<defs></defs>` area of the SVG.
+
+
 ## generate_shape
+
+This is the big 'generative' part of the plugin. Allows you to generate shapes onto a patchwork-quilt like space over the image. Also includes moustache {{}} substitution.
+
+    Parameters [ARRAY]
+    Define how the generative art will be created.
+
+The following settings can be used:
+
+### palette
+
+The 'palette' setting tells the generator which base colours to add to the primary palette. This palette is used to select random colours from.
+
+    'palette' => '{{acf_taxonomy_colour}}, #FAFAFA',
+
+### additional_palette
+
+You can define a secondary palette that the generator can select from and add to the primary palette.
+
+    'additional_palette' => '#000000,#242424,#424242,#757575,#E0E0E0,#F5F5F5,#FAFAFA,#FFFFFF',
+ 
+### additional_colours
+
+How many random colours to add to the primary palette from the secondary one.
+
+    'additional_colours' => 1,
+
+### opacity
+
+What is the opacity of the shapes generated.
+
+    'opacity' => 0.8,
+
+### corners
+
+The generative shapes are added to the corners of the image. This selects which corners to use. If left blank, ALL corners are used.
+Options are:
+
+1. tl (top left)
+2. tr (top right)
+3. br (bottom right)
+4. bl (bottom left)
+
+    'corners' => 'tl,br',
+
+### corner_size
+
+Furthest number of tiles to come out from the corner.
+
+    'corner_size' => 4,
+
+### shapes
+
+Select the shapes you wish to randomly pick from. If left blank, ALL shapes are used.
+Options are:
+
+1. 'rect',
+2. 'cross',
+3. 'square_cross',
+4. 'square_plus',
+5. 'triangle',
+6. 'right_angled_triangle',
+8. 'leaf',
+9. 'dots',
+10. 'lines',
+11. 'wiggles',
+12. 'diamond',
+13. 'flower',
+14. 'stripes',
+15. 'bump',
+
+    'shapes' => 'leaf, cross,bump',
+
+### cell_size
+
+Scale the size of the shape tiles up or down. Number in pixels. Default is 80.
+
+    'cell_size' => 40,
+
+    
+
+### Example
+
+    [
+        'palette' => '{{taxonomy_colour}}, #FAFAFA',
+        'additional_palette' => '#000000,#242424,#424242,#757575,#E0E0E0,#F5F5F5,#FAFAFA,#FFFFFF',
+        'additional_colours' => 1,
+        'opacity' => 0.8,
+        'corners' => 'tl,br',
+        'corner_size' => 4,
+        'shapes' => 'leaf, cross,bump',
+        'cell_size' => 40,
+    ]
