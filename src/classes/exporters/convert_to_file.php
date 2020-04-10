@@ -104,10 +104,6 @@ class convert_to_file
     // └─────────────────────────────────────────────────────────────────────────┘
     public function add_filename_suffix(){
 
-        // Remove the suffix off the end (to stop nesting of the name _gi_gi_gi...)
-        $this->source_image = str_replace( $this->file_suffix.'.jpg', '.jpg', $this->source_image);
-        $this->source_image = str_replace( $this->file_suffix.'.png', '.png', $this->source_image);
-
         // Add the suffix on. ( _gi )
         $this->source_image = str_replace('.jpg', $this->file_suffix.'.jpg', $this->source_image);
         $this->source_image = str_replace('.png', $this->file_suffix.'.png', $this->source_image);
