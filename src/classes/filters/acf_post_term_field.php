@@ -30,6 +30,8 @@ class acf_post_term_field {
 
         $this->terms = get_the_terms($this->post, 'articletags');
         $this->view_term_last();
+        $output = $this->slowmo_last();
+
 
         $sub = new replace($this->terms, $this->params);
         
@@ -56,5 +58,22 @@ class acf_post_term_field {
         return;
 
     }
+
+    public function slowmo_last(){
+
+        foreach ($this->terms as $key => $term){
+
+            if ($term->slug == "slowmotion"){
+                $this->terms[] = $term;     // add to end
+                unset($this->terms[$key]); // delete current.
+                $this->terms = array_values($this->terms); // rekey 0,1,2
+            }
+
+        }
+
+        return;
+
+    }
+
 
 }
