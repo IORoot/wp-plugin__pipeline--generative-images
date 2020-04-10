@@ -139,10 +139,33 @@ Creates a linear-gradient definition with a random hex colour.
 
 ## text
 
-## generate_shape
+Similar to the 'svg_element' layer, but with a caveat... allows you to do text substitutions on wp_post parameters using moustache brackets.
+As an example, using `{{post_title}}` in the parameter field will be substituted for the actual post_title. It also checks against any ACF fields attached to the post object too.
+Just use the name of the field you wish to return in the moustache brackets. {{my_acf_colour_field_added_to_the_post}}
+
+    Parameters [STRING] 
+    Add an element with substitutions with the post object.
+
+The text substitution also has a few extra 'functions' that you can prefix the field with.
+
+1. `uc:` will make the output text of the field UPPERCASE.
+2. `hy:` will remove everything BEFORE (and including) a hypen. 'HELLO - WORLD' will become 'WORLD'.
+3. `w1:` will split the line by hypens and output the first. 'FIRST - SECOND - THIRD - FOURTH` will return 'FIRST'.
+4. `w2:` will split the line by hypens and output the second. 'FIRST - SECOND WORD - 3RD - FOURTH` will return 'SECOND WORD'.
+5. `w3:` will split the line by hypens and output the third. 'FIRST - SECOND WORD - 3RD - FOURTH` will return '3RD'.
+6. `w3:` will split the line by hypens and output the fourth. 'FIRST - SECOND WORD - 3RD - FOURTH` will return 'FOURTH'.
+
+### Example
+
+    <text>{{w2:uc:post_title}}</text>
+    This will split by hypens, output the second one in UPPERCASE.
 
 ## acf_post_tax_field
+
+
 
 ## acf_term_field
 
 ## acf_term_field_defintion
+
+## generate_shape
