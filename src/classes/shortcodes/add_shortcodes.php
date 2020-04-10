@@ -24,9 +24,9 @@ class add_shortcodes
         // │   Shortcode runs on page load, and the page is loaded TWICE. This will  │
         // │                    stop the code from running twice.                    │
         // └─────────────────────────────────────────────────────────────────────────┘
-        if ($_SERVER['HTTP_ACCEPT'] == "*/*") {
-            return;
-        }
+        // if ($_SERVER['HTTP_ACCEPT'] == "*/*") {
+        //     return;
+        // }
 
         add_shortcode('andyp_gen_image', array($this, 'generative_image'));
         return;
