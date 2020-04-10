@@ -8,10 +8,10 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
 {
     public static $classMap = array (
         'genimage\\exporter\\convert_to_file' => __DIR__ . '/../..' . '/src/classes/exporters/convert_to_file.php',
+        'genimage\\filters\\acf_post_tax_field' => __DIR__ . '/../..' . '/src/classes/filters/acf_post_tax_field.php',
         'genimage\\filters\\acf_term_field' => __DIR__ . '/../..' . '/src/classes/filters/acf_term_field.php',
         'genimage\\filters\\acf_term_field_definition' => __DIR__ . '/../..' . '/src/classes/filters/acf_term_field_definition.php',
         'genimage\\filters\\darken' => __DIR__ . '/../..' . '/src/classes/filters/darken.php',
-        'genimage\\filters\\element' => __DIR__ . '/../..' . '/src/classes/filters/element.php',
         'genimage\\filters\\generate_shape' => __DIR__ . '/../..' . '/src/classes/filters/generate_shape.php',
         'genimage\\filters\\image' => __DIR__ . '/../..' . '/src/classes/filters/image.php',
         'genimage\\filters\\image_free' => __DIR__ . '/../..' . '/src/classes/filters/image_free.php',
@@ -19,6 +19,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\filters\\none' => __DIR__ . '/../..' . '/src/classes/filters/none.php',
         'genimage\\filters\\random_colour' => __DIR__ . '/../..' . '/src/classes/filters/random_colour.php',
         'genimage\\filters\\svg_definition' => __DIR__ . '/../..' . '/src/classes/filters/svg_definition.php',
+        'genimage\\filters\\svg_element' => __DIR__ . '/../..' . '/src/classes/filters/svg_element.php',
         'genimage\\filters\\taxonomy_acf' => __DIR__ . '/../..' . '/src/classes/filters/taxonomy_acf.php',
         'genimage\\filters\\text' => __DIR__ . '/../..' . '/src/classes/filters/text.php',
         'genimage\\filters\\whiten' => __DIR__ . '/../..' . '/src/classes/filters/whiten.php',

@@ -4,7 +4,11 @@ namespace genimage\filters;
 
 use genimage\utils\replace as replace;
 
-class taxonomy_acf {
+/**
+ * Used only on the single post & WP_Query sources.
+ * NOT the taxonomy source.
+ */
+class acf_post_tax_field {
 
     public $params;
 

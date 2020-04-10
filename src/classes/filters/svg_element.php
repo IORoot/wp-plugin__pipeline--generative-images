@@ -2,7 +2,7 @@
 
 namespace genimage\filters;
 
-class element {
+class svg_element {
 
     public $params;
 
