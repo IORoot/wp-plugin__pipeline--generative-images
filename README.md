@@ -229,6 +229,7 @@ Options are:
 3. br (bottom right)
 4. bl (bottom left)
 
+
     'corners' => 'tl,br',
 
 ### corner_size
@@ -265,7 +266,7 @@ Scale the size of the shape tiles up or down. Number in pixels. Default is 80.
 
     'cell_size' => 40,
 
-    
+
 
 ### Example
 
