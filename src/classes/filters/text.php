@@ -20,7 +20,8 @@ class text {
     public function output(){
         if (empty($this->params) || empty($this->post)){ return; }
 
-        $output = replace::switch($this->params, $this->post);
+        $replace = new replace;
+        $output = $replace->sub($this->params, $this->post);
         $output = replace::switch_acf($output, $this->post);
 
         return $output;

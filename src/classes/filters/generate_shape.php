@@ -17,12 +17,11 @@ class generate_shape
     {
         $args = unserialize($params);
 
-        $args = replace::switch($args, $post);
+        $replace = new replace;
+        $args = $replace->sub($args, $post);
         $args = replace::switch_acf($args, $post);
         $args = replace::switch_term_acf($args, $post);
-
         $args = utils::lb($args);
-
         $args = eval("return $args;");
 
         $this->params = $args;
