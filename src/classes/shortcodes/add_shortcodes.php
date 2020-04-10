@@ -234,7 +234,7 @@ class add_shortcodes
     public function save_featured_image()
     {
         $save_type = $this->save_options['post'];
-        if ($save_type == 'none') {
+        if ($save_type == 'none' || $save_type == null ) {
             return;
         }
 
