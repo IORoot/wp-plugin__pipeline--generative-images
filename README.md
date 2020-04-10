@@ -31,7 +31,7 @@ You have an option of:
 
 These can be changed using ACF depending on your use case.
 
-## The save options
+## Save options
 
 Once the SVG is built up, you can opt to do:
 
@@ -51,17 +51,28 @@ There is a shortcode `[andyp_gen_image]` which will allow you to put the results
 The SVG data is built up with layers that you define. The order of the layers matter because it's how the output will be rendered.
 There are two slightly different filter lists for the posts and the taxonomy because of the query that is run and the options you can pull back.
 
-## The filters
+# The filters
 
-### none
+## none
 
 This filter does nothing. It allows you to 'switch off' a layer without deleting it. Handy for testing your output.
 
-### darken
+## darken
 
 Creates a black rectangle of 100% height and width.
+
 `<rect height="100%" width="100%" x="0" y="0" fill-opacity="{{your value}}" fill="#000000"></rect>`
 
-#### Parameters
-Opacity value [INT]. 0 to 1.
-You can control the opacity with the parameter field. 
+    Parameters [INT] 0 to 1.
+    You can control the opacity with the parameter field. 
+
+## element
+
+This create a layer of anything you want into the SVG at that level. This is used to insert new SVG shapes / Paths / Polygons / Logos / Images / other SVGs / groups / etc...  into it.
+
+`your text`
+
+    Parameter
+    Any manual text you want to inject in. 
+    
+  
