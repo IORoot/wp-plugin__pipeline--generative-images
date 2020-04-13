@@ -86,7 +86,9 @@ class article_image
     public function get_source_posts()
     {
         // query
-        $return_posts = $this->options['collection'];
+        if (property_exist($this->options,'collection')){
+            $return_posts = $this->options['collection'];
+        }
 
         // term
         if (get_class($this->options['article']) == 'WP_Term') {
