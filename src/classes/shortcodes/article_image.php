@@ -86,7 +86,7 @@ class article_image
     public function get_source_posts()
     {
         // query
-        if (property_exist($this->options,'collection')){
+        if (property_exists($this->options,'collection')){
             $return_posts = $this->options['collection'];
         }
 
