@@ -1260,3 +1260,95 @@ if( function_exists('acf_add_local_field_group') ):
     ));
     
     endif;
+
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array(
+'key' => 'group_5e9d864accece',
+'title' => 'Generative Images link',
+'fields' => array(
+    array(
+        'key' => 'field_5e9d8655fd086',
+        'label' => '',
+        'name' => '',
+        'type' => 'message',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'hide_admin' => 0,
+        'message' => '<a href="https://londonparkour.com/zimage-generator/" target="_blank">Generator Page</a>',
+        'new_lines' => 'wpautop',
+        'esc_html' => 0,
+    ),
+),
+'location' => array(
+    array(
+        array(
+            'param' => 'options_page',
+            'operator' => '==',
+            'value' => 'generativeimages',
+        ),
+    ),
+),
+'menu_order' => 0,
+'position' => 'side',
+'style' => 'default',
+'label_placement' => 'top',
+'instruction_placement' => 'label',
+'hide_on_screen' => '',
+'active' => true,
+'description' => '',
+));
+
+endif;
+
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array(
+    'key' => 'group_5e9d864accece',
+    'title' => 'Generative Images link',
+    'fields' => array(
+        array(
+            'key' => 'field_5e9d8655fd086',
+            'label' => '',
+            'name' => '',
+            'type' => 'message',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'hide_admin' => 0,
+            'message' => '<a href="https://londonparkour.com/zimage-generator/" target="_blank">Generator Page</a>',
+            'new_lines' => 'wpautop',
+            'esc_html' => 0,
+        ),
+    ),
+    'location' => array(
+        array(
+            array(
+                'param' => 'options_page',
+                'operator' => '==',
+                'value' => 'generativeimages',
+            ),
+        ),
+    ),
+    'menu_order' => 0,
+    'position' => 'side',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => true,
+    'description' => '',
+));
+
+endif;
