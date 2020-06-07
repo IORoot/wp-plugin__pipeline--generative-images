@@ -13,7 +13,7 @@ if( function_exists('acf_add_options_page') ) {
         'menu_title' => 'ANDYP',
         'menu_slug' => 'andyp',
         'capability' => 'manage_options',
-        'position' => '99.11',
+        'position' => '1',
         'parent_slug' => '',
         'icon_url' => 'dashicons-screenoptions',
         'redirect' => true,
@@ -38,7 +38,7 @@ if( function_exists('acf_add_options_page') ) {
         'page_title' => 'Generative Images',
         
         /* (string) The title displayed in the wp-admin sidebar. Defaults to page_title */
-        'menu_title' => 'Generative Images',
+        'menu_title' => '🌄 Generative Images',
         
         /* (string) The URL slug used to uniquely identify this options page. 
         Defaults to a url friendly version of menu_title */
