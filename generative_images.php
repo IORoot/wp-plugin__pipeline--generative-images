@@ -19,8 +19,7 @@ require_once __DIR__.'/vendor/autoload.php';
 //  ┌─────────────────────────────────────────────────────────────────────────┐
 //  │                              The ACF                                    │
 //  └─────────────────────────────────────────────────────────────────────────┘
-require __DIR__.'/src/acf/acf_admin_page.php'; 
-require __DIR__.'/src/acf/acf_panel.php'; 
+require __DIR__.'/src/acf/acf_init.php';
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                           Kick off the program                          │

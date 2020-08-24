@@ -1,8 +1,8 @@
 <?php
 
-namespace genimage\svg;
+namespace genimage;
 
-class build_svg {
+class svg_parts {
 
     public $svg;
 

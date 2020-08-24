@@ -4,6 +4,9 @@ namespace genimage\shortcodes;
 
 use genimage\exporter\convert_to_file as convert;
 use genimage\wp\set_image;
+use genimage\output\screen;
+use genimage\utils\rename_file;
+use genimage\options;
 
 class add_shortcodes
 {
@@ -16,46 +19,22 @@ class add_shortcodes
     public $source_files;
     public $source_posts;
 
+    public $options;
     public $save_options;
 
     public function __construct()
     {
-        // ┌─────────────────────────────────────────────────────────────────────────┐
-        // │   Shortcode runs on page load, and the page is loaded TWICE. This will  │
-        // │                    stop the code from running twice.                    │
-        // └─────────────────────────────────────────────────────────────────────────┘
-        // if ($_SERVER['HTTP_ACCEPT'] == "*/*") {
-        //     return;
-        // }
-
         add_shortcode('andyp_gen_image', array($this, 'generative_image'));
         return;
     }
 
 
-
-    public function generative_image($atts)
+    public function generative_image()
     {
-        $a = shortcode_atts(
-            array(
-                'slug' => '',
-            ),
-            $atts
-        );
 
-        $genimage = new article_image;
+        $this->get_acf_options();
 
-        $this->svg = $genimage->render();
-
-        if ($this->svg == null) {
-            return "No Source File.";
-        }
-
-        $this->source_files = $genimage->get_source_files();
-
-        $this->source_posts = $genimage->get_source_posts();
-
-        $this->save_options = $genimage->get_save_values();
+        $this->build_svg();
 
         $this->convert_files();
 
@@ -69,90 +48,31 @@ class add_shortcodes
     }
 
 
-    public function switch_off_file_write()
+
+
+
+    private function get_acf_options()
     {
-        update_field('gi_save_post', 'none', 'option');
-    }
-
-
-    public function render_table()
-    {
-        ob_start();
-
-        $width_on = 100 / (count(array_filter($this->save_options)));
-
-        $svg_data = $this->combine_svgs();
-
-        $output = '<table>';
-        $output .= '<thead style="background-color:#fafafa;"><tr><td>SVG Data</td>';
-            if ($this->save_options['svg']) {
-                $output .= '<td>SVG file</td>';
-            }
-            if ($this->save_options['jpg']) {
-                $output .= '<td>JPG file</td>';
-            }
-            if ($this->save_options['png']) {
-                $output .= '<td>PNG file</td>';
-            }
-        $output .= '</thead>';
-        $output .= '<tr>';
-        $output .= '<td style="width:'.$width_on.'%;">';
-        $output .= $svg_data;
-        $output .= '</td>';
-
-        
-        if ($this->save_options['svg']) {
-            $output .= '<td style="width:'.$width_on.'%;">';
-                $output .= $this->render_svg();
-            $output .= '</td>';
-        }
-        
-        if ($this->save_options['jpg']) {
-            $output .= '<td style="width:'.$width_on.'%;">';
-                $output .= $this->render_jpg();
-            $output .= '</td>';
-        }
-        
-        if ($this->save_options['png']) {
-            $output .= '<td style="width:'.$width_on.'%;">';
-                $output .= $this->render_png();
-            $output .= '</td>';
-        }
-        
-        
-
-
-        $output .= '</tr>';
-        $output .= '</table>';
-
-        echo $output;
-        return ob_end_flush();
+        $this->options = (new options)->get_article_options();
+        $this->save_options = $this->options['save'];
+        return $this;
     }
 
 
 
 
-    public function combine_svgs()
+
+    public function build_svg()
     {
-        $combined_svg = '';
-        foreach ($this->svg as $svg) {
-            $combined_svg .= '<p>Data</p>' . $svg;
-        }
-        return $combined_svg;
+        $genimage = new image_collection;
+        $genimage->set_options($this->options);
+        $this->svg = $genimage->run();
+        
+        $this->source_files = $genimage->get_source_files();
+        $this->source_posts = $genimage->get_source_posts();
     }
 
 
-
-
-    public function render_textarea()
-    {
-        $ta = '<textarea rows="5" style="width:100%;">';
-        $ta .= '<?xml version="1.0" encoding="UTF-8"?>';
-        $ta .= htmlspecialchars($this->svg);
-        $ta .= '</textarea>';
-
-        return $ta;
-    }
 
 
 
@@ -172,60 +92,17 @@ class add_shortcodes
 
 
 
-
-    public function render_jpg()
+    public function render_table()
     {
-        $output = '';
+        $table = new screen;
+        $table->svg = $this->svg;
+        $table->png = $this->png;
+        $table->jpg = $this->jpg;
+        $table->save_options = $this->save_options;
+        $table->source_files = $this->source_files;
 
-        foreach ($this->source_files as $file) {
-            $this->jpg = $this->rename_file($file, 'jpg');
+        echo $table->render_table();
 
-            $output .= '<a href="'.$this->jpg.'" target="_blank">Open File';
-            $output .= '<img class="pushin" src="';
-            $output .= $this->jpg;
-            $output .= '" />';
-            $output .= '</a>';
-        }
-
-        return $output;
-    }
-
-
-    public function render_png()
-    {
-        $output = '';
-
-        foreach ($this->source_files as $file) {
-            $this->png = $this->rename_file($file, 'png');
-
-            $output .= '<a href="'.$this->png.'" target="_blank">Open File';
-            $output .= '<img class="pushin" src="';
-            $output .= $this->png;
-            $output .= '" />';
-            $output .= '</a>';
-        }
-
-        return $output;
-    }
-
-
-    public function render_svg()
-    {
-        $output = '';
-
-        foreach ($this->source_files as $file) {
-
-            // substitute source filename.png for a jpeg filename_suffix.jpg
-            $this->svg = $this->rename_file($file, 'svg');
-
-            $output .= '<a href="'.$this->svg.'" target="_blank">Open File';
-            $output .= '<embed class="pushin" src="';
-            $output .= $this->svg;
-            $output .= '" />';
-            $output .= '</a>';
-        }
-
-        return $output;
     }
 
 
@@ -240,7 +117,7 @@ class add_shortcodes
 
         $i = 0;
         foreach ($this->source_files as $file) {
-            $file = $this->rename_file($file, $save_type);
+            $file = (new rename_file)->rename_file($file, $save_type);
 
             $wp = new set_image;
             $wp->set_filename($file);
@@ -265,17 +142,10 @@ class add_shortcodes
     }
 
 
-    public function rename_file($file, $format)
+
+    public function switch_off_file_write()
     {
-
-        // remove the suffix
-        $file = str_replace($this->suffix.'.png', '.png', $file);
-        $file = str_replace($this->suffix.'.jpg', '.jpg', $file);
-
-        // Reset the format
-        $file = str_replace('.png', $this->suffix.'.'.$format, $file);
-        $file = str_replace('.jpg', $this->suffix.'.'.$format, $file);
-
-        return $file;
+        update_field('gi_save_post', 'none', 'option');
     }
+
 }

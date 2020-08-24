@@ -2,22 +2,23 @@
 
 namespace genimage\filters;
 
-class image {
+class image_free {
 
     public $params;
 
-    public function __construct($params){
+    public $image;
+
+    public function __construct($params, $image){
         $this->params = $params;
+        $this->image = $image;
         return $this;
     }
 
     public function output(){
 
         if (!empty($this->params)){ 
-            $params = ' xlink:href="'.$this->params[0].'"';
-            $params .= ' width="'.$this->params[1].'"';
-            $params .= ' height="'.$this->params[2].'" ';
-            $params .= unserialize($this->params[4]);
+            $params = ' xlink:href="'.$this->image[0].'" ';
+            $params .= unserialize($this->params);
         }
 
         return '<image '.$params.'></image>';
