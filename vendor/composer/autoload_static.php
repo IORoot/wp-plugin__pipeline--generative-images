@@ -7,7 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInita2fee0734c84cd5f140d105459003871
 {
     public static $classMap = array (
-        'genimage\\exporter\\convert_to_file' => __DIR__ . '/../..' . '/src/classes/exporters/convert_to_file.php',
+        'genimage\\convert' => __DIR__ . '/../..' . '/src/classes/convert/convert.php',
+        'genimage\\convert_file' => __DIR__ . '/../..' . '/src/classes/convert/old_convert.php',
+        'genimage\\convert_group' => __DIR__ . '/../..' . '/src/classes/convert/convert_group.php',
         'genimage\\filter_objects' => __DIR__ . '/../..' . '/src/classes/filters/build_filters.php',
         'genimage\\filters' => __DIR__ . '/../..' . '/src/classes/filters/filters.php',
         'genimage\\filters\\acf_post_tax_field' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/acf_post_tax_field.php',
@@ -27,7 +29,6 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\filters\\whiten' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/whiten.php',
         'genimage\\generate' => __DIR__ . '/../..' . '/src/classes/generate.php',
         'genimage\\generator' => __DIR__ . '/../..' . '/src/classes/generator/generator.php',
-        'genimage\\image' => __DIR__ . '/../..' . '/src/classes/image/old_image.php',
         'genimage\\image_details' => __DIR__ . '/../..' . '/src/classes/image/image_details.php',
         'genimage\\images' => __DIR__ . '/../..' . '/src/classes/image/images.php',
         'genimage\\instance' => __DIR__ . '/../..' . '/src/classes/instances/instance.php',
@@ -40,7 +41,6 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\output\\screen' => __DIR__ . '/../..' . '/src/classes/output/screen.php',
         'genimage\\shortcodes\\add_shortcodes' => __DIR__ . '/../..' . '/src/classes/shortcodes/add_shortcodes.php',
         'genimage\\shortcodes\\genimage' => __DIR__ . '/../..' . '/src/classes/shortcodes/genimage.php',
-        'genimage\\shortcodes\\image_collection' => __DIR__ . '/../..' . '/src/classes/image/old_image_collection.php',
         'genimage\\svg\\build_shape' => __DIR__ . '/../..' . '/src/classes/svg/build_shape.php',
         'genimage\\svg_group' => __DIR__ . '/../..' . '/src/classes/svg/svg_group.php',
         'genimage\\svg_parts' => __DIR__ . '/../..' . '/src/classes/svg/svg_parts.php',
@@ -52,6 +52,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\utils\\utils' => __DIR__ . '/../..' . '/src/classes/utils/utils.php',
         'genimage\\wp\\get_image' => __DIR__ . '/../..' . '/src/classes/wp/get_image.php',
         'genimage\\wp\\set_image' => __DIR__ . '/../..' . '/src/classes/wp/set_image.php',
+        'genimage\\wp_funcs' => __DIR__ . '/../..' . '/src/classes/wp/wp_funcs.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

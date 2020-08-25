@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'genimage\\exporter\\convert_to_file' => $baseDir . '/src/classes/exporters/convert_to_file.php',
+    'genimage\\convert' => $baseDir . '/src/classes/convert/convert.php',
+    'genimage\\convert_file' => $baseDir . '/src/classes/convert/old_convert.php',
+    'genimage\\convert_group' => $baseDir . '/src/classes/convert/convert_group.php',
     'genimage\\filter_objects' => $baseDir . '/src/classes/filters/build_filters.php',
     'genimage\\filters' => $baseDir . '/src/classes/filters/filters.php',
     'genimage\\filters\\acf_post_tax_field' => $baseDir . '/src/classes/filters/filter_types/acf_post_tax_field.php',
@@ -26,7 +28,6 @@ return array(
     'genimage\\filters\\whiten' => $baseDir . '/src/classes/filters/filter_types/whiten.php',
     'genimage\\generate' => $baseDir . '/src/classes/generate.php',
     'genimage\\generator' => $baseDir . '/src/classes/generator/generator.php',
-    'genimage\\image' => $baseDir . '/src/classes/image/old_image.php',
     'genimage\\image_details' => $baseDir . '/src/classes/image/image_details.php',
     'genimage\\images' => $baseDir . '/src/classes/image/images.php',
     'genimage\\instance' => $baseDir . '/src/classes/instances/instance.php',
@@ -39,7 +40,6 @@ return array(
     'genimage\\output\\screen' => $baseDir . '/src/classes/output/screen.php',
     'genimage\\shortcodes\\add_shortcodes' => $baseDir . '/src/classes/shortcodes/add_shortcodes.php',
     'genimage\\shortcodes\\genimage' => $baseDir . '/src/classes/shortcodes/genimage.php',
-    'genimage\\shortcodes\\image_collection' => $baseDir . '/src/classes/image/old_image_collection.php',
     'genimage\\svg\\build_shape' => $baseDir . '/src/classes/svg/build_shape.php',
     'genimage\\svg_group' => $baseDir . '/src/classes/svg/svg_group.php',
     'genimage\\svg_parts' => $baseDir . '/src/classes/svg/svg_parts.php',
@@ -51,4 +51,5 @@ return array(
     'genimage\\utils\\utils' => $baseDir . '/src/classes/utils/utils.php',
     'genimage\\wp\\get_image' => $baseDir . '/src/classes/wp/get_image.php',
     'genimage\\wp\\set_image' => $baseDir . '/src/classes/wp/set_image.php',
+    'genimage\\wp_funcs' => $baseDir . '/src/classes/wp/wp_funcs.php',
 );

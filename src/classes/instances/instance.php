@@ -125,14 +125,11 @@ class instance
 
     private function convert()
     {
-        $i = 0;
-        foreach ($this->svg_group as $svgfile) {
 
-            // make absolute path to relative.
-            $filename = str_replace(get_site_url().'/', '', $this->source_files[$i]);
-            $this->convert = new convert($svgfile, $filename, $this->save_options);
-            $i++;
-        }
+        $convert_group = new convert_group;
+        $convert_group->set_svg_group($this->svg_group);
+        $convert_group->set_image_group($this->images);
+        $convert_group->run();
     }
-    
+
 }

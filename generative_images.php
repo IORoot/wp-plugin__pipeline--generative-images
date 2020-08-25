@@ -11,6 +11,11 @@
  * Domain Path:       /languages
  */
 
+
+define( 'ANDYP_GENIMAGE_URL', plugins_url( '/', __FILE__ ) );
+define( 'ANDYP_GENIMAGE_PATH', __DIR__ );
+
+
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                         Use composer autoloader                         │
 // └─────────────────────────────────────────────────────────────────────────┘
