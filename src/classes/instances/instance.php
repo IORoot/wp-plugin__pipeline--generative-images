@@ -21,11 +21,9 @@ class instance
     /**
      * Contains an array of instances of current images' metadata.
      * 0 => [
-     *      0 => Relative Directory
+     *      0 => Relative directory of image
      *      1 => width
      *      2 => height
-     *      3 => false
-     *      4 => URL
      * ]
      *
      * @var array
@@ -77,22 +75,7 @@ class instance
     }
 
 
-    /**
-     * Gets image data.
-     *
-     * 'instance_source'  => get_article | get_category | get_query
-     *
-     * returns :
-     * 0 => [
-     *      0 => Relative Directory
-     *      1 => width
-     *      2 => height
-     *      3 => false
-     *      4 => URL
-     * ]
-     *
-     * @return array
-     */
+
     private function images()
     {
         $images = new images;

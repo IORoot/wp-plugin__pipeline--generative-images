@@ -23,8 +23,6 @@ class convert_group
      *      0 => Relative Directory
      *      1 => width
      *      2 => height
-     *      3 => false
-     *      4 => URL
      * ]
      *
      * @var array

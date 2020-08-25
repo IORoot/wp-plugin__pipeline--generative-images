@@ -33,9 +33,32 @@ class images
     private $images;
 
 
+    /**
+     * set_instance_source
+     * 
+     * wp_post | wp_term | wp_query
+     *
+     * @param string $instance_source
+     * @return void
+     */
     public function set_instance_source($instance_source)
     {
         $this->instance_source = $instance_source;
+    }
+
+    /**
+     * set_source_objects
+     * 
+     * Optional to override the source objects.
+     * Used within the filter 'get_gi_images' to manually
+     * input the post to work on.
+     *
+     * @param array $source_objects
+     * @return void
+     */
+    public function set_source_objects($source_objects)
+    {
+        $this->source_objects = $source_objects;
     }
 
     public function get_images()
@@ -53,6 +76,14 @@ class images
 
     private function get_source_wpposts()
     {
+        /**
+         * This is so you can manually override the source objects
+         * using $this->set_source_objects() first.
+         */
+        if ($this->source_objects != null)
+        {
+            return;
+        }
         $source_type = $this->instance_source;
         $this->source_objects = (new options)->get_source($source_type);
     }

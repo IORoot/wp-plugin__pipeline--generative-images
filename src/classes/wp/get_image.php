@@ -25,6 +25,7 @@ class get_image {
         $domain = get_site_url();
         // Rewrite the absolute to relative path.
         $image_array[0] = str_replace( $domain, '', '../../../..'.$image_array[0] );
+        unset($image_array[3]);
 
         $this->image = $image_array;
 

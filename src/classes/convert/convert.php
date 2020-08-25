@@ -45,9 +45,6 @@ class convert
     private $upload_dir;
 
 
-
-
-
     // The source image relative filepath
     // wp-content/uploads/2020/03/original_file.jpg
     public $source_image;
@@ -140,7 +137,7 @@ class convert
     public function run()
     {
         $this->set_upload_directory();
-        
+
     }
 
 

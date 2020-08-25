@@ -20,10 +20,6 @@ class image_details
     {
         $wp = new get_image;
         $image = $wp->get_image_url($wp_post_or_term);
-
-        $domain = get_site_url();
-        $image[4] = str_replace('../../../..', $domain, $image[0]);
-
         return $image;
     }
 
