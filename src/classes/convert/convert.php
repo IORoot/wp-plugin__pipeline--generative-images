@@ -2,12 +2,11 @@
 
 namespace genimage;
 
-use Imagick;
-
 class convert
 {
 
     use wp_funcs;
+    use debug;
 
     /**
      * The SVG data to convert
@@ -18,284 +17,173 @@ class convert
      */
     private $svg_data;
 
+
     /**
-     * The relative_filename of the original image.
+     * The relative_filepath of the original image.
      * 
      * E.g.
-     * "../../../../wp-content/uploads/2020/04/conditioning-pressup-4-fingers-mixed-view-slowmo_KR63mHA-xi8.jpg"
+     * "wp-content/uploads/2020/04/conditioning-pressup-4-fingers-mixed-view-slowmo_KR63mHA-xi8.jpg"
      * 
      * @var string
      */
-    private $relative_filename;
+    private $filepath;
 
 
     /**
-     * Array of which conversions should happen.
+     * What type to save file to.
+     * 
+     * svg
+     * jpg
+     * png
+     * post
      *
      * @var array
      */
-    private $save_options;
+    private $save_type;
 
 
     /**
      * Current upload directory
+     * 
+     * "wp-content/uploads/2020/08"
      *
      * @var string
      */
     private $upload_dir;
 
 
-    // The source image relative filepath
-    // wp-content/uploads/2020/03/original_file.jpg
-    public $source_image;
-
-    // JPG Quality to save as
-    public $jpg_quality = 100;
-
-
+    /**
+     * This is the suffix to add onto
+     * any temporary files to keep them
+     * separate from original files.
+     */
+    private $file_suffix = '_gi';
 
 
-    public $file_suffix = '_gi';
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                SVG Files                                │
-    // └─────────────────────────────────────────────────────────────────────────┘
-
-    // filename of the temporary SVG file if we're not saving to SVG.
-    public $tmp_svg_filename = '/1_temporary_genimage.svg';
-
-    // Absolute_Path + Filename.svg
-    public $svg_file;
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                PNG Files                                │
-    // └─────────────────────────────────────────────────────────────────────────┘
-
-    // Name of output png file
-    public $tmp_png_filename = '/1_temporary_genimage.png';
-
-    // Upload dir + output png file
-    public $png_dir;
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                JPG Files                                │
-    // └─────────────────────────────────────────────────────────────────────────┘
-
-    // Name of output jpg file
-    public $tmp_jpg_filename = '/1_temporary_genimage.jpg';
-
-    // Upload dir + output jpg file
-    public $jpg_dir;
+    /**
+     * target_filepath
+     * 
+     * This is where the target file should be written to.
+     *
+     * @var string
+     */
+    private $target_filepath;
 
 
+    /**
+     * intermediate_svg_file
+     *
+     * An intermediate SVG file needs to be created so that
+     * any other file can be created from it.
+     * 
+     * @var string
+     */
+    private $intermediate_svg_file;
+
+
+    /**
+     * result variable
+     *
+     * Contains the filepath of the result image.
+     * 
+     * @var string
+     */
+    private $result;
+    
 
     public function set_svg_data($svg_data)
     {
-        $this->$svg_data = $svg_data;
+        $this->svg_data = $svg_data;
     }
 
 
-    public function set_filename($relative_filename)
+    public function set_filepath($filepath)
     {
-        $this->$relative_filename = $relative_filename;
+        $wpcontent_filepath = str_replace('../../../../', '', $filepath);
+        $this->filepath = pathinfo($wpcontent_filepath);
     }
 
 
-
-
-    
-    public function __construct()
+    public function set_savetype($save_type)
     {
-        if ($svg_data == null || $source_image == null || $save_options == null) {
-            return;
-        }
-
-
-
-        $this->add_filename_suffix();
-
-        $this->set_svg_filename();
-
-        $this->set_png_filename();
-
-        $this->set_jpg_filename();
-
-        $this->create_SVG_file_for_conversion();
-
-        $this->convert_to_png();
-
-        $this->png_to_jpg();
-
-        $this->rewrite_SVG_file_with_absolutes();
-
-        $this->cleanup();
-        
-        return $this;
+        $this->save_type = $save_type;
     }
+
+    public function get_result()
+    {
+        return $this->result;
+    }
+
 
 
     public function run()
     {
-        $this->set_upload_directory();
 
+        $this->set_upload_directory();
+        $this->set_intermediate_svg_filepath();
+        $this->set_target_filepath();
+        $this->rewrite_SVG_file_with_no_paths();
+        $this->create_intermediate_svg();
+        $this->convert_to_file();
+
+        $this::debug(
+            [
+                'input file' => $this->filepath,
+                'save as' => $this->save_type,
+                'intermediate file' => $this->intermediate_svg_file,
+                'target file' => $this->target_filepath
+            ], static::class);
+
+        return;
     }
 
 
-
-
+    public function cleanup(){
+        unlink($this->intermediate_svg_file);
+    }
 
 
     private function set_upload_directory()
     {
-        // Set upload directory.
         $this->upload_dir = $this::wp_upload_dir();
     }
-
-
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │             Add the _gi onto the end of the source filename             │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function add_filename_suffix(){
-
-        // Add the suffix on. ( _gi )
-        $this->source_image = str_replace('.jpg', $this->file_suffix.'.jpg', $this->source_image);
-        $this->source_image = str_replace('.png', $this->file_suffix.'.png', $this->source_image);
-        
-        return;
-    }
-
-
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                         Set the output filenames                        │
-    // │                              1. Use Default                             │
-    // │            2. Override to sourcefile name if 'save as' is set           │
-    // └─────────────────────────────────────────────────────────────────────────┘
-
-    public function set_svg_filename(){
-        
-        $this->svg_file = $this->upload_dir .  $this->tmp_svg_filename;
-
-        if ($this->save_options['svg'] == true){
-            $svg_filename = str_replace('.png', '.svg', $this->source_image);
-            $svg_filename = str_replace('.jpg', '.svg', $this->source_image);
-            $this->svg_file = $svg_filename;
-        }
-
-        return;
-
-    }
-
-
-    public function set_png_filename(){
-        $this->png_dir = $this->upload_dir . $this->tmp_png_filename;
-
-        if ($this->save_options['png'] == true){
-            $this->png_dir = str_replace('.jpg', '.png', $this->source_image);
-        }
-
-        return;
-    }
-
     
-    public function set_jpg_filename(){
-        $this->jpg_dir = $this->source_image;
-
-        if ($this->save_options['jpg'] == true){
-            $this->jpg_dir = str_replace('.png', '.jpg', $this->source_image);
-        }
-
-        return;
+    private function set_target_filepath()
+    {
+        $this->target_filepath = $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '.' . $this->save_type;
+    }
+    
+    private function set_intermediate_svg_filepath()
+    {
+        $this->intermediate_svg_file = $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '_intermediate.svg';
     }
 
+    private function rewrite_SVG_file_with_no_paths()
+    { 
+        // Match a filepath
+        preg_match_all('/href="([.|\w|\d|\\\|\/|\-|\_]+)"/',$this->svg_data, $matches);
 
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │                            Write to SVG file                            │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function create_SVG_file_for_conversion()
-    {
-        file_put_contents($this->svg_file, $this->svg_data);
-        return;
-    }
-
-    public function rewrite_SVG_file_with_absolutes()
-    {
-        $svg_date_abs = str_replace('../../../..', get_site_url(), $this->svg_data);
-        file_put_contents($this->svg_file, $svg_date_abs);
-        return;
-    }
-
-
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │                      INKSCAPE : Convert SVG --> PNG                     │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function convert_to_png()
-    {
-        
-        
-        exec('inkscape -z '. $this->svg_file.' -e '.$this->png_dir, $output, $return);
-
-        if ($return > 0) {
-            die('Inkscape did not execute correctly. $result = '.$result. ' | $output = '. $output);
-        }
-
-        return;
-    }
-
-
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │                    IMAGEMAGICK : Convert PNG --> JPG                    │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function png_to_jpg()
-    {
-        try {
-            $im = new Imagick($this->png_dir);
-        } catch (ImagickException $e) {
-            $im = null;
-        }
-
-        if ($im) {
-            $im->setImageCompressionQuality($this->jpg_quality);
-            $im->setImageFormat("jpg");
-            $im->writeImage($this->jpg_dir);
-            $im->clear();
-            $im->destroy();
+        foreach($matches[1] as $match)
+        {
+            $this->svg_data = str_replace($match, $this->filepath['basename'], $this->svg_data);
         }
         
+    }
+
+    private function create_intermediate_svg()
+    {
+        file_put_contents($this->intermediate_svg_file, $this->svg_data);
         return;
     }
 
 
-    // ┌─────────────────────────────────────────────────────────────────────────┐
-    // │                                                                         │
-    // │                Remove any files not specified to be saved               │
-    // │                                                                         │
-    // └─────────────────────────────────────────────────────────────────────────┘
-    public function cleanup(){
-
-        if ($this->save_options['svg'] == false && file_exists($this->save_options['svg'])){
-            $svg_del = unlink($this->svg_dir);
-        }
-
-        if ($this->save_options['png'] == false && file_exists($this->save_options['png'])){
-            $png_del = unlink($this->png_dir);
-        }
-
-        if ($this->save_options['jpg'] == false && file_exists($this->save_options['jpg'])){
-            $jpg_del = unlink($this->jpg_dir);
-        }
-
-        return;
+    private function convert_to_file()
+    {
+        $convert_type = '\genimage\convert\\' . $this->save_type;
+        $convert = new $convert_type;
+        $convert->target($this->target_filepath);
+        $convert->in($this->intermediate_svg_file);
+        $this->result = $convert->out();
     }
 
 

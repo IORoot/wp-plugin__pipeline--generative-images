@@ -5,6 +5,15 @@ namespace genimage;
 class images
 {
 
+    use debug;
+
+    /**
+     * instance_source variable
+     *
+     * post | term | wp_query
+     * 
+     * @var string
+     */
     private $instance_source;
 
     /**
@@ -71,6 +80,8 @@ class images
     {
         $this->get_source_wpposts();
         $this->loop_over_collection();
+
+        $this::debug( ['posts' => $this->images], static::class);
     }
 
 
@@ -84,8 +95,8 @@ class images
         {
             return;
         }
-        $source_type = $this->instance_source;
-        $this->source_objects = (new options)->get_source($source_type);
+
+        $this->source_objects = (new options)->get_source($this->instance_source);
     }
 
 
@@ -93,8 +104,26 @@ class images
     {
         foreach($this->source_objects as $source_data)
         {
-            $this->images[] = (new image_details)::get_image_meta($source_data);
+            $this->images[] = $this->get_image_meta($source_data);
         }
+    }
+
+
+    /**
+     * Returns array on image
+     * 
+     * e.g.
+     * 0 => Relative Directory
+     * 1 => width
+     * 2 => height
+     * 3 => false
+     * 4 => URL
+     */
+    private function get_image_meta($wp_post_or_term)
+    {
+        $wp = new \genimage\wp\get_image;
+        $image = $wp->get_image_url($wp_post_or_term);
+        return $image;
     }
 
 

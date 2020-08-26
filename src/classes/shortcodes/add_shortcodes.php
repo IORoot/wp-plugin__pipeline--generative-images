@@ -32,13 +32,13 @@ class add_shortcodes
     public function generative_image()
     {
 
-        $this->get_acf_options();
+        // $this->get_acf_options();
 
-        $this->build_svg();
+        // $this->build_svg();
 
-        $this->convert_files();
+        // $this->convert_files();
 
-        $this->render_table();
+        // $this->render_table();
 
         $this->save_featured_image();
 
@@ -51,43 +51,43 @@ class add_shortcodes
 
 
 
-    private function get_acf_options()
-    {
-        $this->options = (new options)->get_article_options();
-        $this->save_options = $this->options['save'];
-        return $this;
-    }
+    // private function get_acf_options()
+    // {
+    //     $this->options = (new options)->get_article_options();
+    //     $this->save_options = $this->options['save'];
+    //     return $this;
+    // }
 
 
 
 
 
-    public function build_svg()
-    {
-        $genimage = new image_collection;
-        $genimage->set_options($this->options);
-        $this->svg = $genimage->run();
+    // public function build_svg()
+    // {
+    //     $genimage = new image_collection;
+    //     $genimage->set_options($this->options);
+    //     $this->svg = $genimage->run();
         
-        $this->source_files = $genimage->get_source_files();
-        $this->source_posts = $genimage->get_source_posts();
-    }
+    //     $this->source_files = $genimage->get_source_files();
+    //     $this->source_posts = $genimage->get_source_posts();
+    // }
 
 
 
 
 
-    public function convert_files()
-    {
-        $i = 0;
-        foreach ($this->svg as $svgfile) {
+    // public function convert_files()
+    // {
+    //     $i = 0;
+    //     foreach ($this->svg as $svgfile) {
 
-            // make absolute path to relative.
-            $filename = str_replace(get_site_url().'/', '', $this->source_files[$i]);
-            $this->convert = new convert($svgfile, $filename, $this->save_options);
-            $i++;
-        }
-        return;
-    }
+    //         // make absolute path to relative.
+    //         $filename = str_replace(get_site_url().'/', '', $this->source_files[$i]);
+    //         $this->convert = new convert($svgfile, $filename, $this->save_options);
+    //         $i++;
+    //     }
+    //     return;
+    // }
 
 
 

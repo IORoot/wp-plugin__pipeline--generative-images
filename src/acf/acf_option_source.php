@@ -8,7 +8,7 @@ trait option_source
 {
 
     public function get_source($source_type){
-        return $this->$source_type(); 
+        return $this->$source_type();
     }
 
 

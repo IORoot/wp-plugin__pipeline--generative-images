@@ -4,6 +4,7 @@ namespace genimage;
 
 class generator
 {
+    use debug;
 
     public $instances;
     public $instance_key;
@@ -12,6 +13,7 @@ class generator
 
     public function __construct()
     {
+        $this::debug_clear();
         $this->run();
     }
 
