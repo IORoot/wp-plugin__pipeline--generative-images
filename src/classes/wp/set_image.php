@@ -4,9 +4,17 @@ namespace genimage\wp;
 
 class set_image
 {
+
+    /**
+     * This is the new file to add to the post
+     */
     public $filename;
 
+    /**
+     * Post ID to attach the new image to.
+     */
     public $id;
+
 
     public $attachment_id;
 
@@ -15,14 +23,12 @@ class set_image
     public function set_filename($filename)
     {
         $this->filename = $filename;
-        return;
     }
 
     
     public function set_id($id)
     {
         $this->id = $id;
-        return;
     }
 
     
@@ -30,6 +36,7 @@ class set_image
     {
         $this->create_attachment();
         set_post_thumbnail($this->id, $this->attachment_id);
+        return $this->attachment_id;
     }
 
 
@@ -38,12 +45,13 @@ class set_image
     {
         $this->create_attachment();
         update_field('article_category_image', $this->attachment_id, 'term_'.$this->id);
-        return;
+        return $this->attachment_id;
     }
 
 
 
     public function create_attachment(){
+
         // Check the type of file. We'll use this as the 'post_mime_type'.
         $filetype = wp_check_filetype(basename($this->filename), null);
         
@@ -72,8 +80,6 @@ class set_image
 
 
         wp_update_attachment_metadata($attach_id, $attach_data);
-
-        return;
     }
 
 }

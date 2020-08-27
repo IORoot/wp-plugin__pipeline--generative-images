@@ -17,7 +17,7 @@ trait option_instances
                 'instance_slug'       => get_sub_field('genimage_instance_slug'),
                 'instance_source'     => get_sub_field('genimage_instance_source'),
                 'instance_filter'     => get_sub_field('genimage_instance_filter'),
-                'instance_enabled'     => get_sub_field('genimage_instance_enabled')
+                'instance_enabled'    => get_sub_field('genimage_instance_enabled')
             );
             
         endwhile;

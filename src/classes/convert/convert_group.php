@@ -8,6 +8,8 @@ class convert_group
     use debug;
     
     /**
+     * svg_group
+     * 
      * Array of SVG code for each image.
      * 
      * 0 => '<svg ...>'
@@ -21,6 +23,8 @@ class convert_group
     private $svg_data;
 
     /**
+     * image_group
+     * 
      * Contains an array of instances of current images' metadata.
      * 0 => [
      *      0 => Relative Directory
@@ -33,12 +37,19 @@ class convert_group
     private $image_group;
 
     /**
-     * save_type
+     * save_types
      * 
-     * What to save the file as.
+     * Array of what to save the file as.
+     * 
+     * [
+     *      svg : true,
+     *      png : false,
+     *      jpg : true,
+     * ]
      *
      * @var array
      */
+    private $save_types;
     private $save_type;
 
 
@@ -64,6 +75,13 @@ class convert_group
         $this->image_group = $image_group;
     }
 
+    public function set_save_types($save_types)
+    {
+        $this->save_types = $save_types;
+    }
+
+
+
     public function get_converted()
     {
         return $this->converted;
@@ -80,9 +98,12 @@ class convert_group
 
     private function convert_each_save_type()
     {
-        $save_types = (new options)->get_saves();
+        if ($this->save_types == null)
+        {
+            $this->save_types = (new options)->get_saves();
+        }
 
-        foreach ($save_types as $this->save_type => $enabled)
+        foreach ($this->save_types as $this->save_type => $enabled)
         {
             if ($enabled == false)
             {

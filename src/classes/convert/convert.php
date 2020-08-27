@@ -35,9 +35,8 @@ class convert
      * svg
      * jpg
      * png
-     * post
      *
-     * @var array
+     * @var string
      */
     private $save_type;
 

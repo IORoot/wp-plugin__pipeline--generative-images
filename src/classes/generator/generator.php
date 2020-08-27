@@ -46,7 +46,7 @@ class generator
 
     private function process_single_instance()
     {
-        $this->current_instance = new instance;
+        $this->current_instance = new runas_shortcode;
         $this->current_instance->set_config($this->instance_config);
         $this->current_instance->run();
 

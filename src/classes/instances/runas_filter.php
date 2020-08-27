@@ -2,23 +2,20 @@
 
 namespace genimage;
 
-class instance
+
+class runas_filter
 {
 
     use debug;
 
     /**
-     * Config Array
+     * filter_slug variable
+     * 
+     * The slug of the filter group you want to process.
      *
-     * 'instance_slug'    => SLUG,
-     * 'instance_source'  => get_article | get_category | get_query,
-     * 'instance_filter'  => filter slug
-     * 'instance_enabled' => true | false
-     *
-     * @var array
+     * @var string
      */
-    private $config;
-
+    private $filter_slug;
 
     /**
      * Contains an array of instances of current images' metadata.
@@ -82,41 +79,57 @@ class instance
 
 
 
+    /**
+     * save_types
+     * 
+     * Array of what to save the file as.
+     * 
+     * [
+     *      svg : true,
+     *      png : false,
+     *      jpg : true,
+     * ]
+     *
+     * @var array
+     */
+    private $save_types;
 
-    public function set_config($config)
+
+
+
+    public function set_images($images)
     {
-        $this->config = $config;
+        $this->images = $images;
     }
 
+    public function set_save_types($save_types)
+    {
+        $this->save_types = $save_types;
+    }
+
+    public function set_filter_slug($filter_slug)
+    {
+        $this->filter_slug = $filter_slug;
+    }
+
+    public function get_converted()
+    {
+        return $this->converted;
+    }
 
     public function run()
     {
-        $this->images();
+        $this::debug_clear();
         $this->filters();
         $this->svg();
         $this->convert();
-        $this->render();
-
-        return;
-    }
-
-
-
-    private function images()
-    {
-        $images = new images;
-        $images->set_instance_source($this->config['instance_source']);
-        $images->run();
-        $this->images = $images->get_images();
-
-        $this->continue($this->images, 'images');
     }
 
 
     private function filters()
     {
         $filters = new filters;
-        $filters->set_filter_slug($this->config['instance_filter']);
+        $filters->set_filter_slug($this->filter_slug);
         $filters->run();
         $this->filters = $filters->get_filters();
 
@@ -141,21 +154,12 @@ class instance
         $convert_group = new convert_group;
         $convert_group->set_svg_group($this->svg_group);
         $convert_group->set_image_group($this->images);
+        $convert_group->set_save_types($this->save_types);
         $convert_group->run();
         $this->converted = $convert_group->get_converted();
 
         $this->continue($this->converted, 'converted');
     }
-
-
-    private function render()
-    {
-        $render = new render;
-        $render->set_converted($this->converted);
-        $render->set_svg_group($this->svg_group);
-        $render->run();
-    }
-
 
 
 
@@ -164,11 +168,10 @@ class instance
         if ($stage == null || $stage[0] == null)
         {
             $json = json_encode($stage, JSON_PRETTY_PRINT);
-            $this::debug($name . ' is NULL : '. $json, static::class); 
             die ('no results in ' . $name . ' : '. $json);
         }
     }
 
-    
+
 
 }

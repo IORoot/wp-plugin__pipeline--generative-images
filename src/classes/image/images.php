@@ -42,14 +42,7 @@ class images
     private $images;
 
 
-    /**
-     * set_instance_source
-     * 
-     * wp_post | wp_term | wp_query
-     *
-     * @param string $instance_source
-     * @return void
-     */
+
     public function set_instance_source($instance_source)
     {
         $this->instance_source = $instance_source;
