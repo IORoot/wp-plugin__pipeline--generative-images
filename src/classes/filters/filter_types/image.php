@@ -2,15 +2,31 @@
 
 namespace genimage\filters;
 
-class image {
-
+class image 
+{
+    public $filtername =    'image';
+    public $filterdesc =    'This will create an <image> tag with the image of the source post.'.PHP_EOL.PHP_EOL.
+                            'This will be the basis of the SVG size, so is needed to define the width/height of the SVG data.'.PHP_EOL.PHP_EOL.
+                            'Therefore, the base image has its height/width automatically set based on the source, which you cannot change.';
+    public $example    =    'filter="url(#myFilter)"';
+    public $output     =    '<image xlink:href="../../../../wp-content/uploads/2020/03/my_image.jpg" width="1280" height="720" filter="url(#myFilter)"></image>';
+    
     public $params;
 
     public $image;
 
-    public function __construct($params, $image){
-        $this->params = $params;
+    public function set_params($params)
+    {
+        $this->params = unserialize($params);
+    }
+
+    public function set_post($image)
+    {
         $this->image = $image;
+    }
+
+    public function run()
+    {
         return $this;
     }
 

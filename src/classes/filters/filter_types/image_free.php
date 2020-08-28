@@ -2,23 +2,40 @@
 
 namespace genimage\filters;
 
-class image_free {
-
+class image_free 
+{
+    public $filtername =    'image_free';
+    public $filterdesc =    'This Inserts an <image> layer of a specified image with any parameters defined added in.'.PHP_EOL.
+                            '<image xlink:href="{{image}}" {{params}}></image>'.PHP_EOL.
+                            'Specify both image and parameters in an array.';
+    public $example    =    '['.PHP_EOL.
+                            ' \'image_location.jpg\' '.PHP_EOL.
+                            ' \'filter="url(#myFilter)" width="50%" height="50%"\' '.PHP_EOL.
+                            ']';
+    public $output     =    '<image xlink:href="image_location.jpg" filter="url(#myFilter)" width="50%" height="50%"></image>';
+    
     public $params;
 
-    public $image;
+    public function set_params($params)
+    {
+        $this->params = unserialize($params);
+    }
 
-    public function __construct($params, $image){
-        $this->params = $params;
-        $this->image = $image;
+    public function set_post($post)
+    {
+        $this->post = $post;
+    }
+
+    public function run()
+    {
         return $this;
     }
 
     public function output(){
 
         if (!empty($this->params)){ 
-            $params = ' xlink:href="'.$this->image[0].'" ';
-            $params .= unserialize($this->params);
+            $params = ' xlink:href="'.$this->params[0].'" ';
+            $params .= unserialize($this->params[1]);
         }
 
         return '<image '.$params.'></image>';

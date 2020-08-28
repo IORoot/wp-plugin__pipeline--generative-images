@@ -67,7 +67,10 @@ class filter_objects
         $filter_name = "genimage\\filters\\" . $this->current_filter['filter_name'];
 
         // Instantiate new object with the filter parameters and the post
-        $filter_object = new $filter_name( $this->current_filter['filter_parameters'], $this->image );
+        $filter_object = new $filter_name;
+        $filter_object->set_params($this->current_filter['filter_parameters']);
+        $filter_object->set_post($this->image);
+        $filter_object->run();
 
         // return object
         return $filter_object;

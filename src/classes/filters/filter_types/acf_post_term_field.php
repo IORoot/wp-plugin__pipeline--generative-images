@@ -12,15 +12,35 @@ use genimage\utils\replace_terms as replace;
  */
 class acf_post_term_field {
 
+    public $filtername =    'acf_post_term_field';
+    public $filterdesc =    'Uses "articletags" Taxonomy.'.PHP_EOL.PHP_EOL.
+                            '1. This gets any "articletags" terms for the specific Post.'.PHP_EOL.
+                            '2. Gets the "View" type of the article'.PHP_EOL.
+                            '3. Adds the SLOWMO tag on if it exists.'.PHP_EOL.
+                            '4. Creates a list of each tag name to print out.'.PHP_EOL.PHP_EOL.
+                            'Example: Use {{name[0]}} or {{name[1]}} tags.';
+
+    public $example    =    '<text id="cameraview" x="50%" y="59%" dominant-baseline="middle" text-anchor="middle" style="font-size: 29px; fill:#fafafa;" >{{name[1]}}</text>';
+    public $output     =    '<text id="cameraview" x="50%" y="59%" dominant-baseline="middle" text-anchor="middle" style="font-size: 29px; fill:#fafafa;" >Front View</text>';
+    
     public $params;
 
     public $post;
 
     public $terms;
 
-    public function __construct($params, $post){
+    public function set_params($params)
+    {
         $this->params = unserialize($params);
+    }
+
+    public function set_post($post)
+    {
         $this->post = $post;
+    }
+
+    public function run()
+    {
         return $this;
     }
     

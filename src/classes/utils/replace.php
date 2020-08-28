@@ -111,7 +111,7 @@ class replace
 
 
     /**
-     * substitute any %post_title% type matches with their WP_Post
+     * substitute any {{post_title}} type matches with their WP_Post
      * real values.
      */
     public static function switch($string, $post_object)

@@ -9,13 +9,65 @@ use genimage\svg\build_shape as shape;
 
 class generate_shape
 {
+    public $filtername =    'generate_shape';
+    public $filterdesc =    'This is the big \'generative\' part of the plugin.'. PHP_EOL . PHP_EOL .
+                            'Allows you to generate shapes onto a patchwork-quilt like space over the image.'. PHP_EOL . PHP_EOL .
+                            'Also includes moustache {{}} substitution.'. PHP_EOL . PHP_EOL .
+                            'This would be extremely long as aan example because of the generative nature of the function. Instead, here are the descriptions of settings.';
+
+    public $example    =    "[". PHP_EOL .
+                            "   'palette' => '{{taxonomy_colour}}, #FAFAFA',". PHP_EOL .
+                            "   'additional_palette' => '#000000,#242424,#424242,#757575,#E0E0E0,#F5F5F5,#FAFAFA,#FFFFFF',". PHP_EOL .
+                            "   'additional_colours' => 1,". PHP_EOL .
+                            "   'opacity' => 0.8,". PHP_EOL .
+                            "   'corners' => 'tl,tr,bl,br',". PHP_EOL .
+                            "   'corner_size' => 4,". PHP_EOL .
+                            "   'shapes' => 'rect, cross, square_cross, square_plus, triangle, right_angled_triangle,". PHP_EOL .
+                            "                leaf, dots, lines, wiggles, diamond, flower, stripes, bump',". PHP_EOL .
+                            "   'cell_size' => 40,". PHP_EOL .
+                            "]";
+    public $output     =    'palette'. PHP_EOL .
+                            '"The palette setting tells the generator which base colours to add to its primary palette. It will randomly select a colour from this palette.'. PHP_EOL .
+                            'As you can see in the example, it also has {{moustache}} replacement for post/term fields too."'. PHP_EOL . PHP_EOL .
+                            'additional_palette'. PHP_EOL .
+                            '"You can define a secondary palette that the generator can select from and add to the primary palette.'. PHP_EOL .
+                            'This is used alongside the "additional_colours" setting to specify how many of these colours should be randomly added to the primary palette."'. PHP_EOL . PHP_EOL .
+                            'additional_colours'. PHP_EOL .
+                            '"The number of colours to pick from the additional_palette to add into the main palette. Randomly selects them. Useful if you want a single'. PHP_EOL .
+                            'main colour paired a random secondary colour."'. PHP_EOL . PHP_EOL .
+                            'opacity'. PHP_EOL .
+                            '"The opacity of each shape that is generated"'. PHP_EOL . PHP_EOL .
+                            'corners'. PHP_EOL .
+                            '"The generated shapes are placed into one of the corners of the image. You can have TL, TR, BL, BR. '. PHP_EOL .
+                            'Top-Left, Top-Right, Bottom-Left, Bottom-Right."'. PHP_EOL . PHP_EOL .
+                            'corner_size'. PHP_EOL .
+                            '"This is the number of blocks of shapes that are built coming away from the corner."'. PHP_EOL . PHP_EOL .
+                            'shapes'. PHP_EOL .
+                            '"The type of SVG shapes to use in the generation process. If the setting is not specifieed, then all shapes are used."'. PHP_EOL . PHP_EOL .
+                            'cell_size'. PHP_EOL .
+                            '"This is the maximum size of each shape in pixels. This represents a shape block, and is used in combination with the corner_size setting. Default is 80"'. PHP_EOL .
+                            '';
+
     public $params;
 
     public $shape_args;
 
-    public function __construct($params, $post)
+
+    public function set_params($params)
     {
-        $args = unserialize($params);
+        $this->params = unserialize($params);
+    }
+
+    public function set_post($post)
+    {
+        $this->post = $post;
+    }
+
+
+    public function run()
+    {
+        $args = $this->params;
+        $post = $this->post;
 
         $replace = new replace;
         $args = $replace->sub($args, $post);
@@ -28,6 +80,8 @@ class generate_shape
 
         return $this;
     }
+
+
 
     public function defs()
     {

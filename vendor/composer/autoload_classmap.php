@@ -6,13 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'add_shortcodes' => $baseDir . '/src/classes/shortcodes/add_shortcodes.php',
     'genimage\\convert' => $baseDir . '/src/classes/convert/convert.php',
     'genimage\\convert\\jpg' => $baseDir . '/src/classes/convert/conversions/jpg.php',
     'genimage\\convert\\png' => $baseDir . '/src/classes/convert/conversions/png.php',
     'genimage\\convert\\svg' => $baseDir . '/src/classes/convert/conversions/svg.php',
     'genimage\\convert_group' => $baseDir . '/src/classes/convert/convert_group.php',
     'genimage\\debug' => $baseDir . '/src/classes/debug/debug.php',
+    'genimage\\filter_catalog' => $baseDir . '/src/classes/filters/filter_catalog.php',
     'genimage\\filter_objects' => $baseDir . '/src/classes/filters/build_filters.php',
     'genimage\\filters' => $baseDir . '/src/classes/filters/filters.php',
     'genimage\\filters\\acf_post_tax_field' => $baseDir . '/src/classes/filters/filter_types/acf_post_tax_field.php',

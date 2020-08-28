@@ -7,13 +7,13 @@ namespace Composer\Autoload;
 class ComposerStaticInita2fee0734c84cd5f140d105459003871
 {
     public static $classMap = array (
-        'add_shortcodes' => __DIR__ . '/../..' . '/src/classes/shortcodes/add_shortcodes.php',
         'genimage\\convert' => __DIR__ . '/../..' . '/src/classes/convert/convert.php',
         'genimage\\convert\\jpg' => __DIR__ . '/../..' . '/src/classes/convert/conversions/jpg.php',
         'genimage\\convert\\png' => __DIR__ . '/../..' . '/src/classes/convert/conversions/png.php',
         'genimage\\convert\\svg' => __DIR__ . '/../..' . '/src/classes/convert/conversions/svg.php',
         'genimage\\convert_group' => __DIR__ . '/../..' . '/src/classes/convert/convert_group.php',
         'genimage\\debug' => __DIR__ . '/../..' . '/src/classes/debug/debug.php',
+        'genimage\\filter_catalog' => __DIR__ . '/../..' . '/src/classes/filters/filter_catalog.php',
         'genimage\\filter_objects' => __DIR__ . '/../..' . '/src/classes/filters/build_filters.php',
         'genimage\\filters' => __DIR__ . '/../..' . '/src/classes/filters/filters.php',
         'genimage\\filters\\acf_post_tax_field' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/acf_post_tax_field.php',

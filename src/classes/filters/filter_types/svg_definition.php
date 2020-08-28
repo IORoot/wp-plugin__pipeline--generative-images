@@ -2,12 +2,37 @@
 
 namespace genimage\filters;
 
-class svg_definition {
-
+class svg_definition 
+{
+    public $filtername =    'svg_definition';
+    public $filterdesc =    'Add a new definition into the SVG <defs> section of the object.';
+    public $example    =    '<filter  id="solidTextBG" x="-0.1" y="-0.75" width="1.2" height="3.5">'.PHP_EOL.
+                            '   <feFlood flood-color="#242424" flood-opacity="0.5"></feFlood>'.PHP_EOL.
+                            '   <feComposite in="SourceGraphic"></feComposite>'.PHP_EOL.
+                            '</filter>';
+    public $output     =    '<defs>'.PHP_EOL.
+                            '   <filter  id="solidTextBG" x="-0.1" y="-0.75" width="1.2" height="3.5">'.PHP_EOL.
+                            '       <feFlood flood-color="#242424" flood-opacity="0.5"></feFlood>'.PHP_EOL.
+                            '       <feComposite in="SourceGraphic"></feComposite>'.PHP_EOL.
+                            '   </filter>'.PHP_EOL.
+                            '</defs>';
+    
     public $params;
+    
+    public $post;
 
-    public function __construct($params){
+    public function set_params($params)
+    {
         $this->params = unserialize($params);
+    }
+
+    public function set_post($post)
+    {
+        $this->post = $post;
+    }
+
+    public function run()
+    {
         return $this;
     }
 
