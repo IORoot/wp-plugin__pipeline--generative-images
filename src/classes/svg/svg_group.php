@@ -101,6 +101,7 @@ class svg_group
         $svg_single = new svg_single;
         $svg_single->set_filters($this->filters);
         $svg_single->set_image($this->current_image);
+        $svg_single->set_all_images($this->images);
         $svg_single->run();
 
         $this->result[] = $svg_single->get_svg();

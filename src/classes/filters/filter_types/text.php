@@ -3,8 +3,9 @@
 namespace genimage\filters;
 
 use genimage\utils\replace as replace;
+use genimage\interfaces\filterInterface;
 
-class text 
+class text implements filterInterface
 {
     public $filtername =    'text';
     public $filterdesc =    'Text that can use moustache {{post_title}}'.PHP_EOL.
@@ -26,30 +27,34 @@ class text
     
     public $params;
 
-    public $post;
+    public $image;
 
     public function set_params($params)
     {
         $this->params = $params;
     }
-
-    public function set_post($post)
+    
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
+    
     public function run()
     {
         return $this;
     }
     
-
     public function output(){
-        if (empty($this->params) || empty($this->post)){ return; }
+        if (empty($this->params) || empty($this->image)){ return; }
 
         $replace = new replace;
-        $output = $replace->sub($this->params, $this->post);
-        $output = replace::switch_acf($output, $this->post);
+        $output = $replace->sub($this->params, $this->image);
+        $output = replace::switch_acf($output, $this->image);
 
         return $output;
     }

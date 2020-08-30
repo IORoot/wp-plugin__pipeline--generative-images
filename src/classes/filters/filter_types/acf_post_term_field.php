@@ -3,6 +3,7 @@
 namespace genimage\filters;
 
 use genimage\utils\replace_terms as replace;
+use genimage\interfaces\filterInterface;
 
 /**
  * Used only on the single post & WP_Query sources.
@@ -10,7 +11,8 @@ use genimage\utils\replace_terms as replace;
  * 
  * Get the article TERM, not category.
  */
-class acf_post_term_field {
+class acf_post_term_field implements filterInterface
+{
 
     public $filtername =    'acf_post_term_field';
     public $filterdesc =    'Uses "articletags" Taxonomy.'.PHP_EOL.PHP_EOL.
@@ -25,7 +27,7 @@ class acf_post_term_field {
     
     public $params;
 
-    public $post;
+    public $image;
 
     public $terms;
 
@@ -34,9 +36,14 @@ class acf_post_term_field {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
+    }
+
+    public function set_all_images($images)
+    {
+        $this->images = $images;
     }
 
     public function run()
@@ -46,9 +53,9 @@ class acf_post_term_field {
     
 
     public function output(){
-        if (empty($this->post)){ return; }
+        if (empty($this->image)){ return; }
 
-        $this->terms = get_the_terms($this->post, 'articletags');
+        $this->terms = get_the_terms($this->image, 'articletags');
         $this->view_term_last();
         $output = $this->slowmo_last();
 

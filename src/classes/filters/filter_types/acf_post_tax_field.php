@@ -3,12 +3,13 @@
 namespace genimage\filters;
 
 use genimage\utils\replace as replace;
-
+use genimage\interfaces\filterInterface;
 /**
  * Used only on the single post & WP_Query sources.
  * NOT the taxonomy source.
  */
-class acf_post_tax_field {
+class acf_post_tax_field implements filterInterface
+{
 
     public $filtername =    'acf_post_tax_field';
     public $filterdesc =    'Uses "articlecategory" Taxonomy.'.PHP_EOL.PHP_EOL.
@@ -25,16 +26,21 @@ class acf_post_tax_field {
 
     public $params;
 
-    public $post;
+    public $image;
 
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
+    }
+
+    public function set_all_images($images)
+    {
+        $this->images = $images;
     }
     
     public function run()
@@ -44,13 +50,13 @@ class acf_post_tax_field {
     
 
     public function output(){
-        if (empty($this->params) || empty($this->post)){ return; }
+        if (empty($this->params) || empty($this->image)){ return; }
 
         // Get any taxonomy terms for post
-        $taxonomy = get_the_terms($this->post, 'articlecategory');
+        $taxonomy = get_the_terms($this->image, 'articlecategory');
 
         // Switch the {{moustaches}} for the post value.
-        $output = replace::switch($this->params, $this->post);
+        $output = replace::switch($this->params, $this->image);
 
         // Switch the {{moustaches}} for the taxonomy value.
         $output = replace::switch_acf($output, $taxonomy[0]);

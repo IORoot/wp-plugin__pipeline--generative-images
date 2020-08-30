@@ -159,13 +159,8 @@ class convert
 
     private function rewrite_SVG_file_with_no_paths()
     { 
-        // Match a filepath
-        preg_match_all('/href="([.|\w|\d|\\\|\/|\-|\_]+)"/',$this->svg_data, $matches);
 
-        foreach($matches[1] as $match)
-        {
-            $this->svg_data = str_replace($match, $this->filepath['basename'], $this->svg_data);
-        }
+        $this->svg_data = str_replace('/wp-content', '../../../../wp-content', $this->svg_data);
         
     }
 

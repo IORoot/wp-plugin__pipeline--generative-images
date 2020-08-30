@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class noise
+use genimage\interfaces\filterInterface;
+
+class noise implements filterInterface
 {
     public $filtername =    'noise';
     public $filterdesc =    'Creates a <rect> Noise layer using a fill from a PNG.'.PHP_EOL.PHP_EOL.
@@ -22,18 +24,21 @@ class noise
 
     public $params;
 
-    public $post;
-
     public function set_params($params)
     {
         $this->params = explode(',', unserialize($params));
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        return;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
+    
     public function run()
     {
         return $this;

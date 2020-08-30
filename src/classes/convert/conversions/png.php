@@ -25,6 +25,7 @@ class png implements convertInterface
 
     public function out()
     {
+        // PWD = "/var/www/vhosts/dev.londonparkour.com"
         exec('inkscape --without-gui '. $this->input.' -e '.$this->target, $output, $return);
 
         if ($return > 0) {

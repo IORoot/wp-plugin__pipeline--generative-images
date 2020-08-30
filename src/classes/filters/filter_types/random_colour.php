@@ -3,8 +3,9 @@
 namespace genimage\filters;
 
 use genimage\utils\random as rand;
+use genimage\interfaces\filterInterface;
 
-class random_colour
+class random_colour implements filterInterface
 {
     public $filtername =    'random_colour';
     public $filterdesc =    'Generates a <linearGradient> definition with the specified parameter as an ID.'.PHP_EOL.
@@ -14,37 +15,31 @@ class random_colour
 
     public $params;
 
-    public $post;
-
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        return;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
+    
     public function run()
     {
         return $this;
     }
 
-    /**
-     * output
-     *
-     * @return void
-     */
     public function output()
     {
+        return;
     }
 
-    /**
-     * defs
-     *
-     * @return void
-     */
     public function defs()
     {
         $r = new rand();

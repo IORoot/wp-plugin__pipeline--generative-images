@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class none
+use genimage\interfaces\filterInterface;
+
+class none implements filterInterface
 {
 
     public $filtername =    'None';
@@ -15,11 +17,16 @@ class none
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        return;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
+    
     public function run()
     {
         return $this;

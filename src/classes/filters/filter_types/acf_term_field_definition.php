@@ -3,8 +3,10 @@
 namespace genimage\filters;
 
 use genimage\utils\replace as replace;
+use genimage\interfaces\filterInterface;
 
-class acf_term_field_definition {
+class acf_term_field_definition implements filterInterface
+{
 
     public $filtername =    'acf_term_field_definition';
     public $filterdesc =    'Only available on the \'Category\' source.'. PHP_EOL. PHP_EOL.
@@ -24,16 +26,21 @@ class acf_term_field_definition {
 
     public $params;
 
-    public $post;
+    public $image;
 
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
+    }
+
+    public function set_all_images($images)
+    {
+        $this->images = $images;
     }
 
     public function run()
@@ -47,9 +54,9 @@ class acf_term_field_definition {
     }
 
     public function defs(){
-        if (empty($this->params) || empty($this->post)){ return; }
+        if (empty($this->params) || empty($this->image)){ return; }
 
-        $output = replace::switch_term_acf($this->params, $this->post);
+        $output = replace::switch_term_acf($this->params, $this->image);
 
         return $output;
     }

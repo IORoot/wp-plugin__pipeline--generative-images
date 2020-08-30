@@ -6,6 +6,20 @@ class svg_single
 {
 
     /**
+     * Contains an array of instances of current images' metadata.
+     * 0 => [
+     *      0 => Relative Directory
+     *      1 => width
+     *      2 => height
+     *      3 => false
+     *      4 => URL
+     * ]
+     *
+     * @var array
+     */
+    private $images;
+
+    /**
      * Contains an array current images' metadata.
      *      0 => Relative Directory
      *      1 => width
@@ -81,6 +95,11 @@ class svg_single
         $this->image = $image;
     }
 
+    public function set_all_images($images)
+    {
+        $this->images = $images;
+    }
+
 
     public function run()
     {
@@ -115,6 +134,7 @@ class svg_single
         $filter_objects = new filter_objects();
         $filter_objects->set_filters($this->filters);
         $filter_objects->set_image($this->image);
+        $filter_objects->set_all_images($this->images);
         $this->filter_objects = $filter_objects->run();
     }
 

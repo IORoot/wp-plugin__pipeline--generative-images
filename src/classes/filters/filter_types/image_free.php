@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class image_free 
+use genimage\interfaces\filterInterface;
+
+class image_free implements filterInterface
 {
     public $filtername =    'image_free';
     public $filterdesc =    'This Inserts an <image> layer of a specified image with any parameters defined added in.'.PHP_EOL.
@@ -21,9 +23,14 @@ class image_free
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        return;
+    }
+
+    public function set_all_images($images)
+    {
+        return;
     }
 
     public function run()

@@ -2,8 +2,12 @@
 
 namespace genimage\filters;
 
-class darken {
+use genimage\interfaces\filterInterface;
 
+class darken implements filterInterface
+{
+
+    
     public $filtername =    'darken';
     public $filterdesc =    'Adds a <rect> layer with a #000 fill. You can control the opacity from 0 to 1.';
     public $example    =    '0.5';
@@ -11,16 +15,21 @@ class darken {
 
     public $params;
 
-    public $post;
+    public $image;
 
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
+    }
+
+    public function set_all_images($images)
+    {
+        return;
     }
 
     public function run()

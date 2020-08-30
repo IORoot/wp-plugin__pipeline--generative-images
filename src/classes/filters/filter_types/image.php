@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class image 
+use genimage\interfaces\filterInterface;
+
+class image implements filterInterface
 {
     public $filtername =    'image';
     public $filterdesc =    'This will create an <image> tag with the image of the source post.'.PHP_EOL.PHP_EOL.
@@ -20,9 +22,14 @@ class image
         $this->params = unserialize($params);
     }
 
-    public function set_post($image)
+    public function set_image($image)
     {
         $this->image = $image;
+    }
+
+    public function set_all_images($images)
+    {
+        return;
     }
 
     public function run()

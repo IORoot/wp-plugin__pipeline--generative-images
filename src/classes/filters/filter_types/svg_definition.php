@@ -2,7 +2,9 @@
 
 namespace genimage\filters;
 
-class svg_definition 
+use genimage\interfaces\filterInterface;
+
+class svg_definition implements filterInterface
 {
     public $filtername =    'svg_definition';
     public $filterdesc =    'Add a new definition into the SVG <defs> section of the object.';
@@ -18,19 +20,22 @@ class svg_definition
                             '</defs>';
     
     public $params;
-    
-    public $post;
 
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        return;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
+    
     public function run()
     {
         return $this;

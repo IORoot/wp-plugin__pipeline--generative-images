@@ -6,8 +6,9 @@ use genimage\utils\utils as utils;
 use genimage\utils\replace as replace;
 use genimage\utils\random as random;
 use genimage\svg\build_shape as shape;
+use genimage\interfaces\filterInterface;
 
-class generate_shape
+class generate_shape implements filterInterface
 {
     public $filtername =    'generate_shape';
     public $filterdesc =    'This is the big \'generative\' part of the plugin.'. PHP_EOL . PHP_EOL .
@@ -52,27 +53,32 @@ class generate_shape
 
     public $shape_args;
 
+    public $image;
 
     public function set_params($params)
     {
         $this->params = unserialize($params);
     }
 
-    public function set_post($post)
+    public function set_image($image)
     {
-        $this->post = $post;
+        $this->image = $image;
     }
 
+    public function set_all_images($images)
+    {
+        return;
+    }
 
     public function run()
     {
         $args = $this->params;
-        $post = $this->post;
+        $image = $this->image;
 
         $replace = new replace;
-        $args = $replace->sub($args, $post);
-        $args = replace::switch_acf($args, $post);
-        $args = replace::switch_term_acf($args, $post);
+        $args = $replace->sub($args, $image);
+        $args = replace::switch_acf($args, $image);
+        $args = replace::switch_term_acf($args, $image);
         $args = utils::lb($args);
         $args = eval("return $args;");
 
