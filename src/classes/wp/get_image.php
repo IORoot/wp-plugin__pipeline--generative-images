@@ -17,7 +17,6 @@ class get_image {
 
         $type = get_class($item);
 
-
         /**
          * If the $item is NOT a WP_Post or WP_Term object
          * but instead, is an array representation of a 

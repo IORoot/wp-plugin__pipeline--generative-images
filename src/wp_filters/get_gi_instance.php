@@ -1,7 +1,7 @@
 <?php
 
 
-add_filter('genimage_get_instance', 'genimage_get_instance', 10, 3);
+add_filter('genimage_get_instance', 'genimage_get_instance', 10, 4);
 
 
 /**
@@ -14,7 +14,7 @@ add_filter('genimage_get_instance', 'genimage_get_instance', 10, 3);
  * @param array $saves_array
  * @return void
  */
-function genimage_get_instance($filter_slug, $source_objects, $saves_array)
+function genimage_get_instance($filter_slug, $source_objects, $saves_array, $dimensions = null)
 {
 
     /**
@@ -37,18 +37,6 @@ function genimage_get_instance($filter_slug, $source_objects, $saves_array)
     $instance->set_filter_slug($filter_slug);
 
     /**
-     * Contains an array of instances of current images' metadata.
-     * 0 => [
-     *      0 => Relative directory of image
-     *      1 => width
-     *      2 => height
-     * ]
-     *
-     * @var array
-     */
-    // $instance->set_images($images_array);
-
-    /**
      * save_types
      * 
      * Array of what to save the file as.
@@ -63,7 +51,41 @@ function genimage_get_instance($filter_slug, $source_objects, $saves_array)
      */
     $instance->set_save_types($saves_array);
 
+    /**
+     * source_objects variable
+     * 
+     * The source objects is an array of all input posts/terms
+     * you wish to use in the image generation. 
+     * This is an array of: WP_Posts / WP_Terms or an array with
+     * an 'ID' field to get the WP_Post from.
+     * 
+     * [
+     *      0 => WP_POST,
+     *      1 => WP_POST,
+     *      2 => [
+     *              'ID' => 123,
+     *           ],
+     *      3 => WP_TERM,
+     * ]
+     *
+     * @var array
+     */
     $instance->set_source_objects($source_objects);
+
+    /**
+     * dimensions variable
+     * 
+     * Optional variable that will change the size of the output SVG.
+     * Width, Height in pixels.
+     * 
+     * [
+     *  0 => '640',
+     *  1 => '480'
+     * ]
+     *
+     * @var array
+     */
+    $instance->set_dimensions($dimensions);
 
     $instance->run();
 

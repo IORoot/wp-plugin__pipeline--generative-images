@@ -8,7 +8,25 @@ class runas_filter
 
     use debug;
 
-
+    /**
+     * source_objects variable
+     * 
+     * The source objects is an array of all input posts/terms
+     * you wish to use in the image generation. 
+     * This is an array of: WP_Posts / WP_Terms or an array with
+     * an 'ID' field to get the WP_Post from.
+     * 
+     * [
+     *      0 => WP_POST,
+     *      1 => WP_POST,
+     *      2 => [
+     *              'ID' => 123,
+     *           ],
+     *      3 => WP_TERM,
+     * ]
+     *
+     * @var array
+     */
     private $source_objects;
 
     /**
@@ -98,6 +116,20 @@ class runas_filter
     private $save_types;
 
 
+    /**
+     * dimensions variable
+     * 
+     * Optional variable that will change the size of the output SVG.
+     * Width, Height in pixels.
+     * 
+     * [
+     *  0 => '640',
+     *  1 => '480'
+     * ]
+     *
+     * @var array
+     */
+    private $dimensions;
 
 
     public function set_source_objects($source_objects)
@@ -113,6 +145,11 @@ class runas_filter
     public function set_filter_slug($filter_slug)
     {
         $this->filter_slug = $filter_slug;
+    }
+
+    public function set_dimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
     }
 
     public function get_converted()
@@ -155,6 +192,7 @@ class runas_filter
         $svg_group = new svg_group;
         $svg_group->set_filters($this->filters);
         $svg_group->set_images($this->images);
+        $svg_group->set_dimensions($this->dimensions);
         $svg_group->run();
         $this->svg_group = $svg_group->get_svg_group();
 
@@ -173,7 +211,6 @@ class runas_filter
 
         $this->continue($this->converted, 'converted');
     }
-
 
 
     private function continue($stage, $name)

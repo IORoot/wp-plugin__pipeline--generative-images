@@ -43,6 +43,20 @@ class svg_group
      */
     private $filters;
 
+    /**
+     * dimensions variable
+     * 
+     * Optional variable that will change the size of the output SVG.
+     * Width, Height in pixels.
+     * 
+     * [
+     *  0 => '640',
+     *  1 => '480'
+     * ]
+     *
+     * @var array
+     */
+    private $dimensions;
 
 
     /**
@@ -59,12 +73,15 @@ class svg_group
         $this->filters = $filters;
     }
 
-
     public function set_images($images)
     {
         $this->images = $images;
     }
 
+    public function set_dimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
+    }
 
     public function run()
     {
@@ -102,6 +119,7 @@ class svg_group
         $svg_single->set_filters($this->filters);
         $svg_single->set_image($this->current_image);
         $svg_single->set_all_images($this->images);
+        $svg_single->set_dimensions($this->dimensions);
         $svg_single->run();
 
         $this->result[] = $svg_single->get_svg();

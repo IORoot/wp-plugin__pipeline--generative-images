@@ -66,6 +66,21 @@ class svg_single
      */
     private $filter_objects;
 
+    /**
+     * dimensions variable
+     * 
+     * Optional variable that will change the size of the output SVG.
+     * Width, Height in pixels.
+     * 
+     * [
+     *  0 => '640',
+     *  1 => '480'
+     * ]
+     *
+     * @var array
+     */
+    private $dimensions;
+
 
     /**
      * Currently being processed SVG image.
@@ -98,6 +113,11 @@ class svg_single
     public function set_all_images($images)
     {
         $this->images = $images;
+    }
+
+    public function set_dimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
     }
 
 
@@ -145,7 +165,7 @@ class svg_single
     {
         $this->svg = new svg_parts;
 
-        $this->svg->open_svg('0 0 '.$this->image[1].' '.$this->image[2].'');
+        $this->svg->open_svg('0 0 '.$this->render_width().' '.$this->render_height().'');
             $this->render_filter_definitions();
             $this->render_filters();
         $this->svg->close_svg();
@@ -176,6 +196,28 @@ class svg_single
         {
             $this->svg->add_element($filter_object->output());
         }
+    }
+
+
+    private function render_width()
+    {
+        // optional width can be set.
+        if (isset($this->dimensions['width']))
+        {
+            return $this->dimensions['width'];
+        }
+        return $this->image[1];
+    }
+
+    private function render_height()
+    {
+        // Optional height can be set
+        if (isset($this->dimensions['height']))
+        {
+            return $this->dimensions['height'];
+        }
+
+        return $this->image[2];
     }
 
 

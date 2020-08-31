@@ -132,6 +132,8 @@ class runas_shortcode
         $svg_group = new svg_group;
         $svg_group->set_filters($this->filters);
         $svg_group->set_images($this->images);
+        $dimensions = (new options)->get_dimensions($this->config['instance_filter']);
+        $svg_group->set_dimensions($dimensions);
         $svg_group->run();
         $this->svg_group = $svg_group->get_svg_group();
 
@@ -174,8 +176,6 @@ class runas_shortcode
     {
         update_field('gi_save_post', 'none', 'option');
     }
-
-
 
 
     private function continue($stage, $name)

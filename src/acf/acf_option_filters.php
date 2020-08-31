@@ -23,6 +23,7 @@ trait option_filters
             }
 
             $this->get_layers($filter_slug);
+
         endwhile;
 
         $filters = $this->filters;

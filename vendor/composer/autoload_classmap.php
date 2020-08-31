@@ -36,6 +36,7 @@ return array(
     'genimage\\images' => $baseDir . '/src/classes/image/images.php',
     'genimage\\interfaces\\convertInterface' => $baseDir . '/src/classes/interfaces/convertInterface.php',
     'genimage\\interfaces\\filterInterface' => $baseDir . '/src/classes/interfaces/filterInterface.php',
+    'genimage\\option_dimensions' => $baseDir . '/src/acf/acf_option_dimensions.php',
     'genimage\\option_filters' => $baseDir . '/src/acf/acf_option_filters.php',
     'genimage\\option_instances' => $baseDir . '/src/acf/acf_option_instances.php',
     'genimage\\option_reattach' => $baseDir . '/src/acf/acf_option_reattach.php',

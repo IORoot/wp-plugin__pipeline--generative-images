@@ -37,6 +37,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\images' => __DIR__ . '/../..' . '/src/classes/image/images.php',
         'genimage\\interfaces\\convertInterface' => __DIR__ . '/../..' . '/src/classes/interfaces/convertInterface.php',
         'genimage\\interfaces\\filterInterface' => __DIR__ . '/../..' . '/src/classes/interfaces/filterInterface.php',
+        'genimage\\option_dimensions' => __DIR__ . '/../..' . '/src/acf/acf_option_dimensions.php',
         'genimage\\option_filters' => __DIR__ . '/../..' . '/src/acf/acf_option_filters.php',
         'genimage\\option_instances' => __DIR__ . '/../..' . '/src/acf/acf_option_instances.php',
         'genimage\\option_reattach' => __DIR__ . '/../..' . '/src/acf/acf_option_reattach.php',

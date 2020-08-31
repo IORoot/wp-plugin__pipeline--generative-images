@@ -13,6 +13,7 @@ class options {
 
     // Data Traits
     use \genimage\option_filters;
+    use \genimage\option_dimensions;
     use \genimage\option_source;
 
 }
