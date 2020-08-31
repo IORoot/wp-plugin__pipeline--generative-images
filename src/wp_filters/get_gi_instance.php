@@ -4,7 +4,17 @@
 add_filter('genimage_get_instance', 'genimage_get_instance', 10, 3);
 
 
-function genimage_get_instance($filter_slug, $images_array, $saves_array)
+/**
+ * genimage_get_instance function
+ * 
+ * Use this to run a genimage filter on image(s) and return result.
+ *
+ * @param string $filter_slug
+ * @param array $source_objects
+ * @param array $saves_array
+ * @return void
+ */
+function genimage_get_instance($filter_slug, $source_objects, $saves_array)
 {
 
     /**
@@ -36,7 +46,7 @@ function genimage_get_instance($filter_slug, $images_array, $saves_array)
      *
      * @var array
      */
-    $instance->set_images($images_array);
+    // $instance->set_images($images_array);
 
     /**
      * save_types
@@ -53,13 +63,11 @@ function genimage_get_instance($filter_slug, $images_array, $saves_array)
      */
     $instance->set_save_types($saves_array);
 
+    $instance->set_source_objects($source_objects);
 
     $instance->run();
 
-
     $result = $instance->get_converted();
 
-
-    
     return $result;
 }

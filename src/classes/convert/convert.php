@@ -2,6 +2,21 @@
 
 namespace genimage;
 
+/**
+ * convert class
+ * 
+ * Note all files need to have an ABSOLUTE path
+ * to write to. the exec() function needs this.
+ * Therefore $this->intermediate_svg_file has 
+ * the ABSPATH constant added to the front of
+ * /wp-content path.
+ * 
+ * However, once finished, the result back from
+ * each converter is actually a path from the
+ * /wp-content location. This is done with the 
+ * function target_path_to_relative() in each
+ * converter.
+ */
 class convert
 {
 
@@ -98,7 +113,17 @@ class convert
 
     public function set_filepath($filepath)
     {
+        // remove dots
         $wpcontent_filepath = str_replace('../../../../', '', $filepath);
+
+        // replace https://domain.com/wp-content
+        $site_url = site_url('/wp-content');
+        $wpcontent_filepath = str_replace($site_url, 'wp-content', $wpcontent_filepath);
+
+        // replace http://domain.com/wp-content
+        $site_url = str_replace('https:','http:',$site_url);
+        $wpcontent_filepath = str_replace($site_url, 'wp-content', $wpcontent_filepath);
+
         $this->filepath = pathinfo($wpcontent_filepath);
     }
 
@@ -121,7 +146,7 @@ class convert
         $this->set_upload_directory();
         $this->set_intermediate_svg_filepath();
         $this->set_target_filepath();
-        $this->rewrite_SVG_file_with_no_paths();
+        $this->rewrite_SVG_paths();
         $this->create_intermediate_svg();
         $this->convert_to_file();
 
@@ -149,24 +174,32 @@ class convert
     
     private function set_target_filepath()
     {
-        $this->target_filepath = $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '.' . $this->save_type;
+        $this->target_filepath = ABSPATH . $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '.' . $this->save_type;
     }
     
     private function set_intermediate_svg_filepath()
     {
-        $this->intermediate_svg_file = $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '_intermediate.svg';
+        $this->intermediate_svg_file = ABSPATH . $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '_intermediate.svg';
     }
 
-    private function rewrite_SVG_file_with_no_paths()
+    private function rewrite_SVG_paths()
     { 
+        // replace https://domain.com/wp-content
+        $site_url = site_url('/wp-content');
+        $this->svg_data = str_replace($site_url, '/wp-content', $this->svg_data);
 
+        // replace http://domain.com/wp-content
+        $site_url = str_replace('https:','http:',$site_url);
+        $this->svg_data = str_replace($site_url, '/wp-content', $this->svg_data);
+
+        // /wp-content
         $this->svg_data = str_replace('/wp-content', '../../../../wp-content', $this->svg_data);
         
     }
 
     private function create_intermediate_svg()
     {
-        file_put_contents($this->intermediate_svg_file, $this->svg_data);
+        $result = file_put_contents($this->intermediate_svg_file, $this->svg_data);
         return;
     }
 

@@ -27,8 +27,13 @@ class svg implements convertInterface
     {
         rename($this->input, $this->target);
         $this::debug($this->target, static::class);
-
+        $this->target_path_to_relative();
         return $this->target;
+    }
+
+    private function target_path_to_relative()
+    {
+        $this->target = str_replace(ABSPATH, '', $this->target);
     }
 
 }

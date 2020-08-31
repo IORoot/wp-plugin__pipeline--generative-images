@@ -8,6 +8,9 @@ class runas_filter
 
     use debug;
 
+
+    private $source_objects;
+
     /**
      * filter_slug variable
      * 
@@ -97,9 +100,9 @@ class runas_filter
 
 
 
-    public function set_images($images)
+    public function set_source_objects($source_objects)
     {
-        $this->images = $images;
+        $this->source_objects = $source_objects;
     }
 
     public function set_save_types($save_types)
@@ -120,11 +123,21 @@ class runas_filter
     public function run()
     {
         $this::debug_clear();
+        $this->images();
         $this->filters();
         $this->svg();
         $this->convert();
     }
 
+    private function images()
+    {
+        $images = new images;
+        $images->set_source_objects($this->source_objects);
+        $images->run();
+        $this->images = $images->get_images();
+
+        $this->continue($this->images, 'images');
+    }
 
     private function filters()
     {

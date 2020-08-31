@@ -34,6 +34,7 @@ class jpg implements convertInterface
         $this->convert_to_temp_png();
         $this->convert_temp_png_to_jpg();
         $this->delete_temp_png();
+        $this->target_path_to_relative();
 
         return $this->target;
     }
@@ -43,7 +44,7 @@ class jpg implements convertInterface
     private function define_temp_png()
     {
         $file = pathinfo($this->target);
-        $this->temp_png = $file['dirname'] . $file['filename'] . '.png';
+        $this->temp_png = $file['dirname'] . '/' . $file['filename'] . '.png';
     }
 
 
@@ -97,6 +98,12 @@ class jpg implements convertInterface
     private function delete_temp_png()
     {
         unlink($this->temp_png);
+    }
+
+
+    private function target_path_to_relative()
+    {
+        $this->target = str_replace(ABSPATH, '', $this->target);
     }
 
 

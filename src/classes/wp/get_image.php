@@ -16,6 +16,21 @@ class get_image {
         $this->item = $item;
 
         $type = get_class($item);
+
+
+        /**
+         * If the $item is NOT a WP_Post or WP_Term object
+         * but instead, is an array representation of a 
+         * WP_Post (Which happens when it's passed from the
+         * Universal Exporter), then convert it first and
+         * then pass it in.
+         */
+        if($type == false && isset($this->item["ID"]))
+        {
+            $this->item = get_post($this->item['ID']);
+            $type = 'WP_Post';
+        }
+
         $this->$type();
 
         return $this->image;
@@ -33,15 +48,25 @@ class get_image {
 
         $image_array = wp_get_attachment_image_src($thumnail_id , 'full' );
 
+        // HTTPS:
         $domain = get_site_url();
-        // Rewrite the absolute to relative path.
-        $image_array[0] = str_replace( $domain, '', '../../../..'.$image_array[0] );
+        $image_array[0] = str_replace( $domain, '', $image_array[0] );
+
+        // HTTP:
+        $domain = str_replace('https:','http:', $domain);
+        $image_array[0] = str_replace( $domain, '', $image_array[0] );
+
+        // RELATIVE
+        $image_array[0] = '../../../..'.$image_array[0];
+
+
         unset($image_array[3]);
 
         $this->image = $image_array;
 
         return;
     }
+
 
 
     
@@ -56,5 +81,7 @@ class get_image {
 
         return;
     }
+
+
 
 }

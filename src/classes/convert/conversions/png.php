@@ -37,10 +37,14 @@ class png implements convertInterface
 
             return false;
         }
-
+        $this->target_path_to_relative();
         $this::debug($output, static::class);
 
         return $this->target;
     }
 
+    private function target_path_to_relative()
+    {
+        $this->target = str_replace(ABSPATH, '', $this->target);
+    }
 }

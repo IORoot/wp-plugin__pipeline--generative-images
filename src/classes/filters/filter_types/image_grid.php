@@ -95,14 +95,7 @@ class image_grid implements filterInterface
     {
         foreach ($this->images as $key => $instance)
         {
-
-            /**
-             *      $instance[0] = "../../../../wp-content/uploads/2020/08/Pex3qahzwm8.jpg"
-             */
             $this->params['images'][$key] = str_replace('../../../..','',$instance[0]);
-
-
-            // $this->params['images'][$key] = $instance[0];
         }
 
         $this->image_count = count($this->params['images']);
@@ -129,12 +122,7 @@ class image_grid implements filterInterface
 
     private function create_image()
     {
-        // $this->params['images'][$this->image_key] = "/wp-content/uploads/2020/08/Pex3qahzwm8.jpg"
-        // $image_url    = site_url() . $this->params['images'][$this->image_key];
         $image_url    = $this->params['images'][$this->image_key];
-        //image_url = "/wp-content/uploads/2020/08/Pex3qahzwm8.jpg"
-
-
         
         $image = '<svg viewBox="0 0 1 1" 
                     width="'.$this->cell_width.'%" 
