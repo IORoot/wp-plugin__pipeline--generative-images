@@ -46,6 +46,11 @@ class acf_post_term_field implements filterInterface
         $this->images = $images;
     }
 
+    public function set_source_object($source_object)
+    {
+        $this->source_object = $source_object;
+    }
+
     public function run()
     {
         return $this;

@@ -50,6 +50,20 @@ interface filterInterface
     public function set_all_images($images);
 
     /**
+     * set_source_object function
+     * 
+     * A WP_Post | WP_Term | Array of the source object
+     * used to source the imagery.
+     * The post is sent to the filter so that the text
+     * based filters caan perform substitution on the
+     * real values.
+     *
+     * @param array $source_object
+     * @return void
+     */
+    public function set_source_object($source_object);
+
+    /**
      * run function
      * 
      * The run function will return an instance of itself as an 

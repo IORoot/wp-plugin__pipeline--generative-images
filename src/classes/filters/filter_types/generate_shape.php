@@ -2,9 +2,9 @@
 
 namespace genimage\filters;
 
-use genimage\utils\utils as utils;
-use genimage\utils\replace as replace;
-use genimage\utils\random as random;
+use genimage\utils\utils;
+use genimage\utils\replace;
+use genimage\utils\random;
 use genimage\svg\build_shape as shape;
 use genimage\interfaces\filterInterface;
 
@@ -17,15 +17,17 @@ class generate_shape implements filterInterface
                             'This would be extremely long as aan example because of the generative nature of the function. Instead, here are the descriptions of settings.';
 
     public $example    =    "[". PHP_EOL .
-                            "   'palette' => '{{taxonomy_colour}}, #FAFAFA',". PHP_EOL .
-                            "   'additional_palette' => '#000000,#242424,#424242,#757575,#E0E0E0,#F5F5F5,#FAFAFA,#FFFFFF',". PHP_EOL .
+                            "   'palette' => ['{{taxonomy_colour}}, #FAFAFA'],". PHP_EOL .
+                            "   'additional_palette' => ['#000000','#242424','#FFFFFF'],". PHP_EOL .
                             "   'additional_colours' => 1,". PHP_EOL .
                             "   'opacity' => 0.8,". PHP_EOL .
-                            "   'corners' => 'tl,tr,bl,br',". PHP_EOL .
+                            "   'corners' => ['tl','tr','bl','br'],". PHP_EOL .
                             "   'corner_size' => 4,". PHP_EOL .
-                            "   'shapes' => 'rect, cross, square_cross, square_plus, triangle, right_angled_triangle,". PHP_EOL .
-                            "                leaf, dots, lines, wiggles, diamond, flower, stripes, bump',". PHP_EOL .
+                            "   'shapes' => ['rect', 'cross', 'square_cross', 'square_plus', 'triangle', 'right_angled_triangle'," . PHP_EOL .
+                            "                'leaf', 'dots', 'lines', 'wiggles', 'diamond', 'flower', 'stripes', 'bump']',". PHP_EOL .
                             "   'cell_size' => 40,". PHP_EOL .
+                            "   'width' => 1280,". PHP_EOL .
+                            "   'height' => 1280,". PHP_EOL .
                             "]";
     public $output     =    'palette'. PHP_EOL .
                             '"The palette setting tells the generator which base colours to add to its primary palette. It will randomly select a colour from this palette.'. PHP_EOL .
@@ -46,7 +48,11 @@ class generate_shape implements filterInterface
                             'shapes'. PHP_EOL .
                             '"The type of SVG shapes to use in the generation process. If the setting is not specifieed, then all shapes are used."'. PHP_EOL . PHP_EOL .
                             'cell_size'. PHP_EOL .
-                            '"This is the maximum size of each shape in pixels. This represents a shape block, and is used in combination with the corner_size setting. Default is 80"'. PHP_EOL .
+                            '"This is the maximum size of each shape in pixels. This represents a shape block, and is used in combination with the corner_size setting. Default is 80"'. PHP_EOL . PHP_EOL .
+                            'width'. PHP_EOL .
+                            'Redefine the width of the grid. In pixels.'. PHP_EOL .
+                            'height'. PHP_EOL . PHP_EOL .
+                            'Redefine the height of the grid. In pixels.'. PHP_EOL .
                             '';
 
     public $params;
@@ -54,6 +60,24 @@ class generate_shape implements filterInterface
     public $shape_args;
 
     public $image;
+
+    public $dimensions;
+
+    /**
+     * result variable
+     *
+     * This is the output SVG string.
+     * 
+     * @var string
+     */
+    public $result;
+
+    private $cell_size;
+    private $image_width;
+    private $image_height;
+    
+
+
 
     public function set_params($params)
     {
@@ -69,25 +93,23 @@ class generate_shape implements filterInterface
     {
         return;
     }
+    
+    public function set_source_object($source_object)
+    {
+        return;
+    }
 
     public function run()
     {
-        $args = $this->params;
-        $image = $this->image;
+        $this->set_parameters();
+        $this->get_image_width();
+        $this->get_image_height();
+        $this->add_additional_colours();
+        $this->result = $this->random_patchwork_corner();
 
-        $replace = new replace;
-        $args = $replace->sub($args, $image);
-        $args = replace::switch_acf($args, $image);
-        $args = replace::switch_term_acf($args, $image);
-        $args = utils::lb($args);
-        $args = eval("return $args;");
-
-        $this->params = $args;
 
         return $this;
     }
-
-
 
     public function defs()
     {
@@ -97,54 +119,134 @@ class generate_shape implements filterInterface
 
     public function output()
     {
-        $corners = $this->get_array_param('corners', 'tl,tr,br,bl');
-        $output = $this->random_patchwork_corner(in_array('tl',$corners), in_array('tr',$corners), in_array('br',$corners), in_array('bl',$corners), $this->get_param('cell_size', 80));
-        return $output;
+        
+        return $this->result;
+    }
+
+//  ┌─────────────────────────────────────────────────────────────────────────┐
+//  │                                                                         │░
+//  │                                                                         │░
+//  │                                 PRIVATE                                 │░
+//  │                                                                         │░
+//  │                                                                         │░
+//  └─────────────────────────────────────────────────────────────────────────┘░
+//   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+    private function set_parameters()
+    {
+        $args = (new replace)->sub($this->params, $this->image);
+        $args = replace::switch_acf($args, $this->image);
+        $args = replace::switch_term_acf($args, $this->image);
+
+        $args = utils::lb($args);
+        $args = eval("return $args;");
+
+        $this->params = $args;
+    }
+
+    private function get_image_width()
+    {
+        if (isset($this->params['width']))
+        {
+            $this->image_width = $this->params['width'];
+            return;
+        }
+        $this->image_width = $this->image[1];
+    }
+
+    private function get_image_height()
+    {
+        if (isset($this->params['height']))
+        {
+            $this->image_height = $this->params['height'];
+            return;
+        }
+        $this->image_height = $this->image[2];
     }
 
 
 
-    public function random_patchwork_corner($tl = null, $tr = null, $br = null, $bl = null, $s = 80)
-    {
-        $corner_size = $this->get_param('corner_size', 4);
 
-        $cell_size = $this->get_param('cell_size', 80);
-        $cell_divide = 80 / $cell_size; 
+    public function get_value_or_set_default($name, $default){
 
-        $width = 1280 / $cell_divide;
-        $height = 720 / $cell_divide;
-
-        $colour_count = $this->get_param('additional_colours', 0);
-        $colour_palette = $this->get_array_param('additional_palette', '');
-        if ($colour_count >= 1 && $colour_palette != ''){
-            $this->add_colour_to_palette($colour_count);
+        if (!array_key_exists($name, $this->params))
+        {
+            $this->params[$name] = $default;
         }
-        
+
+        $value = $this->params[$name];          // Set value
+        return $value;
+    }
+
+
+
+    private function add_additional_colours()
+    {
+        if (!isset($this->params['additional_colours']) || $this->params['additional_colours'] < 1)
+        {
+            return;
+        }
+        if (!isset($this->params['additional_palette']) || $this->params['additional_palette'] == '')
+        {
+            return;
+        }
+
+        $colour = $this->params['additional_palette'];
+
+        shuffle($colour);
+
+        for ($i = 0; $i < $this->params['additional_colours']; $i++) {
+            array_push($this->params['palette'], $colour[$i]);
+        }
+    }
+
+
+    private function corner_is_set($corner)
+    {
+        return in_array($corner, $this->params['corners'] );
+    }
+
+
+
+
+
+    
+
+    
+
+    private function random_patchwork_corner()
+    {
+        $corner_size = $this->get_value_or_set_default('corner_size', 4);
+
+        $this->cell_size = $cell_size = $this->get_value_or_set_default('cell_size', 80);
+        $this->cell_divide = 80 / $this->cell_size; 
+        $width = $this->image_width / $this->cell_divide;
+        $height = $this->image_height / $this->cell_divide;
+
         $output = '';
 
-        for ($y=0; $y<=$height; $y+=$s) {
-            for ($x=0; $x<=$width; $x+=$s) {
+        for ($y=0; $y<=$height; $y+=$this->cell_size) {
 
-                $c = $this->random_palette();
+            for ($x=0; $x<=$width; $x+=$this->cell_size) {
 
                 // top-left
-                if ($x+$y < $s*$corner_size && $tl) {
-                    $output .= $this->random_shape($x, $y, $s, $s, $c);
+                if ($x+$y < $this->cell_size*$corner_size && $this->corner_is_set('tl')) {
+                    $output .= $this->random_shape($x, $y);
                 }
 
                 // top-right
-                if ($x-$y > $s*(15-$corner_size)  && $tr) {
-                    $output .= $this->random_shape($x, $y, $s, $s, $c);
+                if ($x-$y > $this->cell_size*(15-$corner_size) && $this->corner_is_set('tr')) {
+                    $output .= $this->random_shape($x, $y);
                 }
 
                 // bottom-left
-                if ($x-$y < -$s*(8 - $corner_size) && $bl) {
-                    $output .= $this->random_shape($x, $y, $s, $s, $c);
+                if ($x-$y < -$this->cell_size*(8 - $corner_size) && $this->corner_is_set('bl')) {
+                    $output .= $this->random_shape($x, $y);
                 }
 
                 // bottom-right
-                if ($x+$y > $s*(23-$corner_size) && $br) {
-                    $output .= $this->random_shape($x, $y, $s, $s, $c);
+                if ($x+$y > $this->cell_size*(23-$corner_size) && $this->corner_is_set('br') ) {
+                    $output .= $this->random_shape($x, $y);
                 }
             }
         }
@@ -152,107 +254,45 @@ class generate_shape implements filterInterface
     }
 
 
-    public function add_colour_to_palette($count = 1)
-    {
 
-        $colour = $this->get_array_param('additional_palette', '');
-        if($colour != ''){ shuffle($colour); }
-
-        for ($i = 0; $i < $count; $i++) {
-            $this->params['palette'] = $this->params['palette'] . ',' .$colour[$i];
-        }
-        
-
-        return ;
-    }
 
     
-    public function random_palette()
+
+    public function random_shape($x, $y)
     {
-        $palette = $this->get_array_param('palette', '');
-
-        $col = new random;
-        $col->set_palette($palette);
-
-        return $col->get_palette();
-    }
-
-
-
-    public function random_shape($x, $y, $w, $h, $c)
-    {
-        $cell_size = $this->get_param('cell_size', 80);
-        $cell_divide = 80 / $cell_size; 
-
-        $scale = random_int(1, 2);
-        $rotate = (random_int(1,3)*90);
-        $filter = '';
-
-        $opacity = $this->get_param('opacity', 0.5);
-
-        $shape_types = [
-            'rect',
-            'cross',
-            'square_cross',
-            'square_plus',
-            'triangle',
-            'right_angled_triangle',
-            'circle',
-            'leaf',
-            'dots',
-            'lines',
-            'wiggles',
-            'diamond',
-            'flower',
-            'stripes',
-            'bump',
-        ];
-
-        $shape_types = $this->get_array_param('shapes', $shape_types);
+        $shape_types = $this->get_value_or_set_default('shapes', ['triangle']);
+        $shape_type = shuffle($shape_types);
         
         $this->shape_args = [
             "x" => $x,
             "y" => $y,
-            "width" => $w,
-            "height" => $h,
-            "fill" => $c,
-            "opacity" => $opacity,
-            "scale" => $scale,
-            "filter" => $filter,
-            "rotate" => $rotate,
+            "width" => $this->cell_size,
+            "height" => $this->cell_size,
+            "fill" => $this->random_palette(),
+            "opacity" => $this->get_value_or_set_default('opacity', 0.5),
+            "scale" => random_int(1, 2),
+            "filter" => '',
+            "rotate" => (random_int(1,3)*90),
+            "shape_type" => $shape_types[0],
         ];
 
-        $key = array_rand($shape_types);
-        $shape_type = $shape_types[$key];
 
-        $shape = new shape($this->shape_args, $shape_type);
+        $shape = new shape($this->shape_args);
         $output = $shape->render();
 
         return $output;
     }
 
 
-    public function get_param($name, $default){
 
-        if (array_key_exists($name, $this->params)) {
-            $value = $this->params[$name];          // Set value
-            $value = str_replace(' ', '', $value);  // Remove spaces
-            return $value;
-        }
-        return $default;
+    public function random_palette()
+    {
+        $palette = $this->get_value_or_set_default('palette', '');
+
+        $col = new random;
+        $col->set_palette($palette);
+
+        return $col->get_palette();
     }
-
-
-    public function get_array_param($name, $default){
-
-        if (array_key_exists($name, $this->params)) {
-            $value = $this->params[$name];          // Set value
-            $value = str_replace(' ', '', $value);  // Remove spaces
-            $value = explode(',', $value);          // CSV
-            return $value;
-        }
-        return $default;
-    }
-
     
 }

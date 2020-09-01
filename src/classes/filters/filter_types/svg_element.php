@@ -15,7 +15,7 @@ class svg_element implements filterInterface
 
     public function set_params($params)
     {
-        $this->params = $params;
+        $this->params = unserialize($params);
     }
 
     public function set_image($image)
@@ -27,7 +27,12 @@ class svg_element implements filterInterface
     {
         return;
     }
-    
+        
+    public function set_source_object($source_object)
+    {
+        return;
+    }
+
     public function run()
     {
         return $this;

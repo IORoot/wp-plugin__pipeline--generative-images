@@ -31,6 +31,7 @@ class svg_group
      * @var array
      */
     private $current_image;
+    private $current_key;
 
     /**
      * Contains an array of each filter layer for filter group
@@ -58,6 +59,19 @@ class svg_group
      */
     private $dimensions;
 
+    /**
+     * Array of WP_Posts or WP_Term
+     * (Used primarily for {{moustache}}
+     * replacement in the text-based
+     * filters.
+     * 
+     * 0 => WP_Post
+     * 1 => WP_Post
+     * 2 => WP_Post
+     *
+     * @var array
+     */
+    private $source_objects;  
 
     /**
      * Array of SVG Code for each image.
@@ -83,9 +97,14 @@ class svg_group
         $this->dimensions = $dimensions;
     }
 
+    public function set_source_objects($source_objects)
+    {
+        $this->source_objects = $source_objects;
+    }
+
     public function run()
     {
-        foreach ($this->images as $this->current_image)
+        foreach ($this->images as $this->current_key => $this->current_image)
         {
             $this->process_image();
         }
@@ -120,6 +139,7 @@ class svg_group
         $svg_single->set_image($this->current_image);
         $svg_single->set_all_images($this->images);
         $svg_single->set_dimensions($this->dimensions);
+        $svg_single->set_source_object($this->source_objects[$this->current_key]);
         $svg_single->run();
 
         $this->result[] = $svg_single->get_svg();

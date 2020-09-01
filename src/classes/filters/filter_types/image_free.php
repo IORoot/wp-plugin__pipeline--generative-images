@@ -14,7 +14,7 @@ class image_free implements filterInterface
                             ' \'image_location.jpg\' '.PHP_EOL.
                             ' \'filter="url(#myFilter)" width="50%" height="50%"\' '.PHP_EOL.
                             ']';
-    public $output     =    '<image xlink:href="image_location.jpg" filter="url(#myFilter)" width="50%" height="50%"></image>';
+    public $output     =    '<image xlink:href="/wp-content/uploads/2020/03/my_image.jpg" filter="url(#myFilter)" width="50%" height="50%"></image>';
     
     public $params;
 
@@ -32,6 +32,11 @@ class image_free implements filterInterface
     {
         return;
     }
+    
+    public function set_source_object($source_object)
+    {
+        return;
+    }
 
     public function run()
     {
@@ -42,7 +47,7 @@ class image_free implements filterInterface
 
         if (!empty($this->params)){ 
             $params = ' xlink:href="'.$this->params[0].'" ';
-            $params .= unserialize($this->params[1]);
+            $params .= $this->params[1];
         }
 
         return '<image '.$params.'></image>';

@@ -31,7 +31,7 @@ class text implements filterInterface
 
     public function set_params($params)
     {
-        $this->params = $params;
+        $this->params = unserialize($params);
     }
     
     public function set_image($image)
@@ -43,18 +43,25 @@ class text implements filterInterface
     {
         return;
     }
-    
+        
+    public function set_source_object($source_object)
+    {
+        $this->source_object = $source_object;
+    }
+
     public function run()
     {
         return $this;
     }
     
     public function output(){
+        
         if (empty($this->params) || empty($this->image)){ return; }
 
         $replace = new replace;
-        $output = $replace->sub($this->params, $this->image);
-        $output = replace::switch_acf($output, $this->image);
+        $output = $replace->sub($this->params, $this->source_object);
+        $output = replace::switch_acf($output, $this->source_object);
+        $output = replace::switch_dates($output);
 
         return $output;
     }

@@ -63,6 +63,11 @@ class images
         $this->source_objects = $source_objects;
     }
 
+    public function get_source_objects()
+    {
+        return $this->source_objects;
+    }
+
     public function get_images()
     {
         return $this->images;

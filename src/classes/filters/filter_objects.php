@@ -58,6 +58,17 @@ class filter_objects
      */
     private $filter_objects;
 
+    /**
+     * Single WP_Post or WP_Term
+     * (Used primarily for {{moustache}}
+     * replacement in the text-based
+     * filters.
+     * 
+     * WP_Post
+     *
+     * @var object
+     */
+    private $source_object;  
 
     /**
      * Contains an array of each filter layer for filter group
@@ -87,6 +98,10 @@ class filter_objects
         $this->images = $images;
     }
 
+    public function set_source_object($source_object)
+    {
+        $this->source_object = $source_object;
+    }
 
     // ┌─────────────────────────────────────────────────────────────────────────┐
     // │                                                                         │
@@ -125,6 +140,7 @@ class filter_objects
         $filter_object->set_params($this->current_filter['filter_parameters']);
         $filter_object->set_image($this->image);
         $filter_object->set_all_images($this->images);
+        $filter_object->set_source_object($this->source_object);
         $filter_object->run();
 
         // return object

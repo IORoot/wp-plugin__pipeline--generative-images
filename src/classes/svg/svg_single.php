@@ -67,6 +67,18 @@ class svg_single
     private $filter_objects;
 
     /**
+     * Single WP_Post or WP_Term
+     * (Used primarily for {{moustache}}
+     * replacement in the text-based
+     * filters.
+     * 
+     * WP_Post
+     *
+     * @var object
+     */
+    private $source_object;  
+
+    /**
      * dimensions variable
      * 
      * Optional variable that will change the size of the output SVG.
@@ -120,6 +132,11 @@ class svg_single
         $this->dimensions = $dimensions;
     }
 
+    public function set_source_object($source_object)
+    {
+        $this->source_object = $source_object;
+    }
+
 
     public function run()
     {
@@ -155,6 +172,7 @@ class svg_single
         $filter_objects->set_filters($this->filters);
         $filter_objects->set_image($this->image);
         $filter_objects->set_all_images($this->images);
+        $filter_objects->set_source_object($this->source_object);
         $this->filter_objects = $filter_objects->run();
     }
 

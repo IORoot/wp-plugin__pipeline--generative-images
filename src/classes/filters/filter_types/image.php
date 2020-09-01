@@ -11,7 +11,7 @@ class image implements filterInterface
                             'This will be the basis of the SVG size, so is needed to define the width/height of the SVG data.'.PHP_EOL.PHP_EOL.
                             'Therefore, the base image has its height/width automatically set based on the source, which you cannot change.';
     public $example    =    'filter="url(#myFilter)"';
-    public $output     =    '<image xlink:href="../../../../wp-content/uploads/2020/03/my_image.jpg" width="1280" height="720" filter="url(#myFilter)"></image>';
+    public $output     =    '<image xlink:href="/wp-content/uploads/2020/03/my_image.jpg" width="1280" height="720" filter="url(#myFilter)"></image>';
     
     public $params;
 
@@ -31,6 +31,11 @@ class image implements filterInterface
     {
         return;
     }
+    
+    public function set_source_object($source_object)
+    {
+        return;
+    }
 
     public function run()
     {
@@ -40,10 +45,13 @@ class image implements filterInterface
     public function output(){
 
         if (!empty($this->params)){ 
+
+            $this->set_image_paths();
+
             $params = ' xlink:href="'.$this->image[0].'"';
             $params .= ' width="'.$this->image[1].'"';
             $params .= ' height="'.$this->image[2].'" ';
-            $params .= unserialize($this->params);
+            $params .= $this->params;
         }
 
         return '<image '.$params.'></image>';
@@ -51,6 +59,11 @@ class image implements filterInterface
 
     public function defs(){
         return;
+    }
+
+    private function set_image_paths()
+    {
+        $this->image[0] = str_replace('../../../..','',$this->image[0]);
     }
 
 }

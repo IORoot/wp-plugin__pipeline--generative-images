@@ -35,7 +35,12 @@ class svg_definition implements filterInterface
     {
         return;
     }
-    
+        
+    public function set_source_object($source_object)
+    {
+        return;
+    }
+
     public function run()
     {
         return $this;

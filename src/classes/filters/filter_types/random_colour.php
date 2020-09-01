@@ -29,7 +29,12 @@ class random_colour implements filterInterface
     {
         return;
     }
-    
+        
+    public function set_source_object($source_object)
+    {
+        return;
+    }
+
     public function run()
     {
         return $this;

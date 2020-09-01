@@ -81,6 +81,16 @@ class runas_shortcode
     private $converted;
 
 
+    /**
+     * Array of WP_Posts or WP_Term
+     * 
+     * 0 => WP_Post
+     * 1 => WP_Post
+     * 2 => WP_Post
+     *
+     * @var array
+     */
+    private $source_objects;  
 
 
     public function set_config($config)
@@ -111,6 +121,7 @@ class runas_shortcode
         $images->set_instance_source($this->config['instance_source']);
         $images->run();
         $this->images = $images->get_images();
+        $this->source_objects = $images->get_source_objects();
 
         $this->continue($this->images, 'images');
     }
@@ -134,6 +145,7 @@ class runas_shortcode
         $svg_group->set_images($this->images);
         $dimensions = (new options)->get_dimensions($this->config['instance_filter']);
         $svg_group->set_dimensions($dimensions);
+        $svg_group->set_source_objects($this->source_objects);
         $svg_group->run();
         $this->svg_group = $svg_group->get_svg_group();
 
