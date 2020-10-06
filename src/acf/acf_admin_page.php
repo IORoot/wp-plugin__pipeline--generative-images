@@ -1,21 +1,16 @@
 <?php
 
-/**
- * Include ACF into plugin.
- * 
- */
-
-  // Create Parent Menu
+// Create Parent Menu
 if( function_exists('acf_add_options_page') ) {
     
     $argsparent = array(
-        'page_title' => 'ANDYP',
-        'menu_title' => 'ANDYP',
-        'menu_slug' => 'andyp',
+        'page_title' => 'Pipeline',
+        'menu_title' => 'Pipeline',
+        'menu_slug' => 'pipeline',
         'capability' => 'manage_options',
         'position' => '1',
         'parent_slug' => '',
-        'icon_url' => 'dashicons-screenoptions',
+        'icon_url' => 'dashicons-marker',
         'redirect' => true,
         'post_id' => 'options',
         'autoload' => false,
@@ -24,8 +19,7 @@ if( function_exists('acf_add_options_page') ) {
     );
 	acf_add_options_page($argsparent);
 	acf_add_options_sub_page(array(
-        'menu_title'	=> 'AndyP Plugins',
-        'parent_slug'	=> 'andyp',
+        'parent_slug'	=> 'pipeline',
         )
     );
 }
@@ -35,10 +29,10 @@ if( function_exists('acf_add_options_page') ) {
     $args = array(
 	
         /* (string) The title displayed on the options page. Required. */
-        'page_title' => 'Generative Images',
+        'page_title' => 'Image Generator',
         
         /* (string) The title displayed in the wp-admin sidebar. Defaults to page_title */
-        'menu_title' => '🌄 Generative Images',
+        'menu_title' => '🌄 Image Generator',
         
         /* (string) The URL slug used to uniquely identify this options page. 
         Defaults to a url friendly version of menu_title */
@@ -52,10 +46,10 @@ if( function_exists('acf_add_options_page') ) {
         WARNING: if two menu items use the same position attribute, one of the items may be overwritten so that only one item displays!
         Risk of conflict can be reduced by using decimal instead of integer values, e.g. '63.3' instead of 63 (must use quotes).
         Defaults to bottom of utility menu items */
-        'position' => '100.5',
+        'position' => '2',
         
         /* (string) The slug of another WP admin page. if set, this will become a child page. */
-        'parent_slug' => 'andyp',
+        'parent_slug' => 'pipeline',
         
         /* (string) The icon class for this menu. Defaults to default WordPress gear.
         Read more about dashicons here: https://developer.wordpress.org/resource/dashicons/ */
