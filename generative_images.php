@@ -2,9 +2,9 @@
 /*
  * 
  * @wordpress-plugin
- * Plugin Name:       _ANDYP - Generative Images
+ * Plugin Name:       _ANDYP - Pipeline - Generative Images
  * Plugin URI:        http://londonparkour.com
- * Description:       <strong>🔌PLUGIN</strong> | <em>ANDYP > Generative Images</em> | Builds up layers of an SVG to be exported into a post.
+ * Description:       <strong>🤖 Pipeline</strong> | <em>Pipeline > Generative Images</em> | Builds up layers of an SVG to be exported into a post.
  * Version:           1.0.0
  * Author:            Andy Pearson
  * Author URI:        https://londonparkour.com
