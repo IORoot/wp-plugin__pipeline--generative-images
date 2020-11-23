@@ -156,7 +156,7 @@ class render {
         {
             $extension = pathinfo($this->filename_file,PATHINFO_EXTENSION);
             $link = $this::wp_site_url() . '/' . $this->filename_file;
-            $filesize = filesize($this->filename_file);
+            $filesize = filesize(ABSPATH . $this->filename_file);
             $filesize = (new \genimage\utils\utils)->niceImageSizes($filesize);
 
             $output .= $this->open_column();
