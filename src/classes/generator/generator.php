@@ -14,7 +14,6 @@ class generator
     public function __construct()
     {
         $this::debug_clear();
-        $this->run();
     }
 
 
@@ -35,8 +34,7 @@ class generator
 
     private function iterate_over_all_instances()
     {
-        foreach ($this->instances as $this->instance_key => $this->instance_config)
-        {
+        foreach ($this->instances as $this->instance_key => $this->instance_config) {
             $this->process_single_instance();
         }
         return;
@@ -49,10 +47,5 @@ class generator
         $this->current_instance = new runas_shortcode;
         $this->current_instance->set_config($this->instance_config);
         $this->current_instance->run();
-
     }
-
-
-
-
 }

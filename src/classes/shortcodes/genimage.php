@@ -16,7 +16,8 @@ class genimage
 
     public function generative_image()
     {
-        new \genimage\generator;
+        $generator = new \genimage\generator;
+        $generator->run();
     }
 
 }

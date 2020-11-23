@@ -2,11 +2,10 @@
 
 namespace genimage;
 
-class generate {
-
-    public function __construct(){
+class generate
+{
+    public function __construct()
+    {
         new \genimage\shortcodes\genimage;
     }
-
-
 }
