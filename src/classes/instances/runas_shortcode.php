@@ -208,7 +208,8 @@ class runas_shortcode
         {
             $json = json_encode($stage, JSON_PRETTY_PRINT);
             $this::debug($name . ' is NULL : '. $json, static::class); 
-            die ('no results in ' . $name . ' : '. $json);
+            // die ('no results in ' . $name . ' : '. $json);
+            echo 'no results in ' . $name . ' : '. $json;
         }
     }
 

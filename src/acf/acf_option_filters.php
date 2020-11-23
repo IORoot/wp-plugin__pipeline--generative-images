@@ -15,16 +15,19 @@ trait option_filters
             return;
         }
 
-        while (have_rows('genimage_filters', 'option')): $row = the_row();
+        while (have_rows('genimage_filters', 'option')) {
 
-            if (get_sub_field('genimage_filter_slug') != $filter_slug)
-            {
+            $row = the_row();
+
+            $group = get_sub_field('genimage_filter_group');
+
+            if ($group['genimage_filter_slug'] != $filter_slug) {
                 continue;
             }
 
             $this->get_layers($filter_slug);
-
-        endwhile;
+            
+        }
 
         $filters = $this->filters;
         return $filters;

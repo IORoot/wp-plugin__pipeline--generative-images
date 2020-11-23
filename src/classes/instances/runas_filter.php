@@ -220,7 +220,8 @@ class runas_filter
         if ($stage == null || $stage[0] == null)
         {
             $json = json_encode($stage, JSON_PRETTY_PRINT);
-            die ('no results in ' . $name . ' : '. $json);
+            // die ('no results in ' . $name . ' : '. $json);
+            echo 'no results in ' . $name . ' : '. $json;
         }
     }
 
