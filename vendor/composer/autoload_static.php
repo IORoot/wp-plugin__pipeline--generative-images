@@ -32,7 +32,6 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\filters\\svg_element' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/svg_element.php',
         'genimage\\filters\\text' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/text.php',
         'genimage\\filters\\whiten' => __DIR__ . '/../..' . '/src/classes/filters/filter_types/whiten.php',
-        'genimage\\generate' => __DIR__ . '/../..' . '/src/classes/generate.php',
         'genimage\\generator' => __DIR__ . '/../..' . '/src/classes/generator/generator.php',
         'genimage\\images' => __DIR__ . '/../..' . '/src/classes/image/images.php',
         'genimage\\interfaces\\convertInterface' => __DIR__ . '/../..' . '/src/classes/interfaces/convertInterface.php',

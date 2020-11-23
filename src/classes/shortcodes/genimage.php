@@ -18,8 +18,18 @@ class genimage
 
     public function generative_image()
     {
+        $result = null;
+
         $generator = new \genimage\generator;
         $generator->run();
+        $image_results = $generator->result(); 
+        
+        foreach ($image_results as $image)
+        {
+            $result .= $image;
+        }
+
+        return $result;
     }
 
 }

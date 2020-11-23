@@ -20,6 +20,8 @@ class render {
     private $filename_file;
     private $image_file;
 
+    private $result;
+
     /**
      * Array of Original SVG code for each image.
      * 
@@ -58,8 +60,13 @@ class render {
     {
         $this->count_columns();
         $this->build_table();
-
     }
+
+    public function result()
+    {
+        return $this->result;
+    }
+
 
     private function count_columns()
     {
@@ -70,20 +77,16 @@ class render {
 
     private function build_table()
     {
-        ob_start();
 
-        $output = $this->open_table();
+        $this->result = $this->open_table();
 
         foreach ($this->converted as $this->converted_key => $this->converted_files)
         {
-            $output .= $this->rows();
+            $this->result .= $this->rows();
         }
 
-        $output .= $this->close_table();
+        $this->result .= $this->close_table();
 
-        echo $output;
-
-        return ob_end_flush();
     }
 
 

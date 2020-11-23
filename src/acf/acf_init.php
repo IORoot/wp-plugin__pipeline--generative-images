@@ -21,3 +21,8 @@ require __DIR__.'/selects/populate_layer_names.php';
 //  └─────────────────────────────────────────────────────────────────────────┘
 require __DIR__.'/acf_check_imagick.php';
 require __DIR__.'/acf_check_inkscape.php';
+
+//  ┌─────────────────────────────────────────────────────────────────────────┐
+//  │                           Display the results                           │
+//  └─────────────────────────────────────────────────────────────────────────┘
+require __DIR__.'/acf_load_shortcode.php';

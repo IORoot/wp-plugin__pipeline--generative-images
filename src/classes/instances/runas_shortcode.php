@@ -93,6 +93,12 @@ class runas_shortcode
     private $source_objects;  
 
 
+    /**
+     * Contains the output of the shortcode.
+     */
+    private $result;
+
+
     public function set_config($config)
     {
         $this->config = $config;
@@ -111,6 +117,11 @@ class runas_shortcode
         $this->reset();
 
         return;
+    }
+
+    public function result()
+    {
+        return $this->result;
     }
 
 
@@ -171,6 +182,7 @@ class runas_shortcode
         $render->set_converted($this->converted);
         $render->set_svg_group($this->svg_group);
         $render->run();
+        $this->result = $render->result();
     }
 
 

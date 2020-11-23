@@ -11,6 +11,8 @@ class generator
     public $instance_config;
     public $current_instance;
 
+    public $result;
+
     public function __construct()
     {
         $this::debug_clear();
@@ -21,6 +23,11 @@ class generator
     {
         $this->get_control_options();
         $this->iterate_over_all_instances();
+    }
+
+    public function result()
+    {
+        return $this->result;
     }
 
 
@@ -47,5 +54,6 @@ class generator
         $this->current_instance = new runas_shortcode;
         $this->current_instance->set_config($this->instance_config);
         $this->current_instance->run();
+        $this->result[] = $this->current_instance->result();
     }
 }

@@ -31,7 +31,6 @@ return array(
     'genimage\\filters\\svg_element' => $baseDir . '/src/classes/filters/filter_types/svg_element.php',
     'genimage\\filters\\text' => $baseDir . '/src/classes/filters/filter_types/text.php',
     'genimage\\filters\\whiten' => $baseDir . '/src/classes/filters/filter_types/whiten.php',
-    'genimage\\generate' => $baseDir . '/src/classes/generate.php',
     'genimage\\generator' => $baseDir . '/src/classes/generator/generator.php',
     'genimage\\images' => $baseDir . '/src/classes/image/images.php',
     'genimage\\interfaces\\convertInterface' => $baseDir . '/src/classes/interfaces/convertInterface.php',
