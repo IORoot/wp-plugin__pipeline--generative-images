@@ -3,7 +3,9 @@
 namespace genimage\shortcodes;
 
 
-
+/**
+ * Create a shortcode 'genimage' and run the generator class.
+ */
 class genimage
 {
 

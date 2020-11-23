@@ -164,6 +164,8 @@ class runas_filter
         $this->filters();
         $this->svg();
         $this->convert();
+
+        return true;
     }
 
     private function images()

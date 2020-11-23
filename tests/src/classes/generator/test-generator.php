@@ -29,7 +29,7 @@ class generatorTest extends WP_UnitTestCase {
 	 */
 	public function test_generator_class_exists() {
 
-        $got = new \genimage\generator;
+            $got = new \genimage\generator;
 
 		$this->assertIsObject($got);
     }

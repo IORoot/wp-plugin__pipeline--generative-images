@@ -34,4 +34,4 @@ require __DIR__.'/src/wp_filters/filters_init.php';
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                           Kick off the program                          │
 // └─────────────────────────────────────────────────────────────────────────┘
-new \genimage\generate;
+new \genimage\shortcodes\genimage;
