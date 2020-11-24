@@ -42,6 +42,9 @@ class generator
     private function iterate_over_all_instances()
     {
         foreach ($this->instances as $this->instance_key => $this->instance_config) {
+            if ($this->instance_config['instance_enabled'] == false){
+                continue;
+            }
             $this->process_single_instance();
         }
         return;

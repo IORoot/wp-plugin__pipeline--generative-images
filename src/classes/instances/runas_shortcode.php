@@ -11,7 +11,7 @@ class runas_shortcode
      * Config Array
      *
      * 'instance_slug'    => SLUG,
-     * 'instance_source'  => get_article | get_category | get_query,
+     * 'instance_source'  => source slug,
      * 'instance_filter'  => filter slug
      * 'instance_enabled' => true | false
      *
@@ -94,7 +94,8 @@ class runas_shortcode
 
 
     /**
-     * Contains the output of the shortcode.
+     * Contains the output table and images 
+     * for the shortcode.
      */
     private $result;
 

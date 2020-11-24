@@ -30,4 +30,31 @@ class runasShortcodeTest extends WP_UnitTestCase
 
         $this->assertIsObject($got);
     }
+
+
+    /**
+     * @test
+     *
+     * @testdox Testing the main generator class
+     *
+     */
+    // public function test_generator_class_runs_with_minimal_config()
+    // {
+    //     $config['instance_slug'] = 'phpunit_test';
+    //     $config['instance_source'] = 'get_query';
+    //     $config['instance_filter'] = 'corner_dots';
+    //     $config['instance_enabled'] = true;
+        
+    //     $this->class_instance->set_config($config);
+
+    //     $this->class_instance->run();
+
+    //     $expected = true;
+
+    //     $got = $this->class_instance->result();
+
+    //     $this->assertEquals($expected, $got);
+    // }
+
+
 }
