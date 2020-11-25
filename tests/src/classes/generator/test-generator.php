@@ -7,7 +7,7 @@
  */
 
 /**
- * @testdox Testing the \ue\content class
+ * @testdox Testing the \genimage\generator class
  */
 class generatorTest extends WP_UnitTestCase
 {

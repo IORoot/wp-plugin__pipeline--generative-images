@@ -1,0 +1,1155 @@
+[
+    {
+        "key": "group_5e9d864accece",
+        "title": "Generative Images Sidebar",
+        "fields": [
+            {
+                "key": "field_5f43ad62cd80f",
+                "label": "Save SVG to Disk",
+                "name": "gi_save_svg",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f43ad93cd810",
+                "label": "Save JPG to Disk",
+                "name": "gi_save_jpg",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f43ada8cd811",
+                "label": "Save PNG to Disk",
+                "name": "gi_save_png",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f43addccd812",
+                "label": "Attach new image to Post \/ Term",
+                "name": "gi_save_post",
+                "type": "select",
+                "instructions": "(This will disable and switch off after each update)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "choices": {
+                    "none": "Do Not Update Post \/ Term",
+                    "jpg": "Save JPG to Post\/Term"
+                },
+                "default_value": [],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_5e9d8655fd086",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "<a href=\"https:\/\/londonparkour.com\/zimage-generator\/\" target=\"_blank\">Generator Page<\/a>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "generativeimages"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_5e7ce9be8ec08",
+        "title": "Generative Images v2",
+        "fields": [
+            {
+                "key": "field_5fbb97818d9c4",
+                "label": "Dependencies",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5fbb9503697bf",
+                "label": "Imagick",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "<img src=\"\/wp-content\/plugins\/andyp_pipeline_generative_images\/src\/acf\/data\/imagick.png\" height=\"200px\">\r\n<h2>Used to convert SVG -> PNG<\/h2>\r\n<b><p style=\"color:green\">iMagick v3.4.4 installed <\/p><\/b>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5fbb9544697c0",
+                "label": "Inkscape",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "<img src=\"\/wp-content\/plugins\/andyp_pipeline_generative_images\/src\/acf\/data\/inkscape.png\" height=\"200px\">\r\n<h2>Used to convert PNG -> JPG<\/h2>\r\n<b><p style=\"color:green\">Inkscape Inkscape 0.92.5 (0.92.5+68) installed.<\/p><\/b>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5fbb9705e983b",
+                "label": "Instance",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f43bb8aeb1cc",
+                "label": "Instance",
+                "name": "genimage_instance",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "collapsed": "field_5f43bb2ed4882",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5f43bb2ed4882",
+                        "label": "Slug",
+                        "name": "genimage_instance_slug",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f43ba90d487f",
+                        "label": "Source",
+                        "name": "genimage_instance_source",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "choices": {
+                            "phpunit_test": "phpunit_test",
+                            "phpunit_source_test2": "phpunit_source_test2",
+                            "phpunit_test_post": "phpunit_test_post"
+                        },
+                        "default_value": [],
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "ui": 0,
+                        "return_format": "value",
+                        "ajax": 0,
+                        "placeholder": ""
+                    },
+                    {
+                        "key": "field_5f43babfd4880",
+                        "label": "Filter",
+                        "name": "genimage_instance_filter",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "choices": {
+                            "reference_library_covers": "reference_library_covers",
+                            "reference_library_taxonomy": "reference_library_taxonomy",
+                            "corner_dots": "corner_dots",
+                            "daily_top_four": "daily_top_four"
+                        },
+                        "default_value": [],
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "ui": 0,
+                        "return_format": "value",
+                        "ajax": 0,
+                        "placeholder": ""
+                    },
+                    {
+                        "key": "field_5f43bae1d4881",
+                        "label": "Enabled",
+                        "name": "genimage_instance_enabled",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "15",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5e7f0d8a7bb58",
+                "label": "Source",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5fbd0e544b518",
+                "label": "Source",
+                "name": "genimage_source",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "collapsed": "field_5fbd0ebf4b51a",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5fbd0ebf4b51a",
+                        "label": "Source Slug",
+                        "name": "genimage_source_slug",
+                        "type": "text",
+                        "instructions": "Unique identifier",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fbd0e764b519",
+                        "label": "Source Type",
+                        "name": "genimage_source_type",
+                        "type": "radio",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "20",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "choices": {
+                            "get_post": "Post",
+                            "get_taxonomy": "Taxonomy",
+                            "get_query": "WP_Query"
+                        },
+                        "allow_null": 0,
+                        "other_choice": 0,
+                        "default_value": "",
+                        "layout": "vertical",
+                        "return_format": "array",
+                        "save_other_choice": 0
+                    },
+                    {
+                        "key": "field_5e7ce9cf1ccf1",
+                        "label": "Post",
+                        "name": "genimage_post",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fbd0e764b519",
+                                    "operator": "==",
+                                    "value": "get_post"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "80",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "post_type": "",
+                        "taxonomy": "",
+                        "allow_null": 0,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
+                    },
+                    {
+                        "key": "field_5e804f159ed7b",
+                        "label": "Taxonomy",
+                        "name": "genimage_taxonomy",
+                        "type": "taxonomy",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fbd0e764b519",
+                                    "operator": "==",
+                                    "value": "get_taxonomy"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "80",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "taxonomy": "articlecategory",
+                        "field_type": "select",
+                        "allow_null": 0,
+                        "add_term": 0,
+                        "save_terms": 0,
+                        "load_terms": 0,
+                        "return_format": "object",
+                        "multiple": 0
+                    },
+                    {
+                        "key": "field_5e80bfbc34265",
+                        "label": "WP_Query",
+                        "name": "genimage_query",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fbd0e764b519",
+                                    "operator": "==",
+                                    "value": "get_query"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "80",
+                            "class": "ue__codemirror",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5e804ee89ed7a",
+                "label": "Filters",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e8046ce7ef45",
+                "label": "Filters",
+                "name": "genimage_filters",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "collapsed": "field_5f4df54c0f9dd",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5f4df54c0f9dd",
+                        "label": "",
+                        "name": "genimage_filter_group",
+                        "type": "group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "100",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "layout": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5f4d38477c3c9",
+                                "label": "Preview",
+                                "name": "genimage_filter_preview",
+                                "type": "image",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "30",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "return_format": "array",
+                                "preview_size": "medium",
+                                "library": "all",
+                                "min_width": "",
+                                "min_height": "",
+                                "min_size": "",
+                                "max_width": "",
+                                "max_height": "",
+                                "max_size": "",
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5f43a7db36f85",
+                                "label": "Filter Slug",
+                                "name": "genimage_filter_slug",
+                                "type": "text",
+                                "instructions": "Unique Identifier",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "70",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            }
+                        ]
+                    },
+                    {
+                        "key": "field_5e804cc6ecde8",
+                        "label": "Filter Description",
+                        "name": "genimage_filter_description",
+                        "type": "textarea",
+                        "instructions": "Summary of the filter.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "60",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5f4ca9328b0d7",
+                        "label": "Resize Width",
+                        "name": "genimage_filter_resize_width",
+                        "type": "number",
+                        "instructions": "Optional",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "20",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": "",
+                        "max": "",
+                        "step": ""
+                    },
+                    {
+                        "key": "field_5f4ca9628b0d8",
+                        "label": "Resize Height",
+                        "name": "genimage_filter_resize_height",
+                        "type": "number",
+                        "instructions": "Optional",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "20",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": "",
+                        "max": "",
+                        "step": ""
+                    },
+                    {
+                        "key": "field_5e80472b7ef47",
+                        "label": "Layers",
+                        "name": "genimage_filter",
+                        "type": "repeater",
+                        "instructions": "Stack of SVG layers in order top to bottom.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "100",
+                            "class": "layers__wrap",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "collapsed": "field_5e8047497ef48",
+                        "min": 0,
+                        "max": 0,
+                        "layout": "block",
+                        "button_label": "Add Layer",
+                        "sub_fields": [
+                            {
+                                "key": "field_5e8047497ef48",
+                                "label": "Filter Name",
+                                "name": "filter_name",
+                                "type": "select",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "20",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "choices": {
+                                    "acf_post_tax_field": "acf_post_tax_field",
+                                    "acf_post_term_field": "acf_post_term_field",
+                                    "acf_term_field": "acf_term_field",
+                                    "acf_term_field_definition": "acf_term_field_definition",
+                                    "darken": "darken",
+                                    "generate_shape": "generate_shape",
+                                    "image": "image",
+                                    "image_free": "image_free",
+                                    "image_grid": "image_grid",
+                                    "noise": "noise",
+                                    "None": "None",
+                                    "random_colour": "random_colour",
+                                    "svg_definition": "svg_definition",
+                                    "svg_element": "svg_element",
+                                    "text": "text",
+                                    "whiten": "whiten"
+                                },
+                                "default_value": [],
+                                "allow_null": 0,
+                                "multiple": 0,
+                                "ui": 1,
+                                "ajax": 0,
+                                "return_format": "value",
+                                "placeholder": ""
+                            },
+                            {
+                                "key": "field_5e8047997ef49",
+                                "label": "Filter Parameters",
+                                "name": "filter_parameters",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "80",
+                                    "class": "ue__codemirror",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 3,
+                                "new_lines": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "field_5fbbc2bc11d5b",
+                "label": "Results",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5fbbc2cb11d5c",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "<table><tr><td style=\"width:50%;\">SVG DATA<\/td><td style=\"width:50%;\"><a href=\"https:\/\/dev.londonparkour.com\/wp-content\/uploads\/2020\/08\/3138b265a61aa4234c910856833519fd_gi.jpg\" target=\"_blank\">jpg - 41.93kb<\/a><\/td><\/tr><tr><td style=\"width:50%;\"><svg viewBox=\"0 0 600 600\" class=\"svgwrapper\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\"><defs>  <filter id=\"aden\" filterUnits=\"objectBoundingBox\">    <feColorMatrix id=\"hue-value\" type=\"hueRotate\" in=\"SourceGraphic\" result=\"hueRotateOut\" values=\"-20\"\/>         <feColorMatrix type=\"saturate\" in=\"hueRotateOut\" result=\"saturateOut\" values=\"0.85\"\/>         <feComponentTransfer in=\"saturateOut\" result=\"brightnessOut\">        <feFuncR type=\"linear\" slope=\"0.9\"\/>        <feFuncG type=\"linear\" slope=\"0.9\"\/>        <feFuncB type=\"linear\" slope=\"0.9\"\/>   <\/feComponentTransfer>   <feComponentTransfer  in=\"brightnessOut\" result=\"contrastOut\">        <feFuncR type=\"linear\" slope=\"1.2\" intercept=\"0.05\"\/>        <feFuncG type=\"linear\" slope=\"1.2\" intercept=\"0.05\"\/>        <feFuncB type=\"linear\" slope=\"1.2\" intercept=\"0.05\"\/>   <\/feComponentTransfer>    <feFlood flood-color=\"#420A0E\" flood-opacity=\"0.1\" out=\"floodOut\"><\/feFlood>    <feBlend mode=\"darken\" in=\"contrastOut\" in2=\"floodOut\" result=\"blendOut\"\/>    <feConvolveMatrix in=\"blendOut\" result=\"sharpenOut\" order=\"3\" preserveAlpha=\"true\" kernelMatrix=\"-1 0 0 0 4 0 0 0 -1\"\/>  <\/filter><filter  id=\"solidTextColouredBG\" x=\"-0.1\" y=\"-0.75\" width=\"1.2\" height=\"2.5\">      <feFlood flood-color=\"#FCC53B\" flood-opacity=\"1\"><\/feFlood>      <feComposite in=\"SourceGraphic\"><\/feComposite><\/filter><filter  id=\"solidTextBG\" x=\"-0.1\" y=\"-0.75\" width=\"1.2\" height=\"3.5\">      <feFlood flood-color=\"#242424\" flood-opacity=\"0.5\"><\/feFlood>      <feComposite in=\"SourceGraphic\"><\/feComposite><\/filter><\/defs><image  xlink:href=\"\/wp-content\/uploads\/2020\/08\/3138b265a61aa4234c910856833519fd.jpg\" width=\"600\" height=\"600\" filter=\"url(#aden)\"><\/image><svg viewBox=\"0 0 80 80\"  x=\"0\"  y=\"0\"  width=\"160\"  height=\"160\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"80\"  y=\"0\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"160\"  y=\"0\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"240\"  y=\"0\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FAFAFA\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"0\"  y=\"80\"  width=\"160\"  height=\"160\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FAFAFA\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"80\"  y=\"80\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"160\"  y=\"80\"  width=\"160\"  height=\"160\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"0\"  y=\"160\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"80\"  y=\"160\"  width=\"80\"  height=\"80\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><svg viewBox=\"0 0 80 80\"  x=\"0\"  y=\"240\"  width=\"160\"  height=\"160\"  filter=\"\" ><polygon  points=\"80 80 40 10 0 80\"  fill=\"#FCC53B\"  fill-opacity=\"0.8\" ><\/polygon><\/svg><text filter=\"url(#solidTextBG)\" x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" style=\"letter-spacing:-5px; font-size: 87px; fill:#fafafa;\" >THE LAST EVER SOLE DESTROYER EPISODE<\/text><text id=\"cameraview\" x=\"50%\" y=\"59%\" dominant-baseline=\"middle\" text-anchor=\"middle\" style=\"font-size: 29px; fill:#fafafa;\" ><\/text><text id=\"category\" filter=\"url(#solidTextColouredBG)\"  x=\"50%\" y=\"20%\" dominant-baseline=\"middle\" text-anchor=\"middle\" style=\"font-size: 29px; fill:#242424;\" ><\/text><svg x=\"50%\" overflow=\"visible\">    <g id=\"Logo\" transform=\"translate(-70, 464) scale(0.3)\">        <polygon id=\"Logo_-_Left\" fill=\"#757575\" points=\"0 0 130 0 290 250 0 250\"><\/polygon>        <polygon id=\"Logo_-_Right\" fill=\"#FCC53B\" points=\"160 0 450 0 450 250 320 250\"><\/polygon>    <\/g><\/svg><\/svg><\/td><td style=\"width:50%;\"><a href=\"https:\/\/dev.londonparkour.com\/wp-content\/uploads\/2020\/08\/3138b265a61aa4234c910856833519fd_gi.jpg\" target=\"_blank\"><embed src=\"https:\/\/dev.londonparkour.com\/wp-content\/uploads\/2020\/08\/3138b265a61aa4234c910856833519fd_gi.jpg\" \/><\/a><\/td><\/tr><\/table>",
+                "new_lines": "",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5e860d5f350ac",
+                "label": "Help",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f48ae120dded",
+                "label": "Help Group",
+                "name": "genimage_help_group",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f48ae440ddef",
+                        "label": "Filter Library",
+                        "name": "",
+                        "type": "tab",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "placement": "top",
+                        "endpoint": 0
+                    },
+                    {
+                        "key": "field_5f4777823c93f",
+                        "label": "Filter Library",
+                        "name": "genimage_library",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "collapsed": "field_5f4778c73c940",
+                        "min": 0,
+                        "max": 0,
+                        "layout": "block",
+                        "button_label": "",
+                        "sub_fields": [
+                            {
+                                "key": "field_5f4778c73c940",
+                                "label": "Filter Name",
+                                "name": "genimage_library_filter_name",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "30",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_5f4778ec3c941",
+                                "label": "Filter Description",
+                                "name": "genimage_library_filter_description",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "70",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 10,
+                                "new_lines": ""
+                            },
+                            {
+                                "key": "field_5f4779123c942",
+                                "label": "Example Parameter Input",
+                                "name": "genimage_library_filter_example",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "ue__codemirror ue__codemirror--scrollbars",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 10,
+                                "new_lines": ""
+                            },
+                            {
+                                "key": "field_5f479f850bcc5",
+                                "label": "Example Output",
+                                "name": "genimage_library_filter_example_output",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "ue__codemirror ue__codemirror--scrollbars",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 10,
+                                "new_lines": ""
+                            }
+                        ]
+                    },
+                    {
+                        "key": "field_5f48ae660ddf1",
+                        "label": "Examples",
+                        "name": "",
+                        "type": "tab",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "placement": "top",
+                        "endpoint": 0
+                    },
+                    {
+                        "key": "field_5f48ae7e0ddf2",
+                        "label": "Examples",
+                        "name": "genimage_examples",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "collapsed": "field_5f48af89d03b3",
+                        "min": 0,
+                        "max": 0,
+                        "layout": "block",
+                        "button_label": "",
+                        "sub_fields": [
+                            {
+                                "key": "field_5f48af89d03b3",
+                                "label": "Title",
+                                "name": "genimage_examples_title",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_5f48ae9b0ddf3",
+                                "label": "Description",
+                                "name": "genimage_examples_description",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "30",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 12,
+                                "new_lines": ""
+                            },
+                            {
+                                "key": "field_5f48aec40ddf4",
+                                "label": "Example",
+                                "name": "genimage_examples_example",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "70",
+                                    "class": "ue__codemirror",
+                                    "id": ""
+                                },
+                                "hide_admin": 0,
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": 12,
+                                "new_lines": ""
+                            }
+                        ]
+                    },
+                    {
+                        "key": "field_5e8062b26be3b",
+                        "label": "Debug",
+                        "name": "",
+                        "type": "tab",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "placement": "top",
+                        "endpoint": 0
+                    },
+                    {
+                        "key": "field_5e861d148d529",
+                        "label": "Debug",
+                        "name": "genimage_debug",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "ue__codemirror ue__codemirror--scrollbars",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": 20,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5f48ae520ddf0",
+                        "label": "Useful Links",
+                        "name": "",
+                        "type": "tab",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "placement": "top",
+                        "endpoint": 0
+                    },
+                    {
+                        "key": "field_5e804e63702aa",
+                        "label": "Links",
+                        "name": "",
+                        "type": "message",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "hide_admin": 0,
+                        "message": "<code>[genimage]<\/code>\r\n\r\n<h4>Links<\/h4>\r\n<a href=\"http:\/\/apigen.juzna.cz\/doc\/WordPress\/WordPress\/class-WP_Post.html\">WP_Post<\/a>\r\n<a href=\"http:\/\/apigen.juzna.cz\/doc\/WordPress\/WordPress\/class-WP_Term.html\">WP_Term<\/a>\r\n<a href=\"https:\/\/developer.wordpress.org\/reference\/classes\/wp_query\/\">WP_Query<\/a>\r\n\r\n<h4>Misc<\/h4>\r\n<a href=\"https:\/\/github.com\/una\/CSSgram\/tree\/master\/source\/scss\">Instagram CSS filters<\/a>\r\n<a href=\"https:\/\/yoksel.github.io\/svg-gradient-map\/#\/\">DuoTone<\/a>\r\n<a href=\"http:\/\/pleeease.io\/play\/\">Convert CSS filters to SVG<\/a>\r\n<a href=\"http:\/\/www.heropatterns.com\/\">Hero Patterns<\/a>\r\n<a href=\"http:\/\/yoksel.github.io\/svg-filters\/#\/\">SVG Filter builder<\/a>\r\n<a href=\"http:\/\/www.petercollingridge.co.uk\/tutorials\/svg\/isometric-projection\/\">Isometric Transforms<\/a>\r\n<a href=\"https:\/\/github.com\/jorgeatgu\/fildrop\/blob\/master\/demo.html\">SVG Filter Reference<\/a>",
+                        "new_lines": "wpautop",
+                        "esc_html": 0
+                    }
+                ]
+            },
+            {
+                "key": "field_5f43aa600bba5",
+                "label": "Hooks",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f43aa690bba6",
+                "label": "Hook",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "hide_admin": 0,
+                "message": "<h1>Run via a wordpress filter.<\/h2>\r\n\r\n<pre>apply_filter('genimage_get_instance', $filter_slug, $source_objects, $saves_array, $dimensions); <\/pre>\r\n\r\n<h3>Description<\/h3>\r\nYou can run an instance of the generative image plugin via the <code>'genimage_get_instance'<\/code> filter.\r\n<br\/>\r\n\r\n<h3>Parameters<\/h3>\r\n\r\n<h4><pre style=\"display:inline; color: #fff; background: #242424; padding:2px;\">(string) $filter_slug<\/pre><\/h4>\r\n<p>slug name of the filter to run. i.e. <code>'test_filter'<\/code><\/p>\r\n\r\n<br\/>\r\n\r\n<h4><pre style=\"display:inline; color: #fff; background: #242424; padding:2px;\">(array) $source_objects<\/pre><\/h4>\r\n<p>An array of WP_Term \/ WP_Post source objects. i.e. <code>[ 0 => WP_Post, 1 => WP_Post, 2 => WP_Post ]<\/code><\/p>\r\n\r\n<br\/>\r\n\r\n<h4><pre style=\"display:inline; color: #fff; background: #242424; padding:2px;\">(array) $saves_array<\/pre><\/h4>\r\n<p>Which conversions to run. i.e. <code>[ 'svg' => true,  'png' => false, 'jpg' => true ]<\/code><\/p>\r\n\r\n<br\/>\r\n\r\n<h4><pre style=\"display:inline; color: #fff; background: #242424; padding:2px;\">(array) $dimensions<\/pre><\/h4>\r\n<p>Optional variable that will change the size of the output SVG. Width, Height in pixels. i.e. <code>[ 0 => '640', 1 => '480' ]<\/code><\/p>\r\n\r\n<br\/>\r\n\r\n<h3>Returned<\/h3>\r\n<p>Returns <code>true<\/code> on success.<\/p>",
+                "new_lines": "",
+                "esc_html": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "generativeimages"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    }
+]
