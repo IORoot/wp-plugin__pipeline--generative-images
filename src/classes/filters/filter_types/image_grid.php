@@ -93,7 +93,7 @@ class image_grid implements filterInterface
 
     public function set_image($image)
     {
-        $this->image = $image;
+        return;
     }
 
     public function set_all_images($images)
@@ -135,6 +135,11 @@ class image_grid implements filterInterface
 
     private function set_grid_variables()
     {
+
+        if (!isset($this->params)) {
+            return false;
+        }
+
         $this->set_image_count();
         $this->set_cell_width();
         $this->set_cell_height();
@@ -180,12 +185,38 @@ class image_grid implements filterInterface
 
     private function params_to_array()
     {
+
+        if (!isset($this->params)) {
+            return false;
+        }
+
+        // remove linebreaks
         $args = utils::lb($this->params);
-        $this->params = eval("return $args;");
+
+        // check for array or string
+        if (substr( $args, 0, 1 ) !== "["){ $args = "'" . $args; }
+        if (substr( $args, -1, 1 ) !== "]"){ $args = $args . "'"; }
+
+        try {
+            // convert string to array
+            $args = eval("return $args;");
+        } catch (\ParseError $e) {
+            $this->result = $e->getMessage();
+            unset($this->params);
+            return false;
+        }
+        
+        $this->params = $args;
     }
+
 
     private function set_image_paths()
     {
+                
+        if (!isset($this->images)) {
+            return false;
+        }
+
         foreach ($this->images as $key => $instance)
         {
             $this->params['images'][$key] = str_replace('../../../..','',$instance[0]);
@@ -220,12 +251,11 @@ class image_grid implements filterInterface
         $x = preg_replace('/[^0-9|\.]/', '', $this->cell_width);
         $y = preg_replace('/[^0-9|\.]/', '', $this->cell_height);
         
-        $image = '<svg viewBox="0 0 1 1" 
-                    width="'.$this->cell_width.'" 
-                    height="'.$this->cell_height.'" 
-                    x="'. ($this->column_id - 1) * (float) $x.'%" 
-                    y="'. ($this->row_id - 1) * (float) $y.'%" 
-                    preserveAspectRatio="xMidYMid slice">';
+        $image = '<svg viewBox="0 0 1 1" width="'
+                    .$this->cell_width.'" height="'
+                    .$this->cell_height.'" x="'
+                    .($this->column_id - 1) * (float) $x.'%" y="'
+                    .($this->row_id - 1) * (float) $y.'%" preserveAspectRatio="xMidYMid slice">';
             $image .= '<image ';
             $image .= ' xlink:href="'. $image_url .'"';
             $image .= ' ' . $this->image_parameters;

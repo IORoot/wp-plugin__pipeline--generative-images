@@ -2,6 +2,7 @@
 
 namespace genimage\filters;
 
+use genimage\utils\utils;
 use genimage\interfaces\filterInterface;
 
 class noise implements filterInterface
@@ -26,7 +27,7 @@ class noise implements filterInterface
 
     public function set_params($params)
     {
-        $this->params = explode(',', unserialize($params));
+        $this->params = unserialize($params);
     }
 
     public function set_image($image)
@@ -46,25 +47,56 @@ class noise implements filterInterface
 
     public function run()
     {
+        
+        if (!isset($this->params)) {
+            return false;
+        }
+
+        // remove linebreaks
+        $args = utils::lb($this->params);
+
+        // check for array or string
+        if (substr( $args, 0, 1 ) !== "["){ $args = "'" . $args; }
+        if (substr( $args, -1, 1 ) !== "]"){ $args = $args . "'"; }
+
+        try {
+            // convert string to array
+            $args = eval("return $args;");
+        } catch (\ParseError $e) {
+            $this->result = $e->getMessage();
+            unset($this->params);
+            return false;
+        }
+        
+        $this->params = $args;
+
         return $this;
     }
 
 
     public function output()
     {
+        if (!isset($this->params)) {
+            return false;
+        }
+
         return '<rect height="100%" width="100%" x="0" y="0" fill-opacity="'.$this->params[0].'" fill="url(#pattern-noise)"></rect>';
     }
 
     public function defs()
     {
+        if (!isset($this->params)) {
+            return false;
+        }
+
         $noise_url = "../../../../wp-content/plugins/andyp_generative_images/src/img/noise.png";
         if ($this->params[1]) {
             $noise_url = $this->absolute_to_relative();
         }
 
-        $def = '<image id="noise"  xlink:href="'.$noise_url.'" height="200px" width="200px"></image>
-        <pattern id="pattern-noise" width="200px" height="200px" x="-200" y="-200" patternUnits="userSpaceOnUse">
-        <use xlink:href="#noise"></use></pattern>';
+        $def = '<image id="noise" xlink:href="'.$noise_url.'" height="200px" width="200px"></image>';
+        $def .= '<pattern id="pattern-noise" width="200px" height="200px" x="-200" y="-200" patternUnits="userSpaceOnUse">';
+        $def .= '<use xlink:href="#noise"></use></pattern>';
 
         return $def;
     }

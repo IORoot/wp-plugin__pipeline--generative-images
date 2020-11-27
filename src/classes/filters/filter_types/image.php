@@ -44,15 +44,17 @@ class image implements filterInterface
 
     public function output(){
 
-        if (!empty($this->params)){ 
-
-            $this->set_image_paths();
-
-            $params = ' xlink:href="'.$this->image[0].'"';
-            $params .= ' width="'.$this->image[1].'"';
-            $params .= ' height="'.$this->image[2].'" ';
-            $params .= $this->params;
+        if (empty($this->image)){
+            return false;
         }
+
+        $this->set_image_paths();
+
+        $params = ' xlink:href="'.$this->image[0].'"';
+        $params .= ' width="'.$this->image[1].'"';
+        $params .= ' height="'.$this->image[2].'" ';
+        $params .= $this->params;
+        
 
         return '<image '.$params.'></image>';
     }
