@@ -44,12 +44,12 @@ class jpg implements convertInterface
     private function define_temp_png()
     {
         $file = pathinfo($this->target);
-        $this->temp_png = $file['dirname'] . '/' . $file['filename'] . '.png';
+        $this->temp_png = $file['dirname'] . '/' . $file['filename'] . '.temp.png';
     }
 
 
 
-    /**
+    /**´
      * Best way is to convert SVG to PNG using inkscape and then
      * convert the PNG to JPG using Imagick.
      * 
@@ -57,16 +57,17 @@ class jpg implements convertInterface
      */
     private function convert_to_temp_png()
     {
-        exec('inkscape --without-gui '. $this->input.' -e ' . $this->temp_png, $output, $return);
+        exec('dbus-run-session inkscape --without-gui '. $this->input.' -e ' . $this->temp_png . ' 2>/dev/null', $output, $return);
 
         if ($return > 0) {
             $this::debug([
                 'message' => 'Inkscape did not execute correctly converting to SVG -> PNG',
-                'result' => $result,
+                'result' => $return,
                 'output' => $output,
             ], static::class);
 
-            return false;
+            $this->target = false;
+            return;
         }
 
         $this::debug($output, static::class);
@@ -77,16 +78,17 @@ class jpg implements convertInterface
 
     private function convert_temp_png_to_jpg()
     {
-        exec('convert '. $this->temp_png . ' ' . $this->target , $output, $return);
+        exec('convert '. $this->temp_png . ' ' . $this->target . ' 2>/dev/null' , $output, $return);
 
         if ($return > 0) {
             $this::debug([
                 'message' => 'Imagick CLI convert PNG -> JPG failed.',
-                'result' => $result,
+                'result' => $return,
                 'output' => $output,
             ], static::class);
 
-            return false;
+            $this->target = false;
+            return;
         }
 
         $this::debug($output, static::class);
@@ -97,12 +99,15 @@ class jpg implements convertInterface
     
     private function delete_temp_png()
     {
-        unlink($this->temp_png);
+        if (file_exists($this->temp_png)){
+            unlink($this->temp_png);
+        }
     }
 
 
     private function target_path_to_relative()
     {
+        if (!$this->target){ return; }
         $this->target = str_replace(ABSPATH, '', $this->target);
     }
 

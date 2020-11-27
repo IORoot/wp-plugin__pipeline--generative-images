@@ -6,7 +6,8 @@ trait wp_funcs
 {
     public static function wp_upload_dir()
     {
-        return 'wp-content/uploads' . wp_upload_dir()['subdir'];
+        $dir = wp_upload_dir();
+        return $dir['path'];
     }
 
 

@@ -26,12 +26,14 @@ class png implements convertInterface
     public function out()
     {
         // PWD = "/var/www/vhosts/dev.londonparkour.com"
-        exec('inkscape --without-gui '. $this->input.' -e '.$this->target, $output, $return);
+        // dbus = https://gitlab.com/inkscape/inkscape/-/issues/294
+        // 2>/dev/null will suppress errors
+        exec('dbus-run-session inkscape --without-gui '. $this->input.' -e ' . $this->target . ' 2>/dev/null', $output, $return);
 
         if ($return > 0) {
             $this::debug([
                 'message' => 'Inkscape did not execute correctly.',
-                'result' => $result,
+                'result' => $return,
                 'output' => $output,
             ], static::class);
 
