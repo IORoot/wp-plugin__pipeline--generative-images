@@ -23,7 +23,11 @@ class image_free implements filterInterface
 
     public function set_params($params)
     {
-        $this->params = unserialize($params);
+        if (is_serialized($params)){
+            $this->params = unserialize($params);
+            return;
+        }
+        $this->params = $params;
     }
 
     public function set_image($image)

@@ -38,7 +38,7 @@ class svg_group
      *
      * 0 => [
      *          'filter_name' => "image"
-     *          'filter_parameters => "s:19:"filter="url(#aden)"";"
+     *          'filter_parameters' => "s:19:"filter="url(#aden)"";"
      *      ]
      * @var [type]
      */

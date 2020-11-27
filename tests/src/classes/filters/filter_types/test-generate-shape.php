@@ -181,7 +181,7 @@ class filterGenerateShapeTest extends WP_UnitTestCase
                 'corners' => ['tl','tr','bl','br'],
                 'corner_size' => 4,
                 'shapes' => ['rect', 'cross', 'square_cross', 'square_plus', 'triangle', 'right_angled_triangle',
-                            'leaf', 'dots', 'lines', 'wiggles', 'diamond', 'flower', 'stripes', 'bump'],
+                            'leaf', 'dots', 'lines', 'wiggles', 'diamond', 'flower', 'stripes', 'bump', 'circle'],
                 'cell_size' => 40,
                 'width' => 1280,
                 'height' => 1280,

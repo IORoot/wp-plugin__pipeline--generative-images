@@ -26,11 +26,6 @@ class svg_parts {
         $this->svg[] = '</defs>';
     }
 
-    public function set_image($image){
-        $this->svg[] = '<image href="'.$image[0].'" width="'.$image[1].'" height="'.$image[2].'" />';
-        return $this;
-    }
-
     public function add_element($element){
         $this->svg[] = $element;
         return $this;

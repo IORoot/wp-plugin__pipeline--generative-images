@@ -139,11 +139,7 @@ class svg_single
 
 
     public function run()
-    {
-        if (empty($this->image)) {
-            return;
-        }
-        
+    {        
         $this->build_array_of_filter_objects();
         $this->build_svg();
     }
