@@ -11,7 +11,7 @@ class whiten implements filterInterface
     public $example    =    '0.5';
     public $output     =    '<rect height="100%" width="100%" x="0" y="0" fill-opacity="0.5" fill="#ffffff"></rect>';
 
-    public $params = '0.5';
+    public $params = 1;
 
     public function set_params($params)
     {
@@ -39,6 +39,11 @@ class whiten implements filterInterface
     }
 
     public function output(){
+
+        if (!is_numeric($this->params)){
+            $this->params = 1;
+        }
+
         return '<rect height="100%" width="100%" x="0" y="0" fill-opacity="'.$this->params.'" fill="#ffffff"></rect>';
     }
 

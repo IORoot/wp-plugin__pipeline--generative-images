@@ -10,6 +10,13 @@ trait switch_for_tax_acf_term_field
      */
     public static function switch_term_acf($string, $post_object)
     {
+        if (!is_object($post_object)) {
+            return $string;
+        }
+        if (!property_exists($post_object, 'term_id')) {
+            return $string;
+        }
+
         $acf = get_fields('term_'.$post_object->term_id);
         
         preg_match_all("/{{([\w|_]+)}}/", $string, $matches);
@@ -20,5 +27,4 @@ trait switch_for_tax_acf_term_field
 
         return $string;
     }
-
 }

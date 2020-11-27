@@ -67,7 +67,7 @@ class generate_shape implements filterInterface
      * result variable
      *
      * This is the output SVG string.
-     * 
+     *
      * @var string
      */
     public $result;
@@ -106,8 +106,6 @@ class generate_shape implements filterInterface
         $this->get_image_height();
         $this->add_additional_colours();
         $this->result = $this->random_patchwork_corner();
-
-
         return $this;
     }
 
@@ -119,47 +117,84 @@ class generate_shape implements filterInterface
 
     public function output()
     {
-        
         return $this->result;
     }
 
-//  ┌─────────────────────────────────────────────────────────────────────────┐
-//  │                                                                         │░
-//  │                                                                         │░
-//  │                                 PRIVATE                                 │░
-//  │                                                                         │░
-//  │                                                                         │░
-//  └─────────────────────────────────────────────────────────────────────────┘░
-//   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    //  ┌─────────────────────────────────────────────────────────────────────────┐
+    //  │                                                                         │░
+    //  │                                                                         │░
+    //  │                                 PRIVATE                                 │░
+    //  │                                                                         │░
+    //  │                                                                         │░
+    //  └─────────────────────────────────────────────────────────────────────────┘░
+    //   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+    /**
+     * Convert any {{moustaches}}, substitutions, linebreaks, etc...
+     * Then convert the string into a proper array.
+     */
     private function set_parameters()
     {
+        // {{moustaches}} to values
         $args = (new replace)->sub($this->params, $this->image);
+
+        // acf fields in posts
         $args = replace::switch_acf($args, $this->image);
+
+        // acf fields in taxonomies
         $args = replace::switch_term_acf($args, $this->image);
 
+        // remove linebreaks
         $args = utils::lb($args);
+
+        // check for array or string
+        if (substr( $args, 0, 1 ) !== "["){ $args = "'" . $args; }
+        if (substr( $args, -1, 1 ) !== "]"){ $args = $args . "'"; }
+
+        // convert string to array
         $args = eval("return $args;");
+
+        if (is_string($args)){
+            $array_args = [$args];
+            unset($args);
+            $args = $array_args;
+        }
 
         $this->params = $args;
     }
 
+    /**
+     * Manual or detected width
+     */
     private function get_image_width()
     {
-        if (isset($this->params['width']))
-        {
+        if (isset($this->params['width'])) {
             $this->image_width = $this->params['width'];
             return;
+        }
+        if (!isset($this->image[1])) {
+            $sizes = getimagesize($this->image[0]);
+            $this->image[1] = $sizes[0];
+            $this->params['width'] = $sizes[0];
         }
         $this->image_width = $this->image[1];
     }
 
+
+    /**
+     * Manual or detected height
+     */
     private function get_image_height()
     {
-        if (isset($this->params['height']))
-        {
+        if (isset($this->params['height'])) {
             $this->image_height = $this->params['height'];
             return;
+        }
+        // detect if missing
+        if (!isset($this->image[2])) {
+            $sizes = getimagesize($this->image[0]);
+            $this->image[2] = $sizes[1];
+            $this->params['height'] = $sizes[1];
         }
         $this->image_height = $this->image[2];
     }
@@ -167,14 +202,13 @@ class generate_shape implements filterInterface
 
 
 
-    public function get_value_or_set_default($name, $default){
-
-        if (!array_key_exists($name, $this->params))
-        {
+    public function get_value_or_set_default($name, $default)
+    {
+        if (!array_key_exists($name, $this->params)) {
             $this->params[$name] = $default;
         }
 
-        $value = $this->params[$name];          // Set value
+        $value = $this->params[$name];
         return $value;
     }
 
@@ -182,12 +216,10 @@ class generate_shape implements filterInterface
 
     private function add_additional_colours()
     {
-        if (!isset($this->params['additional_colours']) || $this->params['additional_colours'] < 1)
-        {
+        if (!isset($this->params['additional_colours']) || $this->params['additional_colours'] < 1) {
             return;
         }
-        if (!isset($this->params['additional_palette']) || $this->params['additional_palette'] == '')
-        {
+        if (!isset($this->params['additional_palette']) || $this->params['additional_palette'] == '') {
             return;
         }
 
@@ -203,7 +235,11 @@ class generate_shape implements filterInterface
 
     private function corner_is_set($corner)
     {
-        return in_array($corner, $this->params['corners'] );
+        // default
+        if (!isset($this->params['corners'])) {
+            $this->params['corners'] = ['tl', 'tr', 'bl', 'br' ];
+        }
+        return in_array($corner, $this->params['corners']);
     }
 
 
@@ -219,14 +255,13 @@ class generate_shape implements filterInterface
         $corner_size = $this->get_value_or_set_default('corner_size', 4);
 
         $this->cell_size = $cell_size = $this->get_value_or_set_default('cell_size', 80);
-        $this->cell_divide = 80 / $this->cell_size; 
+        $this->cell_divide = 80 / $this->cell_size;
         $width = $this->image_width / $this->cell_divide;
         $height = $this->image_height / $this->cell_divide;
 
         $output = '';
 
         for ($y=0; $y<=$height; $y+=$this->cell_size) {
-
             for ($x=0; $x<=$width; $x+=$this->cell_size) {
 
                 // top-left
@@ -245,7 +280,7 @@ class generate_shape implements filterInterface
                 }
 
                 // bottom-right
-                if ($x+$y > $this->cell_size*(23-$corner_size) && $this->corner_is_set('br') ) {
+                if ($x+$y > $this->cell_size*(23-$corner_size) && $this->corner_is_set('br')) {
                     $output .= $this->random_shape($x, $y);
                 }
             }
@@ -272,7 +307,7 @@ class generate_shape implements filterInterface
             "opacity" => $this->get_value_or_set_default('opacity', 0.5),
             "scale" => random_int(1, 2),
             "filter" => '',
-            "rotate" => (random_int(1,3)*90),
+            "rotate" => (random_int(1, 3)*90),
             "shape_type" => $shape_types[0],
         ];
 
@@ -287,12 +322,11 @@ class generate_shape implements filterInterface
 
     public function random_palette()
     {
-        $palette = $this->get_value_or_set_default('palette', '');
+        $palette = $this->get_value_or_set_default('palette', ['#ffffff', '#000000']);
 
         $col = new random;
         $col->set_palette($palette);
 
         return $col->get_palette();
     }
-    
 }

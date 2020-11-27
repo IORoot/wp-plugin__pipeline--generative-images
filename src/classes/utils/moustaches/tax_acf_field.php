@@ -11,8 +11,7 @@ trait switch_for_tax_acf_field
      */
     public static function switch_acf($string, $post_object)
     {
-        if (!is_object($post_object))
-        {
+        if (!is_object($post_object)){
             return $string;
         }
 
@@ -21,6 +20,9 @@ trait switch_for_tax_acf_field
 
         // get the ACF fields of the term linked to a post.
         $terms = wp_get_post_terms($post_object->ID, 'articlecategory');
+
+        if (is_wp_error($terms)){ return $string; }
+
         $acf = get_fields('term_'.$terms[0]->term_id);
 
         // get a terms ACF fields

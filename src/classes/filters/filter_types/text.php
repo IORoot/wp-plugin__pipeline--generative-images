@@ -11,7 +11,7 @@ class text implements filterInterface
     public $filterdesc =    'Text that can use moustache {{post_title}}'.PHP_EOL.
                             'tags or any other WP_Post / WP_Term item.'.PHP_EOL.PHP_EOL.
                             'Also have additional PREFIXES to modify the text.'.PHP_EOL.
-                            'us: prefix for Upper Case text'.PHP_EOL.
+                            'uc: prefix for Upper Case text'.PHP_EOL.
                             'hy: Removes anything BEFORE a " - " hypen. "HELLO - THERE" will become "THERE"'.PHP_EOL.
                             'w1: Matches the first word of the match."'.PHP_EOL.
                             'w2: Matches the second word of the match."'.PHP_EOL.
@@ -54,9 +54,11 @@ class text implements filterInterface
         return $this;
     }
     
-    public function output(){
-        
-        if (empty($this->params) || empty($this->image)){ return; }
+    public function output()
+    {
+        if (empty($this->params) || empty($this->image) || empty($this->source_object)) {
+            return;
+        }
 
         $replace = new replace;
         $output = $replace->sub($this->params, $this->source_object);
@@ -66,8 +68,8 @@ class text implements filterInterface
         return $output;
     }
 
-    public function defs(){
+    public function defs()
+    {
         return;
     }
-
 }

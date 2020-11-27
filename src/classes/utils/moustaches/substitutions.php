@@ -83,7 +83,7 @@ trait substitutions
 
         preg_match_all("/([\w|\d]*)/i", $field, $matches);
 
-        $output = '';
+        $output = [];
         foreach($matches[0] as $match){
             if ($match != ""){
                 $output[] = $match;

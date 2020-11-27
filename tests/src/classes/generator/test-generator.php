@@ -24,7 +24,7 @@ class generatorTest extends WP_UnitTestCase
      * @testdox Testing class exists and returns an object.
      *
      */
-    public function test_generator_class_exists()
+    public function test_class_exists()
     {
         $got = new \genimage\generator;
 

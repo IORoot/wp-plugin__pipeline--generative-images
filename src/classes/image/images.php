@@ -27,7 +27,7 @@ class images
      */
     private $source_objects;  
 
-        /**
+    /**
      * Contains an array of instances of current images' metadata.
      * 0 => [
      *      0 => Relative Directory
