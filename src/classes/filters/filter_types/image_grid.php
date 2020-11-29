@@ -264,7 +264,7 @@ class image_grid implements filterInterface
         $x              = ' x="'.($this->column_id - 1) * (float) $x.'%" ';
         $y              = ' y="'.($this->row_id - 1) * (float) $y.'%" ';
 
-        $image .= '<svg>';
+        $image = '<svg>';
         $image .= '<image ' . $href . $ascpectRatio . $viewbox . $width . $height . $x . $y . ' ></image>';
         $image .= '</svg>';
         

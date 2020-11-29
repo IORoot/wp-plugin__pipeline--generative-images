@@ -126,7 +126,7 @@ class filterImageGridTest extends WP_UnitTestCase
     /**
      * @test
      *
-     * @testdox Testing filter can output() a grid of <image>.
+     * @testdox Testing filter can output() a grid of four <image>.
      *
      */
     public function test_output_creates_a_grid_of_four_images()
@@ -163,7 +163,7 @@ class filterImageGridTest extends WP_UnitTestCase
         /**
          * Expected, Recieved, Asserted
          */
-        $expected = '<svg viewBox="0 0 1 1" width="50%" height="50%" x="0%" y="0%" preserveAspectRatio="xMidYMid slice"><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" width="100%" height="100%" ></image></svg><svg viewBox="0 0 1 1" width="50%" height="50%" x="50%" y="0%" preserveAspectRatio="xMidYMid slice"><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" width="100%" height="100%" ></image></svg><svg viewBox="0 0 1 1" width="50%" height="50%" x="0%" y="50%" preserveAspectRatio="xMidYMid slice"><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" width="100%" height="100%" ></image></svg><svg viewBox="0 0 1 1" width="50%" height="50%" x="50%" y="50%" preserveAspectRatio="xMidYMid slice"><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" width="100%" height="100%" ></image></svg>';
+        $expected = '<svg><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" preserveAspectRatio="xMidYMid slice"  viewBox="0 0 100 50"  width="50%"  height="50%"  x="0%"  y="0%"  ></image></svg><svg><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" preserveAspectRatio="xMidYMid slice"  viewBox="0 0 100 50"  width="50%"  height="50%"  x="50%"  y="0%"  ></image></svg><svg><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" preserveAspectRatio="xMidYMid slice"  viewBox="0 0 100 50"  width="50%"  height="50%"  x="0%"  y="50%"  ></image></svg><svg><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" preserveAspectRatio="xMidYMid slice"  viewBox="0 0 100 50"  width="50%"  height="50%"  x="50%"  y="50%"  ></image></svg>';
         $recieved = $this->class_instance->output();
         $this->assertEquals($expected, $recieved);
     }
@@ -238,7 +238,7 @@ class filterImageGridTest extends WP_UnitTestCase
         /**
          * Expected, Recieved, Asserted
          */
-        $expected = '<svg viewBox="0 0 1 1" width="50%" height="50%" x="0%" y="0%" preserveAspectRatio="xMidYMid slice"><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" width="100%" height="100%" ></image></svg>';
+        $expected = '<svg><image  xlink:href="/var/www/vhosts/dev.londonparkour.com/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" preserveAspectRatio="xMidYMid slice"  viewBox="0 0 100 50"  width="50%"  height="50%"  x="0%"  y="0%"  ></image></svg>';
         $recieved = $this->class_instance->output();
         $this->assertEquals($expected, $recieved);
     }
