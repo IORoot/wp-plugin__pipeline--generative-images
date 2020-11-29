@@ -13,10 +13,10 @@ class noise implements filterInterface
                             '[Opacity],[filename]. Opacity level 0 to 1. Filename is (optional) – must be a LOCAL file.';
     public $example    =    '['.PHP_EOL.
                             '    0.2,'.PHP_EOL.
-                            '   "../../../../wp-content/plugins/andyp_generative_images/src/img/noise.png"'.PHP_EOL.
+                            '   "/wp-content/plugins/andyp_pipeline_generative_images/src/img/noise.png"'.PHP_EOL.
                             ']';
     public $output     =    '<defs>'.PHP_EOL.
-                            '   <image id="noise"  xlink:href="../../../../wp-content/plugins/andyp_generative_images/src/img/noise.png" height="200px" width="200px"></image>'.PHP_EOL.
+                            '   <image id="noise"  xlink:href="/wp-content/plugins/andyp_pipeline_generative_images/src/img/noise.png" height="200px" width="200px"></image>'.PHP_EOL.
                             '   <pattern id="pattern-noise" width="200px" height="200px" x="-200" y="-200" patternUnits="userSpaceOnUse">'.PHP_EOL.
                             '       <use xlink:href="#noise"></use>'.PHP_EOL.
                             '   </pattern>'.PHP_EOL.
@@ -93,7 +93,7 @@ class noise implements filterInterface
             return false;
         }
 
-        $noise_url = "../../../../wp-content/plugins/andyp_generative_images/src/img/noise.png";
+        $noise_url = "/wp-content/plugins/andyp_pipeline_generative_images/src/img/noise.png";
         if ($this->params[1]) {
             $noise_url = $this->absolute_to_relative();
         }
@@ -107,7 +107,7 @@ class noise implements filterInterface
 
     public function absolute_to_relative()
     {
-        $this->params[1] = preg_replace('/.*wp-content/','../../../../wp-content', $this->params[1]);
+        $this->params[1] = preg_replace('/.*wp-content/','/wp-content', $this->params[1]);
         return $this->params[1];
     }
 }

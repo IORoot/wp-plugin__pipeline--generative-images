@@ -70,7 +70,7 @@ class image implements filterInterface
 
     private function set_image_paths()
     {
-        $this->image[0] = str_replace('../../../..','',$this->image[0]);
+        $this->image[0] = str_replace(ABSPATH,'/',$this->image[0]);
     }
 
 }

@@ -223,7 +223,8 @@ class image_grid implements filterInterface
 
         foreach ($this->images as $key => $instance)
         {
-            $this->params['images'][$key] = str_replace('../../../..','',$instance[0]);
+            // ABSPATH to /wp-content directory.
+            $this->params['images'][$key] = str_replace(ABSPATH, '/',$instance[0]);
         }
     }
 
@@ -254,16 +255,17 @@ class image_grid implements filterInterface
 
         $x = preg_replace('/[^0-9|\.]/', '', $this->cell_width);
         $y = preg_replace('/[^0-9|\.]/', '', $this->cell_height);
-        
-        $image = '<svg viewBox="0 0 1 1" width="'
-                    .$this->cell_width.'" height="'
-                    .$this->cell_height.'" x="'
-                    .($this->column_id - 1) * (float) $x.'%" y="'
-                    .($this->row_id - 1) * (float) $y.'%" preserveAspectRatio="xMidYMid slice">';
-            $image .= '<image ';
-            $image .= ' xlink:href="'. $image_url .'"';
-            $image .= ' ' . $this->image_parameters;
-            $image .= ' ></image>';
+
+        $href           = ' xlink:href="'. $image_url .'"';
+        $ascpectRatio   = ' preserveAspectRatio="xMidYMid slice" ';
+        $viewbox        = ' viewBox="0 0 100 ' . str_replace('%', '', $this->cell_height) . '" ';
+        $width          = ' width="'.$this->cell_width.'" ';
+        $height         = ' height="'.$this->cell_height.'" ';
+        $x              = ' x="'.($this->column_id - 1) * (float) $x.'%" ';
+        $y              = ' y="'.($this->row_id - 1) * (float) $y.'%" ';
+
+        $image .= '<svg>';
+        $image .= '<image ' . $href . $ascpectRatio . $viewbox . $width . $height . $x . $y . ' ></image>';
         $image .= '</svg>';
         
         $this->result .= $image;

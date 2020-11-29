@@ -30,6 +30,7 @@ class jpg implements convertInterface
 
     public function out()
     {
+        $this->rewrite_paths_in_intermediate_file_to_ABSPATH();
         $this->define_temp_png();
         $this->convert_to_temp_png();
         $this->convert_temp_png_to_jpg();
@@ -111,5 +112,17 @@ class jpg implements convertInterface
         $this->target = str_replace(ABSPATH, '', $this->target);
     }
 
+
+    /**
+     * Inkscape needs all images to be absolute to work correctly.
+     * This is because it sits outside of apache/php and will have
+     * a different working path.
+     */
+    private function rewrite_paths_in_intermediate_file_to_ABSPATH()
+    {
+        $file_contents = file_get_contents($this->input);
+        $file_contents = str_replace('/wp-content', ABSPATH.'/wp-content',$file_contents);
+        file_put_contents($this->input, $file_contents);
+    }
 
 }

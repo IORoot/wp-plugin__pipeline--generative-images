@@ -146,7 +146,6 @@ class convert
         $this->set_upload_directory();
         $this->set_intermediate_svg_filepath();
         $this->set_target_filepath();
-        $this->rewrite_SVG_paths();
         $this->create_intermediate_svg();
         $this->convert_to_file();
 
@@ -178,28 +177,11 @@ class convert
     private function set_target_filepath()
     {
         $this->target_filepath = $this->upload_dir . '/' . $this->filepath['filename'] . $this->file_suffix . '.' . $this->save_type;
-        // $this->target_filepath = ABSPATH . $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '.' . $this->save_type;
     }
     
     private function set_intermediate_svg_filepath()
     {
         $this->intermediate_svg_file = $this->upload_dir . '/' . $this->filepath['filename'] . $this->file_suffix . '_intermediate.svg';
-        // $this->intermediate_svg_file = ABSPATH . $this->filepath['dirname']. '/' . $this->filepath['filename'] . $this->file_suffix . '_intermediate.svg';
-    }
-
-    private function rewrite_SVG_paths()
-    { 
-        // replace https://domain.com/wp-content
-        $site_url = site_url('/wp-content');
-        $this->svg_data = str_replace($site_url, '/wp-content', $this->svg_data);
-
-        // replace http://domain.com/wp-content
-        $site_url = str_replace('https:','http:',$site_url);
-        $this->svg_data = str_replace($site_url, '/wp-content', $this->svg_data);
-
-        // /wp-content
-        $this->svg_data = str_replace('/wp-content', '/../../../../wp-content', $this->svg_data);
-        
     }
 
     private function create_intermediate_svg()

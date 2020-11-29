@@ -25,6 +25,9 @@ class png implements convertInterface
 
     public function out()
     {
+
+        $this->rewrite_paths_in_intermediate_file_to_ABSPATH();
+
         // PWD = "/var/www/vhosts/dev.londonparkour.com"
         // dbus = https://gitlab.com/inkscape/inkscape/-/issues/294
         // 2>/dev/null will suppress errors
@@ -49,4 +52,17 @@ class png implements convertInterface
     {
         $this->target = str_replace(ABSPATH, '', $this->target);
     }
+
+    /**
+     * Inkscape needs all images to be absolute to work correctly.
+     * This is because it sits outside of apache/php and will have
+     * a different working path.
+     */
+    private function rewrite_paths_in_intermediate_file_to_ABSPATH()
+    {
+        $file_contents = file_get_contents($this->input);
+        $file_contents = str_replace('/wp-content', ABSPATH.'/wp-content',$file_contents);
+        file_put_contents($this->input, $file_contents);
+    }
+
 }
