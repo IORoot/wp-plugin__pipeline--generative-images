@@ -32,6 +32,6 @@ require __DIR__.'/src/acf/acf_init.php';
 require __DIR__.'/src/wp_filters/filters_init.php';
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
-// │                           Kick off the program                          │
+// │                            Add shortcode                                │
 // └─────────────────────────────────────────────────────────────────────────┘
 new \genimage\shortcodes\genimage;

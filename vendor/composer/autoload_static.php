@@ -64,6 +64,7 @@ class ComposerStaticInita2fee0734c84cd5f140d105459003871
         'genimage\\wp\\get_image' => __DIR__ . '/../..' . '/src/classes/wp/get_image.php',
         'genimage\\wp\\set_image' => __DIR__ . '/../..' . '/src/classes/wp/set_image.php',
         'genimage\\wp_funcs' => __DIR__ . '/../..' . '/src/classes/wp/wp_funcs.php',
+        'update_acf_options_field' => __DIR__ . '/../..' . '/src/acf/acf_update_options_field.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

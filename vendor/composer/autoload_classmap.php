@@ -63,4 +63,5 @@ return array(
     'genimage\\wp\\get_image' => $baseDir . '/src/classes/wp/get_image.php',
     'genimage\\wp\\set_image' => $baseDir . '/src/classes/wp/set_image.php',
     'genimage\\wp_funcs' => $baseDir . '/src/classes/wp/wp_funcs.php',
+    'update_acf_options_field' => $baseDir . '/src/acf/acf_update_options_field.php',
 );
