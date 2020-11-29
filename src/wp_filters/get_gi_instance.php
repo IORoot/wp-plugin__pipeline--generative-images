@@ -37,21 +37,6 @@ function genimage_get_instance($filter_slug, $source_objects, $saves_array, $dim
     $instance->set_filter_slug($filter_slug);
 
     /**
-     * save_types
-     * 
-     * Array of what to save the file as.
-     * 
-     * [
-     *      svg : true,
-     *      png : false,
-     *      jpg : true,
-     * ]
-     *
-     * @var array
-     */
-    $instance->set_save_types($saves_array);
-
-    /**
      * source_objects variable
      * 
      * The source objects is an array of all input posts/terms
@@ -72,6 +57,22 @@ function genimage_get_instance($filter_slug, $source_objects, $saves_array, $dim
      */
     $instance->set_source_objects($source_objects);
 
+
+    /**
+     * save_types
+     * 
+     * Array of what to save the file as.
+     * 
+     * [
+     *      svg : true,
+     *      png : false,
+     *      jpg : true,
+     * ]
+     *
+     * @var array
+     */
+    $instance->set_save_types($saves_array);
+    
     /**
      * dimensions variable
      * 

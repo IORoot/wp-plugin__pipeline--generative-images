@@ -195,6 +195,7 @@ class runas_filter
         $svg_group->set_filters($this->filters);
         $svg_group->set_images($this->images);
         $svg_group->set_dimensions($this->dimensions);
+        $svg_group->set_source_objects($this->source_objects);
         $svg_group->run();
         $this->svg_group = $svg_group->get_svg_group();
 

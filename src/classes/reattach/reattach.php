@@ -84,6 +84,7 @@ class reattach
     {
         $this->get_reattach_option();
         if ($this->reattach_option['reattach'] == 'none'){ return; }
+        if (empty($this->reattach_option['reattach'])){    return; }
         $this->get_source_objects();
         $this->loop_over_source_objects();
         return;

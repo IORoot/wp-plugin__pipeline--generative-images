@@ -194,7 +194,7 @@ class filterNoiseTest extends WP_UnitTestCase
         /**
          * Expected, Recieved, Asserted
          */
-        $expected = '<image id="noise" xlink:href="../../../../wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" height="200px" width="200px"></image><pattern id="pattern-noise" width="200px" height="200px" x="-200" y="-200" patternUnits="userSpaceOnUse"><use xlink:href="#noise"></use></pattern>';
+        $expected = '<image id="noise" xlink:href="/wp-content/plugins/andyp_pipeline_generative_images/tests/data/test_image.jpg" height="200px" width="200px"></image><pattern id="pattern-noise" width="200px" height="200px" x="-200" y="-200" patternUnits="userSpaceOnUse"><use xlink:href="#noise"></use></pattern>';
         $recieved = $this->class_instance->defs();
         $this->assertEquals($expected, $recieved);
     }
