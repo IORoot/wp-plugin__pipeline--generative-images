@@ -13,7 +13,6 @@ jobs:
         operating-system: [ubuntu-latest]
         php-versions: ['7.4']
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
-    
     services:
       mysql:
         image: mysql:5.7.27
@@ -21,9 +20,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
         - 3306
-        volumes:
-        - $HOME/mysql:/var/lib/mysql
-          
     steps:
     - name: Checkout
       uses: actions/checkout@v2
