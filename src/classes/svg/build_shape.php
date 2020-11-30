@@ -12,10 +12,11 @@ class build_shape
 
     public $cell_size = 80;
 
-    public function __construct($args, $shape_type)
+    public function __construct($args)
     {
         $this->args = $args;
-        $this->shape_type = $shape_type;
+
+        $this->shape_type = $this->args['shape_type'];
     }
 
 

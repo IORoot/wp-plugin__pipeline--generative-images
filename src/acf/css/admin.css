@@ -1,0 +1,33 @@
+
+/*  ┌─────────────────────────────────────────────────────────────────────────┐
+    │                                                                         │░
+    │                                                                         │░
+    │                                 TABLES                                  │░
+    │                                                                         │░
+    │                                                                         │░
+    └─────────────────────────────────────────────────────────────────────────┘░
+     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ */
+
+#acf-group_5e7ce9be8ec08 table { 
+    border-collapse: separate;
+    border-spacing: 0 40px;
+    border: 0px;
+    background: transparent;
+    width:100%;
+}    
+#acf-group_5e7ce9be8ec08 table>tbody>tr { 
+    border: 0px;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072);
+}    
+#acf-group_5e7ce9be8ec08 table>tbody>tr>td { 
+    border:0px;
+    border-top: 1px solid rgba(230,230,230,0.5);
+}
+
+#acf-group_5e7ce9be8ec08 table embed { 
+    width: 100%;
+}
+
+.layers__wrap {
+    background: #D0C8B3;
+}
