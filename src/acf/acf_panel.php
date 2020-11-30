@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Updated 26 Novemeber 2020
+ * Updated 30 Novemeber 2020
  */
 if( function_exists('acf_add_local_field_group') ):
 
@@ -749,7 +749,51 @@ if( function_exists('acf_add_local_field_group') ):
                                 'rows' => 3,
                                 'new_lines' => '',
                             ),
+                            array(
+                                'key' => 'field_5fc386b6853a0',
+                                'label' => 'Layer',
+                                'name' => 'filter_layer',
+                                'type' => 'clone',
+                                'instructions' => '',
+                                'required' => 0,
+                                'conditional_logic' => 0,
+                                'wrapper' => array(
+                                    'width' => '',
+                                    'class' => '',
+                                    'id' => '',
+                                ),
+                                'hide_admin' => 0,
+                                'clone' => array(
+                                    0 => 'field_5fc382d5fcb14',
+                                ),
+                                'display' => 'seamless',
+                                'layout' => 'block',
+                                'prefix_label' => 0,
+                                'prefix_name' => 1,
+                            ),
                         ),
+                    ),
+                    array(
+                        'key' => 'field_5fc38b7e8ea78',
+                        'label' => 'Layers',
+                        'name' => 'filter_layer',
+                        'type' => 'clone',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'hide_admin' => 1,
+                        'clone' => array(
+                            0 => 'field_5fc382d5fcb14',
+                        ),
+                        'display' => 'seamless',
+                        'layout' => 'block',
+                        'prefix_label' => 0,
+                        'prefix_name' => 1,
                     ),
                 ),
             ),
@@ -784,7 +828,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'id' => '',
                 ),
                 'hide_admin' => 0,
-                'message' => '<table><tr><td style="width:50%;">SVG DATA</td><td style="width:50%;"><a href="https://dev.londonparkour.com/wp-content/uploads/2020/08/3138b265a61aa4234c910856833519fd_gi.jpg" target="_blank">jpg - 39.35kb</a></td></tr><tr><td style="width:50%;"><svg viewBox="0 0 600 600" class="svgwrapper" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>	<filter id="aden" filterUnits="objectBoundingBox">		<feColorMatrix id="hue-value" type="hueRotate" in="SourceGraphic" result="hueRotateOut" values="-20"/>				 <feColorMatrix type="saturate" in="hueRotateOut" result="saturateOut" values="0.85"/>				 <feComponentTransfer in="saturateOut" result="brightnessOut">				<feFuncR type="linear" slope="0.9"/>				<feFuncG type="linear" slope="0.9"/>				<feFuncB type="linear" slope="0.9"/>	 </feComponentTransfer>	 <feComponentTransfer	in="brightnessOut" result="contrastOut">				<feFuncR type="linear" slope="1.2" intercept="0.05"/>				<feFuncG type="linear" slope="1.2" intercept="0.05"/>				<feFuncB type="linear" slope="1.2" intercept="0.05"/>	 </feComponentTransfer>		<feFlood flood-color="#420A0E" flood-opacity="0.1" out="floodOut"></feFlood>		<feBlend mode="darken" in="contrastOut" in2="floodOut" result="blendOut"/>		<feConvolveMatrix in="blendOut" result="sharpenOut" order="3" preserveAlpha="true" kernelMatrix="-1 0 0 0 4 0 0 0 -1"/>	</filter><filter	id="solidTextColouredBG" x="-0.1" y="-0.75" width="1.2" height="2.5">			<feFlood flood-color="#FCC53B" flood-opacity="1"></feFlood>			<feComposite in="SourceGraphic"></feComposite></filter><filter	id="solidTextBG" x="-0.1" y="-0.75" width="1.2" height="3.5">			<feFlood flood-color="#242424" flood-opacity="0.5"></feFlood>			<feComposite in="SourceGraphic"></feComposite></filter></defs><image	xlink:href="/wp-content/uploads/2020/08/3138b265a61aa4234c910856833519fd.jpg" width="600" height="600" filter="url(#aden)"></image><svg viewBox="0 0 80 80"	x="0"	y="0"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="80"	y="0"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="160"	y="0"	width="160"	height="160"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FCC53B"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="240"	y="0"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FCC53B"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="0"	y="80"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FCC53B"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="80"	y="80"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="160"	y="80"	width="160"	height="160"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="0"	y="160"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="80"	y="160"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><svg viewBox="0 0 80 80"	x="0"	y="240"	width="80"	height="80"	filter="" ><polygon	points="80 80 40 10 0 80"	fill="#FAFAFA"	fill-opacity="0.8" ></polygon></svg><text filter="url(#solidTextBG)" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" style="letter-spacing:-5px; font-size: 87px; fill:#fafafa;" >THE LAST EVER SOLE DESTROYER EPISODE</text><text id="cameraview" x="50%" y="59%" dominant-baseline="middle" text-anchor="middle" style="font-size: 29px; fill:#fafafa;" ></text><text id="category" filter="url(#solidTextColouredBG)"	x="50%" y="20%" dominant-baseline="middle" text-anchor="middle" style="font-size: 29px; fill:#242424;" ></text><svg x="50%" overflow="visible">		<g id="Logo" transform="translate(-70, 464) scale(0.3)">				<polygon id="Logo_-_Left" fill="#757575" points="0 0 130 0 290 250 0 250"></polygon>				<polygon id="Logo_-_Right" fill="#FCC53B" points="160 0 450 0 450 250 320 250"></polygon>		</g></svg></svg></td><td style="width:50%;"><a href="https://dev.londonparkour.com/wp-content/uploads/2020/08/3138b265a61aa4234c910856833519fd_gi.jpg" target="_blank"><embed src="https://dev.londonparkour.com/wp-content/uploads/2020/08/3138b265a61aa4234c910856833519fd_gi.jpg" /></a></td></tr></table>',
+                'message' => '<table></table>',
                 'new_lines' => '',
                 'esc_html' => 0,
             ),
