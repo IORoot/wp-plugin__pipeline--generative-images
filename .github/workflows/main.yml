@@ -45,6 +45,9 @@ jobs:
         coverage: xdebug #optional, setup coverage driver
         pecl: false #optional, setup PECL
 
+    - name: Check PHP Version
+      run: php -v
+
     - name: Composer install
       run: composer install --optimize-autoloader --prefer-dist
       
