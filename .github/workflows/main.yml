@@ -28,11 +28,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Checkout tools repo
+    - name: Checkout ACF-Pro
       uses: actions/checkout@v2
       with:
-        repository: elliotcondon/acf
+        repository: IORoot/advanced-custom-fields-pro
         path: advanced-custom-fields-pro
+        ref: master
+        token: ${{ secrets.QA_DEPLOY_KEY }}
     
     - name: Setup PHP
       uses: shivammathur/setup-php@v1
