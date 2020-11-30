@@ -33,6 +33,8 @@ jobs:
       with:
         repository: IORoot/advanced-custom-fields-pro
         path: advanced-custom-fields-pro
+        ref: master
+        token: ${{ secrets.QA_DEPLOY_KEY }}
     
     - name: Setup PHP
       uses: shivammathur/setup-php@v1
