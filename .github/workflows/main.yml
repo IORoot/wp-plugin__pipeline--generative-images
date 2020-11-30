@@ -12,6 +12,7 @@ jobs:
       matrix:
         operating-system: [ubuntu-latest]
         php-versions: ['7.4']
+        phpunit: [7.5.15]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     
     services:
@@ -42,8 +43,9 @@ jobs:
     - name: Composer install
       run: composer install --optimize-autoloader --prefer-dist
       
-    - name: List dir
-      run: ls -la
+
+    - name: Install PHPUnit
+      run: composer global require "phpunit/phpunit=${{ matrix.phpunit }}"
       
     - name: Install WP Tests
       run: bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:33306 latest
