@@ -11,6 +11,9 @@
 		<testsuite name="unit">
 			<directory prefix="test-" suffix=".php">./tests/</directory>
 		</testsuite>
+		<testsuite name="no-inkscape">
+			<file prefix="test-" suffix=".php">./tests/src/classes/filters/test-darken.php</file>
+		</testsuite>
 	</testsuites>
 	<filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
