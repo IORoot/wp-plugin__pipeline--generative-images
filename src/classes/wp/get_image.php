@@ -15,7 +15,10 @@ class get_image {
 
         $this->item = $item;
 
-        $type = get_class($item);
+        $type = '';
+        if(is_string($item)){ return; }
+        if(is_array ($item)){ $type = false; }
+        if(is_object($item)){ $type = get_class($item); }
 
         /**
          * If the $item is NOT a WP_Post or WP_Term object
@@ -49,21 +52,6 @@ class get_image {
 
         // Convert URL to ABSPATH
         $image_array[0] = preg_replace('/.*wp-content/', ABSPATH. 'wp-content', $image_array[0]);
-
-        // HTTPS: remove domain name
-        // $domain = get_site_url();
-        // $image_array[0] = str_replace( $domain, '', $image_array[0] );
-
-        // HTTP:
-        // $domain = str_replace('https:','http:', $domain);
-        // $image_array[0] = str_replace( $domain, '', $image_array[0] );
-
-        // RELATIVE
-        // $image_array[0] = '../../../..'.$image_array[0];
-
-        // ABSOLUTE PATH
-        // $image_array[0] = ABSPATH .$image_array[0];
-
 
         unset($image_array[3]);
 
