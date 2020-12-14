@@ -119,15 +119,12 @@ class getGiInstanceTest extends WP_UnitTestCase
             [ 300,300 ]
         ];
         
-
+        $result = apply_filters_ref_array('genimage_get_instance', $filter_args);
         /**
          * Expected, Recieved, Result.
          */
-        $expected = [
-            [ "wp-content/uploads/2020/11/test_image_gi.png" ],
-            [ "wp-content/uploads/2020/11/test_image-1_gi.png" ],
-        ];
-        $recieved = apply_filters_ref_array('genimage_get_instance', $filter_args);
+        $expected = 2;
+        $recieved = count($result);
         $this->assertEquals($expected, $recieved);
     }
 

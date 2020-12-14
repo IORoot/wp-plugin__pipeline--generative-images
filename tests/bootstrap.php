@@ -17,10 +17,6 @@ if (! file_exists($_tests_dir . '/includes/functions.php')) {
 // Give access to tests_add_filter() function.
 require_once $_tests_dir . '/includes/functions.php';
 
-
-define('DIR_DATA', dirname(__FILE__) . '/data');
-define('WP_HOME', 'http://example.org');
-
 /**
  * Manually load the plugin being tested.
  */
@@ -42,3 +38,8 @@ tests_add_filter('muplugins_loaded', '_manually_load_plugin');
 
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
+
+$upload_dir = wp_upload_dir();
+define('UPLOAD_DIR', 'wp-content/uploads'. $upload_dir['subdir'] );
+define('DIR_DATA', dirname(__FILE__) . '/data');
+define('WP_HOME', 'http://example.org');

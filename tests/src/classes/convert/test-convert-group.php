@@ -82,9 +82,9 @@ class convertGroupTest extends WP_UnitTestCase
          */
         $expected = [ 
             [ 
-                "wp-content/uploads/2020/11/test_image_gi.svg", 
-                "wp-content/uploads/2020/11/test_image_gi.png", 
-                "wp-content/uploads/2020/11/test_image_gi.jpg" 
+                UPLOAD_DIR . "/test_image_gi.svg", 
+                UPLOAD_DIR . "/test_image_gi.png", 
+                UPLOAD_DIR . "/test_image_gi.jpg" 
             ]
         ];
         $recieved = $this->class_instance->get_converted();
@@ -132,7 +132,7 @@ class convertGroupTest extends WP_UnitTestCase
          */
         $expected = [ 
             [ 
-                "wp-content/uploads/2020/11/test_image`_gi.svg", 
+                UPLOAD_DIR . "/test_image`_gi.svg", 
                 false, 
                 false 
             ]
