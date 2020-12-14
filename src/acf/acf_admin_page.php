@@ -14,7 +14,7 @@ function generative_acf_add_menus_init() {
         'capability' => 'manage_options',
         'position' => '1',
         'parent_slug' => '',
-        'icon_url' => 'dashicons-marker',
+        'icon_url' => 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLDJBMTAsMTAgMCAwLDAgMiwxMkExMCwxMCAwIDAsMCAxMiwyMkExMCwxMCAwIDAsMCAyMiwxMkExMCwxMCAwIDAsMCAxMiwyTTEyLDRBOCw4IDAgMCwxIDIwLDEyQTgsOCAwIDAsMSAxMiwyMEE4LDggMCAwLDEgNCwxMkE4LDggMCAwLDEgMTIsNE0xMiw2QTYsNiAwIDAsMCA2LDEyQTYsNiAwIDAsMCAxMiwxOEE2LDYgMCAwLDAgMTgsMTJBNiw2IDAgMCwwIDEyLDZNMTIsOEE0LDQgMCAwLDEgMTYsMTJBNCw0IDAgMCwxIDEyLDE2QTQsNCAwIDAsMSA4LDEyQTQsNCAwIDAsMSAxMiw4WiIvPjwvc3ZnPg==',
         'redirect' => true,
         'post_id' => 'options',
         'autoload' => false,
@@ -33,10 +33,10 @@ function generative_acf_add_menus_init() {
         $args = array(
     
         /* (string) The title displayed on the options page. Required. */
-        'page_title' => 'Image Generator',
+        'page_title' => '<span class="mdi mdi-image-plus" style="color:#E86546"></span> Image Generator',
         
         /* (string) The title displayed in the wp-admin sidebar. Defaults to page_title */
-        'menu_title' => '🌄 Image Generator',
+        'menu_title' => '<span class="mdi mdi-image-plus" style="color:#E86546"></span> Image Generator',
         
         /* (string) The URL slug used to uniquely identify this options page.
         Defaults to a url friendly version of menu_title */
