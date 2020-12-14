@@ -31,8 +31,7 @@ function _manually_load_plugin()
      * depending on GITHUB CI or regular PHPUNIT
      */
     $path = '';
-    if (!is_dir(dirname(dirname(__FILE__)) . '/advanced-custom-fields-pro'))
-    {
+    if (!is_dir(dirname(dirname(__FILE__)) . '/advanced-custom-fields-pro')) {
         $path = '../';
     }
     require dirname(dirname(__FILE__)) . '/'.$path.'advanced-custom-fields-pro/acf.php';				// ACF
