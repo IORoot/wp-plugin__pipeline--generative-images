@@ -15,6 +15,10 @@
 define( 'ANDYP_GENIMAGE_URL', plugins_url( '/', __FILE__ ) );
 define( 'ANDYP_GENIMAGE_PATH', __DIR__ );
 
+//  ┌─────────────────────────────────────────────────────────────────────────┐
+//  │                    Register with ANDYP Plugins                          │
+//  └─────────────────────────────────────────────────────────────────────────┘
+require __DIR__.'/src/acf/andyp_plugin_register.php';
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                         Use composer autoloader                         │
