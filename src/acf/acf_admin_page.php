@@ -12,7 +12,7 @@ function generative_acf_add_menus_init() {
         'menu_title' => 'Pipeline',
         'menu_slug' => 'pipeline',
         'capability' => 'manage_options',
-        'position' => '1',
+        'position' => 1,
         'parent_slug' => '',
         'icon_url' => 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLDJBMTAsMTAgMCAwLDAgMiwxMkExMCwxMCAwIDAsMCAxMiwyMkExMCwxMCAwIDAsMCAyMiwxMkExMCwxMCAwIDAsMCAxMiwyTTEyLDRBOCw4IDAgMCwxIDIwLDEyQTgsOCAwIDAsMSAxMiwyMEE4LDggMCAwLDEgNCwxMkE4LDggMCAwLDEgMTIsNE0xMiw2QTYsNiAwIDAsMCA2LDEyQTYsNiAwIDAsMCAxMiwxOEE2LDYgMCAwLDAgMTgsMTJBNiw2IDAgMCwwIDEyLDZNMTIsOEE0LDQgMCAwLDEgMTYsMTJBNCw0IDAgMCwxIDEyLDE2QTQsNCAwIDAsMSA4LDEyQTQsNCAwIDAsMSAxMiw4WiIvPjwvc3ZnPg==',
         'redirect' => true,
@@ -50,7 +50,7 @@ function generative_acf_add_menus_init() {
         WARNING: if two menu items use the same position attribute, one of the items may be overwritten so that only one item displays!
         Risk of conflict can be reduced by using decimal instead of integer values, e.g. '63.3' instead of 63 (must use quotes).
         Defaults to bottom of utility menu items */
-        'position' => '2',
+        'position' => 12,
         
         /* (string) The slug of another WP admin page. if set, this will become a child page. */
         'parent_slug' => 'pipeline',
