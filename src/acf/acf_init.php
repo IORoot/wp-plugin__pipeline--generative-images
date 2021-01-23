@@ -3,7 +3,7 @@
 //  ┌─────────────────────────────────────────────────────────────────────────┐
 //  │                         Include ACF Options Page                        │
 //  └─────────────────────────────────────────────────────────────────────────┘
-require __DIR__.'/acf_admin_page.php'; 
+// require __DIR__.'/acf_admin_page.php'; 
 require __DIR__.'/acf_admin_style.php'; 
 require __DIR__.'/acf_panel.php';
 
