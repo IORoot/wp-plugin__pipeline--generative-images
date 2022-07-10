@@ -106,7 +106,7 @@ At time of writing, this is what I'm using :
 
 1. Clone the repo into your wordpress plugin folder
     ```bash
-    git clone https://github.com/IORoot/wp-plugin__api-scraper ./wp-content/plugins/api-scraper
+    git clone https://github.com/IORoot/wp-plugin__pipeline--generative-images ./wp-content/plugins/pipeline-generative-images
     ```
 1. Activate the plugin.
 
