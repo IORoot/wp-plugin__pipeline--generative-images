@@ -5,10 +5,10 @@
 
 <img src="https://svg-rewriter.sachinraja.workers.dev/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40mdi%2Fsvg%406.7.96%2Fsvg%2Fimage-filter-vintage.svg&fill=%239D174D&width=200px&height=200px" style="width:200px;"/>
 
-<h3 align="center">Generative Images for Wordpress posts</h3>
+<h3 align="center">Pipeline : Generative Images</h3>
 
 <p align="center">
-Create and generate SVG images using the featured image as a base.
+Create and generate SVG images using the featured image as a base. Part of the Pipeline project.
 </p>    
 </div>
 
@@ -59,8 +59,6 @@ Create and generate SVG images using the featured image as a base.
 
 
 ##  2. <a name='AboutTheProject'></a>About The Project
-
-
 
 This is highly cowboy-coded plugin I created to enable me to manipulate all of my post images. The premise was to be able to automatically alter ALL posts/CPT/Taxonomy featured images in some way to give them a more consistent tone and feel. This plugin does that through SVGs and conversion. Note that I have 'articles' CPT with 'articlecategory' and 'articletags' as taxonomy and terms. The code may have references to these. Like I said, this was a personal project... Will need refactoring.
 
