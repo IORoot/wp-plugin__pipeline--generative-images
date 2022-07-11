@@ -16,49 +16,67 @@ Create and generate SVG images using the featured image as a base. Part of the P
 
 
 * 1. [Table of Contents](#TableofContents)
-* 2. [About The Project](#AboutTheProject)
-	* 2.1. [Built With](#BuiltWith)
-	* 2.2. [Installation](#Installation)
-* 3. [Usage](#Usage)
-	* 3.1. [The query](#Thequery)
-	* 3.2. [Save options](#Saveoptions)
-	* 3.3. [The shortcode](#Theshortcode)
-	* 3.4. [Building up your SVG](#BuildingupyourSVG)
-* 4. [The filters](#Thefilters)
-	* 4.1. [none](#none)
-	* 4.2. [image](#image)
-	* 4.3. [image_free](#image_free)
-	* 4.4. [svg_element](#svg_element)
-	* 4.5. [svg_definition](#svg_definition)
-	* 4.6. [noise](#noise)
-	* 4.7. [darken](#darken)
-	* 4.8. [whiten](#whiten)
-	* 4.9. [random_colour](#random_colour)
-	* 4.10. [text](#text)
-		* 4.10.1. [Example](#Example)
-	* 4.11. [acf_post_tax_field](#acf_post_tax_field)
-	* 4.12. [acf_term_field](#acf_term_field)
-	* 4.13. [acf_term_field_defintion](#acf_term_field_defintion)
-	* 4.14. [generate_shape](#generate_shape)
-		* 4.14.1. [palette](#palette)
-		* 4.14.2. [additional_palette](#additional_palette)
-		* 4.14.3. [additional_colours](#additional_colours)
-		* 4.14.4. [opacity](#opacity)
-		* 4.14.5. [corners](#corners)
-		* 4.14.6. [corner_size](#corner_size)
-		* 4.14.7. [shapes](#shapes)
-		* 4.14.8. [cell_size](#cell_size)
-		* 4.14.9. [Example](#Example-1)
-* 5. [ Customising](#Customising)
-* 6. [Troubleshooting](#Troubleshooting)
-* 7. [Contributing](#Contributing)
-* 8. [License](#License)
-* 9. [Contact](#Contact)
-* 10. [Changelog](#Changelog)
+* 2. [The Pipeline Project](#ThePipelineProject)
+* 3. [About The Project](#AboutTheProject)
+	* 3.1. [Built With](#BuiltWith)
+	* 3.2. [Installation](#Installation)
+* 4. [Usage](#Usage)
+	* 4.1. [The query](#Thequery)
+	* 4.2. [Save options](#Saveoptions)
+	* 4.3. [The shortcode](#Theshortcode)
+	* 4.4. [Building up your SVG](#BuildingupyourSVG)
+* 5. [The filters](#Thefilters)
+	* 5.1. [none](#none)
+	* 5.2. [image](#image)
+	* 5.3. [image_free](#image_free)
+	* 5.4. [svg_element](#svg_element)
+	* 5.5. [svg_definition](#svg_definition)
+	* 5.6. [noise](#noise)
+	* 5.7. [darken](#darken)
+	* 5.8. [whiten](#whiten)
+	* 5.9. [random_colour](#random_colour)
+	* 5.10. [text](#text)
+		* 5.10.1. [Example](#Example)
+	* 5.11. [acf_post_tax_field](#acf_post_tax_field)
+	* 5.12. [acf_term_field](#acf_term_field)
+	* 5.13. [acf_term_field_defintion](#acf_term_field_defintion)
+	* 5.14. [generate_shape](#generate_shape)
+		* 5.14.1. [palette](#palette)
+		* 5.14.2. [additional_palette](#additional_palette)
+		* 5.14.3. [additional_colours](#additional_colours)
+		* 5.14.4. [opacity](#opacity)
+		* 5.14.5. [corners](#corners)
+		* 5.14.6. [corner_size](#corner_size)
+		* 5.14.7. [shapes](#shapes)
+		* 5.14.8. [cell_size](#cell_size)
+		* 5.14.9. [Example](#Example-1)
+* 6. [ Customising](#Customising)
+* 7. [Troubleshooting](#Troubleshooting)
+* 8. [Contributing](#Contributing)
+* 9. [License](#License)
+* 10. [Contact](#Contact)
+* 11. [Changelog](#Changelog)
 
 
 
-##  2. <a name='AboutTheProject'></a>About The Project
+##  2. <a name='ThePipelineProject'></a>The Pipeline Project
+
+The pipeline project was one where I wanted to be able to do the following:
+
+1. Query YouTube / Instagram for specific videos and download the results (video file, post content, meta, etc).
+1. Automatically create some cover art.
+1. Combine the videos to create a quick trailer.
+1. Export the results to my social media.
+
+This then became the components of the pipeline project:
+
+1. [API Scraper](https://github.com/IORoot/wp-plugin__pipeline--api-scraper)
+1. [Generative Images](https://github.com/IORoot/wp-plugin__pipeline--generative-images)
+1. [The Processor](https://github.com/IORoot/wp-plugin__pipeline--processor)
+1. [Exporter](https://github.com/IORoot/wp-plugin__pipeline--exporter)
+
+
+##  3. <a name='AboutTheProject'></a>About The Project
 
 This is highly cowboy-coded plugin I created to enable me to manipulate all of my post images. The premise was to be able to automatically alter ALL posts/CPT/Taxonomy featured images in some way to give them a more consistent tone and feel. This plugin does that through SVGs and conversion. Note that I have 'articles' CPT with 'articlecategory' and 'articletags' as taxonomy and terms. The code may have references to these. Like I said, this was a personal project... Will need refactoring.
 
@@ -76,7 +94,7 @@ WP_Query --> Posts --> Run filter --> Build SVG with featured image of post --> 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-###  2.1. <a name='BuiltWith'></a>Built With
+###  3.1. <a name='BuiltWith'></a>Built With
 
 This project was built with the following frameworks, technologies and software.
 
@@ -102,7 +120,7 @@ At time of writing, this is what I'm using :
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-###  2.2. <a name='Installation'></a>Installation
+###  3.2. <a name='Installation'></a>Installation
 
 1. Clone the repo into your wordpress plugin folder
     ```bash
@@ -114,10 +132,10 @@ At time of writing, this is what I'm using :
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-##  3. <a name='Usage'></a>Usage
+##  4. <a name='Usage'></a>Usage
 
 
-###  3.1. <a name='Thequery'></a>The query
+###  4.1. <a name='Thequery'></a>The query
 
 You have an option of:
 
@@ -127,7 +145,7 @@ You have an option of:
 
 These can be changed using ACF depending on your use case.
 
-###  3.2. <a name='Saveoptions'></a>Save options
+###  4.2. <a name='Saveoptions'></a>Save options
 
 Once the SVG is built up, you can opt to do:
 
@@ -138,22 +156,22 @@ Once the SVG is built up, you can opt to do:
 WARNING - You ALSO have the write back to post option. Which allows you to write the JPG back to the post.
 Be aware that if this setting is kept on, it'll recursively apply the filter over the top every time.
 
-###  3.3. <a name='Theshortcode'></a>The shortcode
+###  4.3. <a name='Theshortcode'></a>The shortcode
 
 There is a shortcode `[andyp_gen_image]` which will allow you to put the results on a page. You execute the whole process by visiting the shortcode page.
 
-###  3.4. <a name='BuildingupyourSVG'></a>Building up your SVG
+###  4.4. <a name='BuildingupyourSVG'></a>Building up your SVG
 
 The SVG data is built up with layers that you define. The order of the layers matter because it's how the output will be rendered.
 There are two slightly different filter lists for the posts and the taxonomy because of the query that is run and the options you can pull back.
 
-##  4. <a name='Thefilters'></a>The filters
+##  5. <a name='Thefilters'></a>The filters
 
-###  4.1. <a name='none'></a>none
+###  5.1. <a name='none'></a>none
 
 This filter does nothing. It allows you to 'switch off' a layer without deleting it. Handy for testing your output.
 
-###  4.2. <a name='image'></a>image
+###  5.2. <a name='image'></a>image
 
 This will create an `<image>` tag with the image of the source post. This will be the basis of the SVG size, so is needed to define the width/height of the SVG data.
 Therefore, the base image has its height/width automatically set based on the source, which you can't change. 
@@ -163,7 +181,7 @@ Therefore, the base image has its height/width automatically set based on the so
     Parameter [STRING]
     The parameter is anything extra you want to add into the image string. Good for adding filters. i.e. filter="url(#myfilter)"
 
-###  4.3. <a name='image_free'></a>image_free
+###  5.3. <a name='image_free'></a>image_free
 
 This will create an `<image>` tag with the image of the source post. The difference here is that no width or height is set. Which is good for overlays and resizing/repositioning.
 
@@ -173,7 +191,7 @@ This will create an `<image>` tag with the image of the source post. The differe
     The parameter is anything extra you want to add into the image string. Good for adding widths / heights / x /y / filters / etc..
 
 
-###  4.4. <a name='svg_element'></a>svg_element
+###  5.4. <a name='svg_element'></a>svg_element
 
 This create a layer of anything you want into the SVG at that level. This is used to insert new SVG shapes / Paths / Polygons / Logos / Images / other SVGs / groups / etc...  into it.
 
@@ -183,7 +201,7 @@ This create a layer of anything you want into the SVG at that level. This is use
     Any manual text you want to inject in. 
 
 
-###  4.5. <a name='svg_definition'></a>svg_definition
+###  5.5. <a name='svg_definition'></a>svg_definition
 
 This creates a layer within the SVG `<defs></defs>` tags at the top. Allows you to insert filters into it.
 
@@ -193,7 +211,7 @@ This creates a layer within the SVG `<defs></defs>` tags at the top. Allows you 
     Any manual text you want to inject into the def tags. 
 
 
-###  4.6. <a name='noise'></a>noise
+###  5.6. <a name='noise'></a>noise
 
 Creates a transparent 'noise' layer. This is a tileable img supplied with the plugin. This creates a pattern definition and rectangle element to layer over everything underneath.
 
@@ -201,7 +219,7 @@ Creates a transparent 'noise' layer. This is a tileable img supplied with the pl
     You can control the opacity with the parameter field. 
 
 
-###  4.7. <a name='darken'></a>darken
+###  5.7. <a name='darken'></a>darken
 
 Creates a black rectangle of 100% height and width.
 
@@ -211,7 +229,7 @@ Creates a black rectangle of 100% height and width.
     You can control the opacity with the parameter field. 
 
 
-###  4.8. <a name='whiten'></a>whiten
+###  5.8. <a name='whiten'></a>whiten
 
 Creates a white rectangle of 100% height and width.
 
@@ -221,7 +239,7 @@ Creates a white rectangle of 100% height and width.
     You can control the opacity with the parameter field.
 
 
-###  4.9. <a name='random_colour'></a>random_colour
+###  5.9. <a name='random_colour'></a>random_colour
 
 Creates a linear-gradient definition with a random hex colour. 
 
@@ -231,7 +249,7 @@ Creates a linear-gradient definition with a random hex colour.
     This allows you to set the ID of the linear-gradient definition. Therefore referencing it in any element with a
     fill=url(#randomID)
 
-###  4.10. <a name='text'></a>text
+###  5.10. <a name='text'></a>text
 
 Similar to the 'svg_element' layer, but with a caveat... allows you to do text substitutions on wp_post parameters using moustache brackets.
 As an example, using `{{post_title}}` in the parameter field will be substituted for the actual post_title. It also checks against any ACF fields attached to the post object too.
@@ -249,13 +267,13 @@ The text substitution also has a few extra 'functions' that you can prefix the f
 5. `w3:` will split the line by hypens and output the third. 'FIRST - SECOND WORD - 3RD - FOURTH` will return '3RD'.
 6. `w3:` will split the line by hypens and output the fourth. 'FIRST - SECOND WORD - 3RD - FOURTH` will return 'FOURTH'.
 
-####  4.10.1. <a name='Example'></a>Example
+####  5.10.1. <a name='Example'></a>Example
 
     <text>{{w2:uc:post_title}}</text>
     This will split by hypens, output the second one in UPPERCASE.
 
 
-###  4.11. <a name='acf_post_tax_field'></a>acf_post_tax_field
+###  5.11. <a name='acf_post_tax_field'></a>acf_post_tax_field
 
 This will allow the post get ACF fields on the category its attached to. Use the moustache brackets to define the category ACF field you wish to use. Has all functionality of the `text` type layer.
 
@@ -265,7 +283,7 @@ This will allow the post get ACF fields on the category its attached to. Use the
 I created this because my categories have ACF colour fields on them. Any post attached to the category can now get the category colour.
 
 
-###  4.12. <a name='acf_term_field'></a>acf_term_field
+###  5.12. <a name='acf_term_field'></a>acf_term_field
 
 Only available on the 'Category' source. 
 
@@ -275,12 +293,12 @@ Allows you to specify an ACF field attached to the taxonomy and output the value
     Add an element with substitutions with the term object.
 
 
-###  4.13. <a name='acf_term_field_defintion'></a>acf_term_field_defintion
+###  5.13. <a name='acf_term_field_defintion'></a>acf_term_field_defintion
 
 Same as the `acf_term_field` but puts the parameter into the `<defs></defs>` area of the SVG.
 
 
-###  4.14. <a name='generate_shape'></a>generate_shape
+###  5.14. <a name='generate_shape'></a>generate_shape
 
 This is the big 'generative' part of the plugin. Allows you to generate shapes onto a patchwork-quilt like space over the image. Also includes moustache {{}} substitution.
 
@@ -289,31 +307,31 @@ This is the big 'generative' part of the plugin. Allows you to generate shapes o
 
 The following settings can be used:
 
-####  4.14.1. <a name='palette'></a>palette
+####  5.14.1. <a name='palette'></a>palette
 
 The 'palette' setting tells the generator which base colours to add to the primary palette. This palette is used to select random colours from.
 
     'palette' => '{{acf_taxonomy_colour}}, #FAFAFA',
 
-####  4.14.2. <a name='additional_palette'></a>additional_palette
+####  5.14.2. <a name='additional_palette'></a>additional_palette
 
 You can define a secondary palette that the generator can select from and add to the primary palette.
 
     'additional_palette' => '#000000,#242424,#424242,#757575,#E0E0E0,#F5F5F5,#FAFAFA,#FFFFFF',
 
-####  4.14.3. <a name='additional_colours'></a>additional_colours
+####  5.14.3. <a name='additional_colours'></a>additional_colours
 
 How many random colours to add to the primary palette from the secondary one.
 
     'additional_colours' => 1,
 
-####  4.14.4. <a name='opacity'></a>opacity
+####  5.14.4. <a name='opacity'></a>opacity
 
 What is the opacity of the shapes generated.
 
     'opacity' => 0.8,
 
-####  4.14.5. <a name='corners'></a>corners
+####  5.14.5. <a name='corners'></a>corners
 
 The generative shapes are added to the corners of the image. This selects which corners to use. If left blank, ALL corners are used.
 Options are:
@@ -326,13 +344,13 @@ Options are:
 
     'corners' => 'tl,br',
 
-####  4.14.6. <a name='corner_size'></a>corner_size
+####  5.14.6. <a name='corner_size'></a>corner_size
 
 Furthest number of tiles to come out from the corner.
 
     'corner_size' => 4,
 
-####  4.14.7. <a name='shapes'></a>shapes
+####  5.14.7. <a name='shapes'></a>shapes
 
 Select the shapes you wish to randomly pick from. If left blank, ALL shapes are used.
 Options are:
@@ -354,7 +372,7 @@ Options are:
 
     'shapes' => 'leaf, cross,bump',
 
-####  4.14.8. <a name='cell_size'></a>cell_size
+####  5.14.8. <a name='cell_size'></a>cell_size
 
 Scale the size of the shape tiles up or down. Number in pixels. Default is 80.
 
@@ -362,7 +380,7 @@ Scale the size of the shape tiles up or down. Number in pixels. Default is 80.
 
 
 
-####  4.14.9. <a name='Example-1'></a>Example
+####  5.14.9. <a name='Example-1'></a>Example
 
     [
         'palette' => '{{taxonomy_colour}}, #FAFAFA',
@@ -377,18 +395,18 @@ Scale the size of the shape tiles up or down. Number in pixels. Default is 80.
 
 
 
-##  5. <a name='Customising'></a> Customising
+##  6. <a name='Customising'></a> Customising
 
 None.
 
-##  6. <a name='Troubleshooting'></a>Troubleshooting
+##  7. <a name='Troubleshooting'></a>Troubleshooting
 
 None.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-##  7. <a name='Contributing'></a>Contributing
+##  8. <a name='Contributing'></a>Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -405,7 +423,7 @@ Don't forget to give the project a star! Thanks again!
 
 
 
-##  8. <a name='License'></a>License
+##  9. <a name='License'></a>License
 
 Distributed under the MIT License.
 
@@ -435,12 +453,12 @@ SOFTWARE.
 
 
 
-##  9. <a name='Contact'></a>Contact
+##  10. <a name='Contact'></a>Contact
 
 Author Link: [https://github.com/IORoot](https://github.com/IORoot)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-##  10. <a name='Changelog'></a>Changelog
+##  11. <a name='Changelog'></a>Changelog
 
 - v1.0.0 - Initial Commit
